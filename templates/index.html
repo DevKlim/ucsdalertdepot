@@ -1,0 +1,80 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>UCSD Crime Map - MapLibre</title>
+  <!-- MapLibre GL JS CSS -->
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <h1>UCSD Crime Map</h1>
+  <div id="map"></div>
+
+  <!-- MapLibre GL JS -->
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <script>
+    // Initialize the map centered around UCSD
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://demotiles.maplibre.org/style.json', // a public demo style
+      center: [-117.2340, 32.8801],
+      zoom: 15
+    });
+
+    // When the map loads, fetch the GeoJSON data
+    map.on('load', () => {
+      fetch('/api/crimes')
+        .then(response => response.json())
+        .then(geojsonData => {
+          // Add a GeoJSON source for crime data
+          map.addSource('crimeData', {
+            type: 'geojson',
+            data: geojsonData
+          });
+
+          // Add a circle layer to display each crime alert
+          map.addLayer({
+            id: 'crime-points',
+            type: 'circle',
+            source: 'crimeData',
+            paint: {
+              'circle-radius': 6,
+              'circle-color': '#B42222'
+            }
+          });
+
+          // Create a popup on click
+          map.on('click', 'crime-points', (e) => {
+            const feature = e.features[0];
+            const props = feature.properties;
+            const coords = feature.geometry.coordinates.slice();
+            const html = `
+              <div class="popup-content">
+                <strong>${props.title}</strong><br/>
+                <em>${props.crime_type}</em> - ${props.alert_type}<br/>
+                Date: ${props.date}<br/>
+                Suspect Info: ${props.suspect_info}<br/>
+                <a href="${props.details_url}" target="_blank">View Details</a>
+              </div>
+            `;
+            new maplibregl.Popup()
+              .setLngLat(coords)
+              .setHTML(html)
+              .addTo(map);
+          });
+
+          // Change the cursor when hovering over a point.
+          map.on('mouseenter', 'crime-points', () => {
+            map.getCanvas().style.cursor = 'pointer';
+          });
+          map.on('mouseleave', 'crime-points', () => {
+            map.getCanvas().style.cursor = '';
+          });
+        })
+        .catch(err => console.error("Error fetching crime data:", err));
+    });
+  </script>
+</body>
+</html>
