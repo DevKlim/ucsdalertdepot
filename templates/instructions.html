@@ -1,0 +1,230 @@
+<!-- templates/instructions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCSD Crime Map - Instructions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background-color: #182B49; /* UCSD blue */
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    
+    .content {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+      color: #182B49;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 22px;
+      border-bottom: 2px solid #FFCD00; /* UCSD gold */
+      padding-bottom: 8px;
+    }
+    
+    h3 {
+      color: #555;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    p {
+      margin-bottom: 16px;
+    }
+    
+    ul, ol {
+      margin-bottom: 20px;
+      margin-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    a {
+      color: #182B49;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #182B49;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #0e1a2c;
+      text-decoration: none;
+    }
+    
+    .note {
+      background-color: #f8f8f8;
+      border-left: 4px solid #FFCD00;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .img-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UCSD Campus Crime Map - User Guide</h1>
+  </header>
+  
+  <div class="container">
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The UCSD Campus Crime Map provides a visual representation of crime and safety alerts on and around the UC San Diego campus. 
+        This tool helps students, faculty, staff, and visitors stay informed about safety incidents and make informed decisions about their personal safety.
+      </p>
+      
+      <div class="note">
+        <strong>Note:</strong> This application scrapes data from the official UCSD Police Department website and should not be considered a replacement for official safety communications.
+      </div>
+      
+      <h2>Getting Started</h2>
+      <p>To access the map, navigate to <a href="/">http://localhost:8000/</a> when running the application locally.</p>
+      
+      <h3>Map Navigation</h3>
+      <ul>
+        <li><strong>Zoom in/out:</strong> Use the + and - buttons in the top-left corner, or your mouse wheel/touchpad</li>
+        <li><strong>Pan:</strong> Click and drag to move around the map</li>
+        <li><strong>Find your location:</strong> Click the location button in the top-left to center the map on your current location (requires permission)</li>
+        <li><strong>Fullscreen:</strong> Click the fullscreen button to expand the map</li>
+      </ul>
+      
+      <h2>Using Filters</h2>
+      <p>The sidebar on the right side of the map allows you to filter crimes by various criteria:</p>
+      
+      <h3>Alert Types</h3>
+      <p>Choose which types of alerts to display:</p>
+      <ul>
+        <li><strong>Timely Warning:</strong> Notifications about Clery Act crimes that pose a serious or ongoing threat</li>
+        <li><strong>Triton Alert:</strong> Emergency notifications for immediate threats to safety</li>
+        <li><strong>Community Alert:</strong> Information about safety issues that don't meet Clery Act requirements</li>
+      </ul>
+      
+      <h3>Crime Types</h3>
+      <p>Filter by specific types of incidents (theft, assault, etc.). The map uses color coding:</p>
+      <ul>
+        <li><span style="color: #FF495C;">Red:</span> Violent crimes (assault, robbery, etc.)</li>
+        <li><span style="color: #FFCD00;">Yellow:</span> Property crimes (theft, burglary, etc.)</li>
+        <li><span style="color: #3DDC97;">Green:</span> Other incidents</li>
+      </ul>
+      
+      <h3>Date Range</h3>
+      <p>Limit results to incidents within a specific time period by selecting start and end dates.</p>
+      
+      <h3>Recent Alerts</h3>
+      <p>The sidebar also shows the five most recent alerts matching your current filters. Click on any alert to center the map on that location and view details.</p>
+      
+      <h2>Administrative Functions</h2>
+      
+      <h3>Data Scraping</h3>
+      <p>
+        The application automatically scrapes the UCSD Police Department website for new alerts on an hourly basis.
+        You can toggle this functionality on or off by clicking the "Data Scraping" button in the header.
+      </p>
+      <p>This feature is primarily for testing and development purposes:</p>
+      <ul>
+        <li>Access the toggle directly at: <a href="/toggle_scraping">/toggle_scraping</a></li>
+        <li>The small indicator dot next to the button shows the current status (green = ON, red = OFF)</li>
+      </ul>
+      
+      <h3>Exporting Data</h3>
+      <p>
+        To download the complete dataset as a CSV file for further analysis, click the "Download CSV" button in the header
+        or visit <a href="/export_csv">/export_csv</a>.
+      </p>
+      <p>
+        The exported file includes all alert data with columns for date, alert title, alert type, crime type, location details,
+        suspect information, coordinates, and more.
+      </p>
+      
+      <h2>Understanding the Data</h2>
+      
+      <h3>Data Sources</h3>
+      <p>
+        The data is sourced from the <a href="https://police.ucsd.edu/alerts/warnings.html" target="_blank">UCSD Police Department's alerts page</a>.
+        It includes:
+      </p>
+      <ul>
+        <li>Timely Warnings required by the Clery Act</li>
+        <li>Triton Alerts for emergency notifications</li>
+        <li>Community Alert Bulletins for other safety information</li>
+      </ul>
+      
+      <h3>Geocoding</h3>
+      <p>
+        Incident locations are geocoded (mapped to latitude/longitude coordinates) using a simple mapping of known campus locations.
+        For locations that cannot be precisely geocoded, a general campus center point may be used.
+      </p>
+      
+      <h3>Data Processing</h3>
+      <p>
+        The application uses natural language processing techniques to extract location and suspect information from alert text.
+        This automated process may not always be 100% accurate, so it's recommended to click through to the original alert for complete details.
+      </p>
+      
+      <a href="/" class="btn">Return to Map</a>
+    </div>
+    
+    <div class="footer">
+      <p>UCSD Campus Crime Map - A web application for visualizing campus safety data</p>
+    </div>
+  </div>
+</body>
+</html>

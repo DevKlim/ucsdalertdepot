@@ -9,7 +9,7 @@ CAMPUS_LOCATIONS = {
 
 def simple_campus_geocode(location_text: str):
     """
-    Checks if any known campus landmark name is in the location_text.
+    Checks if any known campus landmark is mentioned in the location_text.
     Returns a (lat, lng) tuple if found; otherwise, returns None.
     """
     if not location_text:

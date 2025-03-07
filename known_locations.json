@@ -1,0 +1,322 @@
+{
+  "Warren Mall": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "BCB Caf\u00e9": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "BCB Caf\u00e9, Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Pepper Canyon": {
+    "lat": 32.8782,
+    "lng": -117.2392,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Muir College": {
+    "lat": 32.8789,
+    "lng": -117.241,
+    "address": "Muir College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Eighth College": {
+    "lat": 32.8851,
+    "lng": -117.2408,
+    "address": "Eighth College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "UC San Diego": {
+    "lat": 32.8801,
+    "lng": -117.234,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "La Jolla": {
+    "lat": 32.8449,
+    "lng": -117.274,
+    "address": "La Jolla, San Diego, CA 92037"
+  },
+  "San Diego": {
+    "lat": 32.7157,
+    "lng": -117.1611,
+    "address": "San Diego, CA"
+  },
+  "Gilman Dr. at Via Alicante": {
+    "lat": 32.882757,
+    "lng": -117.235197,
+    "address": "Gilman Dr & Via Alicante, La Jolla, CA 92093"
+  },
+  "RIMAC Arena North Campus": {
+    "lat": 32.880255,
+    "lng": -117.238317,
+    "address": "RIMAC Arena, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "RIMAC Arena": {
+    "lat": 32.880255,
+    "lng": -117.238317,
+    "address": "RIMAC Arena, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "9600 Block Black Gold Road": {
+    "lat": 32.907933,
+    "lng": -117.147064,
+    "address": "9600 Black Gold Rd, San Diego, CA 92126"
+  },
+  "York Hall UCSD": {
+    "lat": 32.879937,
+    "lng": -117.236535,
+    "address": "York Hall, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "3135 Matthews Lane": {
+    "lat": 32.862223,
+    "lng": -117.199767,
+    "address": "3135 Matthews Ln, San Diego, CA 92123"
+  },
+  "Mandeville Auditorium": {
+    "lat": 32.880444,
+    "lng": -117.236294,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Douglas Hall": {
+    "lat": 32.934778,
+    "lng": -117.233333,
+    "address": "10250 N Torrey Pines Rd, La Jolla, CA 92037"
+  },
+  "Torrey Pines North Parking": {
+    "lat": 32.879903,
+    "lng": -117.237409,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "CSE Building": {
+    "lat": 32.880383,
+    "lng": -117.235703,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "ERC Residences": {
+    "lat": 32.879389,
+    "lng": -117.238611,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Warren Neighborhood": {
+    "lat": 32.878639,
+    "lng": -117.237011,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Athena Parking Structure": {
+    "lat": 32.880833,
+    "lng": -117.231667,
+    "address": "9417 East Medical Center Drive, La Jolla, CA 92037"
+  },
+  "3366 N. Torrey Pines Ct.": {
+    "lat": 32.894261,
+    "lng": -117.236747,
+    "address": "3366 N. Torrey Pines Ct, La Jolla, CA 92037"
+  },
+  "Matthews Apartments": {
+    "lat": 32.726428,
+    "lng": -117.159486,
+    "address": "3232 Fifth Avenue, San Diego, CA 92103"
+  },
+  "Library Walk": {
+    "lat": 32.87995,
+    "lng": -117.235895,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Ridge Walk Academic Building": {
+    "lat": 32.881049,
+    "lng": -117.236958,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "San Diego Downtown": {
+    "lat": 32.715738,
+    "lng": -117.161091,
+    "address": "1200 3rd Ave, San Diego, CA 92101"
+  },
+  "INCLUSION": {
+    "lat": 32.881049,
+    "lng": -117.236958,
+    "address": "9 a Precise: INCLUSION"
+  },
+  "UCSD Extended Studies Building A": {
+    "lat": 32.879073,
+    "lng": -117.237113,
+    "address": "3220 Sixth College Lane, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Cala Building": {
+    "lat": 32.869312,
+    "lng": -117.171678,
+    "address": "3869 Miramar St, San Diego, CA 92121"
+  },
+  "Hillcrest Medical Center Intersection": {
+    "lat": 32.742522,
+    "lng": -117.150392,
+    "address": "3900 5th Ave, San Diego, CA 92103"
+  },
+  "North Torrey Pines Living Learning Neighborhood Bike Storage": {
+    "lat": 32.880663,
+    "lng": -117.236448,
+    "address": "6400 Scholars Dr N, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Harlan Hall Suite": {
+    "lat": 32.881889,
+    "lng": -117.235233,
+    "address": "6001 Harlan Dr, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Scholars Drive North & Exploration Drive Intersection": {
+    "lat": 32.881889,
+    "lng": -117.234722,
+    "address": "Scholars Drive North & Exploration Drive, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "North Torrey Pines Laundry Room": {
+    "lat": 32.880833,
+    "lng": -117.236667,
+    "address": "North Torrey Pines Living and Learning Center, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Matthews Apartment E": {
+    "lat": 32.888333,
+    "lng": -117.225278,
+    "address": "9460 Innovation Lane, La Jolla, CA 92037"
+  },
+  "Preuss School": {
+    "lat": 32.884167,
+    "lng": -117.228333,
+    "address": "3750 Voigt Dr, La Jolla, CA 92037"
+  },
+  "Residential Areas around UCSD": {
+    "lat": 32.88,
+    "lng": -117.235,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Cafe Ventanas": {
+    "lat": 32.879534,
+    "lng": -117.235698,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Mesa Nueva Artesa": {
+    "lat": 32.859704,
+    "lng": -117.169258,
+    "address": "3867 Miramar St, San Diego, CA 92121"
+  },
+  "Triton Clubhouse": {
+    "lat": 32.874763,
+    "lng": -117.230773,
+    "address": "3685 Voigt Dr, San Diego, CA 92121"
+  },
+  "Sun God Lawn": {
+    "lat": 32.878449,
+    "lng": -117.237193,
+    "address": "Matthews Ln, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "ERC Residence Halls": {
+    "lat": 32.875361,
+    "lng": -117.238261,
+    "address": "9450 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Central Campus Trolley Station": {
+    "lat": 32.881027,
+    "lng": -117.23474,
+    "address": "UC San Diego Trolley Station, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Marshall Lower Apartments": {
+    "lat": 32.879575,
+    "lng": -117.236867,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Biological Grade, SIO": {
+    "lat": 32.8687,
+    "lng": -117.2535,
+    "address": "8605 La Jolla Shores Dr, La Jolla, CA 92037"
+  },
+  "Library Walk near The Trove": {
+    "lat": 32.880361,
+    "lng": -117.234933,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "1000 York Lane": {
+    "lat": 32.777,
+    "lng": -117.111,
+    "address": "1000 York Lane, San Diego, CA 92131"
+  },
+  "UCSD Hillcrest Hospital": {
+    "lat": 32.7327,
+    "lng": -117.14512,
+    "address": "200 W. Arbor Drive, San Diego, CA 92103"
+  },
+  "Biological Grade Parking Lot 011": {
+    "lat": 32.87973,
+    "lng": -117.23763,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Leichtag Biomedical Research Building": {
+    "lat": 32.88196,
+    "lng": -117.23389,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Latin America Hall": {
+    "lat": 32.87995,
+    "lng": -117.23797,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "One Miramar": {
+    "lat": 32.8643,
+    "lng": -117.1863,
+    "address": "9225 Towne Centre Dr, San Diego, CA 92121"
+  },
+  "6th College": {
+    "lat": 32.881122,
+    "lng": -117.234997,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Campus Point Parking Structure": {
+    "lat": 32.876736,
+    "lng": -117.240397,
+    "address": "Campus Point Dr, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "9126 Regents Rd and 9238 Regents Rd": {
+    "lat": 32.844752,
+    "lng": -117.187157,
+    "address": "9126 Regents Rd, San Diego, CA 92122"
+  },
+  "9238 Regents Rd": {
+    "lat": 32.842923,
+    "lng": -117.185673,
+    "address": "9238 Regents Rd, San Diego, CA 92122"
+  },
+  "United States": {
+    "lat": 38.8951,
+    "lng": -77.0364,
+    "address": "Washington, D.C., USA"
+  },
+  "Rita Atkinson Residences": {
+    "lat": 32.880222,
+    "lng": -117.23492,
+    "address": "Matthews Quad, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Sixth College Residence Halls": {
+    "lat": 32.8792,
+    "lng": -117.2395,
+    "address": "Sixth College, 9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "Gilman Drive West of Gilman Bridge": {
+    "lat": 32.881574,
+    "lng": -117.237782,
+    "address": "Gilman Dr, La Jolla, CA 92093"
+  },
+  "SIO Old Director's House": {
+    "lat": 32.868047,
+    "lng": -117.252706,
+    "address": "8670 Discovery Way, La Jolla, CA 92037"
+  },
+  "Mesa Apartments": {
+    "lat": 32.878877,
+    "lng": -117.204426,
+    "address": "9266 Regents Rd, San Diego, CA 92121"
+  },
+  "Argo Hall": {
+    "lat": 32.879565,
+    "lng": -117.237694,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
+  },
+  "3366 North Torrey Pines Court Parking Lot": {
+    "lat": 32.890665,
+    "lng": -117.233512,
+    "address": "3366 North Torrey Pines Court, La Jolla, CA 92037"
+  }
+}
