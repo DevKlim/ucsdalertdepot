@@ -149,7 +149,7 @@
           <div id="challenge-vis"></div>
         </div>
         <div class="step-content">
-          <h2>The Challenge</h2>
+          <h2>Problem Statement</h2>
           <p>UCSD campus alerts often reference location names that global mapping services don't recognize – such as "Price Center," "Ridgewalk," or residence hall names. Standard geocoding fails to translate these campus-specific references into precise coordinates.</p>
           <p>Our goal was to create a system that accurately maps alerts when they mention locations like "Lot P103 near Revelle" or "BCB Café at Warren Mall" – providing a visual interface that helps students stay informed about campus safety.</p>
           <div class="tech-highlight">
@@ -163,7 +163,7 @@
       </div>
 
       <!-- Step 2: OCR Map Extraction -->
-      <div class="step" data-step="ocr">
+      <!-- <div class="step" data-step="ocr">
         <div class="step-vis">
           <div id="ocr-vis"></div>
         </div>
@@ -201,58 +201,24 @@ def extract_map_labels(map_image_path):
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- Step 3: Campus Geocoding -->
-      <div class="step" data-step="geocoding">
+      <div class="step" data-step="process">
         <div class="step-vis">
-          <div id="geocoding-vis"></div>
+          <div id="n/a"></div>
         </div>
         <div class="step-content">
-          <h2>Campus-Specific Geocoding</h2>
-          <p>We built a custom geocoding database specifically tailored for UCSD. This gazetteer contains official building names, internal campus roads, landmarks, and even informal areas like "Muir Quad" that traditional geocoders don't recognize.</p>
-          <div class="code-snippet">
-            <pre><code>
-{
-  "Warren Mall": {
-    "lat": 32.8822,
-    "lng": -117.2345,
-    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr"
-  },
-  "BCB Café": {
-    "lat": 32.8822,
-    "lng": -117.2345,
-    "address": "BCB Café, Warren Mall, UC San Diego"
-  },
-  "Pepper Canyon": {
-    "lat": 32.8782,
-    "lng": -117.2392,
-    "address": "Pepper Canyon, UC San Diego"
-  },
-  // Many more campus locations...
-}</code></pre>
-          </div>
-          <p>This custom geocoding solution enables us to precisely locate any campus-specific reference in alerts, providing students with exact information about where incidents occur.</p>
-          <div class="tech-highlight">
-            <div class="tech-icon">🧠</div>
-            <div class="tech-text">
-              <h4>AI-Enhanced Geocoding</h4>
-              <p>For ambiguous location descriptions, we implemented NLP and language models to match unclear references to known locations in our database.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 4: LLM Comparison -->
-      <div class="step" data-step="llm-comparison">
-        <div class="step-vis">
-          <div id="llm-comparison-vis"></div>
-        </div>
-        <div class="step-content">
-          <h2>LLM Geocoding Comparison</h2>
-          <p>We compared the performance of various Large Language Models for geocoding UCSD-specific locations. Different models showed varying levels of effectiveness for campus landmark recognition.</p>
-          <p>Our tests revealed that while all LLMs had decent accuracy for well-known locations like "Geisel Library," specialized models like Mistral Large showed superior performance for ambiguous campus-specific references.</p>
-          <p>Traditional geocoding services like ArcGIS struggled most with campus-specific vernacular such as building nicknames and informal areas, confirming the need for our specialized solution.</p>
+          <h2>Process Overview</h2>
+          <p>Given our problem statement and known geocoding challenges, we began experimenting and developing our product.</p>
+          <p>Here is an outline of our development process:</p>
+          <ol>
+            <li>Create script to scrape crime data periodically from UCSD Police Crime Logs</li>
+            <li>Process and clean text data using simple NLP techniques</li>
+            <li>Explore geocoding options: Geopandas + LLMs to locate and identify specific campus locations</li>
+            <li>Spatial density analysis to visualize data distribution</li>
+            <li>Use most accurate geocoding to create our interactive prototype</li>
+            <li>Future directions: refine accuracy in geocoding and NLP and explore broader applications</li>
+          </ol>
         </div>
       </div>
 
@@ -302,6 +268,62 @@ def scrape_ucsd_alerts():
           </div>
         </div>
       </div>
+      
+
+      <!-- Step 3: Campus Geocoding -->
+      <div class="step" data-step="geocoding">
+        <div class="step-vis">
+          <div id="geocoding-vis"></div>
+        </div>
+        <div class="step-content">
+          <h2>Campus-Specific Geocoding</h2>
+          <p>We built a custom geocoding database specifically tailored for UCSD. This json contains official building names, internal campus roads, landmarks, and even informal areas like "Muir Quad" that traditional geocoders don't recognize.</p>
+          <div class="code-snippet">
+            <pre><code>
+{
+  "Warren Mall": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr"
+  },
+  "BCB Café": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "BCB Café, Warren Mall, UC San Diego"
+  },
+  "Pepper Canyon": {
+    "lat": 32.8782,
+    "lng": -117.2392,
+    "address": "Pepper Canyon, UC San Diego"
+  },
+  // Many more campus locations...
+}</code></pre>
+          </div>
+          <p>This custom geocoding solution enables us to precisely locate any campus-specific reference in alerts, providing students with exact information about where incidents occur.</p>
+          <div class="tech-highlight">
+            <div class="tech-icon">🧠</div>
+            <div class="tech-text">
+              <h4>AI-Enhanced Geocoding</h4>
+              <p>For ambiguous location descriptions, we implemented NLP and language models to match unclear references to known locations in our database.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: LLM Comparison -->
+      <div class="step" data-step="llm-comparison">
+        <div class="step-vis">
+          <div id="llm-comparison-vis"></div>
+        </div>
+        <div class="step-content">
+          <h2>LLM Geocoding Comparison</h2>
+          <p>We compared the performance of various Large Language Models for geocoding UCSD-specific locations. Different models showed varying levels of effectiveness for campus landmark recognition.</p>
+          <p>Our tests revealed that while all LLMs had decent accuracy for well-known locations like "Geisel Library," specialized models like Mistral Large showed superior performance for ambiguous campus-specific references.</p>
+          <p>Traditional geocoding services like ArcGIS struggled most with campus-specific vernacular such as building nicknames and informal areas, confirming the need for our specialized solution.</p>
+        </div>
+      </div>
+
+      
 
       <!-- Step 6: Visualization -->
       <div class="step" data-step="visualization">
@@ -360,7 +382,7 @@ function addAlertMarkers(alertsData) {
       </div>
 
       <!-- Step 7: Dashboard Analytics -->
-      <div class="step" data-step="dashboard">
+      <!-- <div class="step" data-step="dashboard">
         <div class="step-vis">
           <div id="dashboard-vis"></div>
         </div>
@@ -376,7 +398,7 @@ function addAlertMarkers(alertsData) {
           </ul>
           <p>These analytics help campus security personnel allocate resources more effectively and assist students in making informed decisions about their daily routines and routes.</p>
         </div>
-      </div>
+      </div> -->
 
       <!-- Step 8: Privacy & Security -->
       <div class="step" data-step="privacy">
