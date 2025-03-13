@@ -1,4 +1,4 @@
-/* static/style.css */
+/* static/style.css - Enhanced version */
 
 /* Main color variables */
 :root {
@@ -38,6 +38,8 @@ header {
   padding: 20px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3);
   box-shadow: 0 2px 15px var(--shadow-gold);
+  position: relative;
+  z-index: 100;
 }
 
 .header-content {
@@ -56,6 +58,7 @@ h1 {
 h1 svg {
   margin-right: 10px;
   stroke: var(--secondary);
+  fill: var(--secondary);
 }
 
 .controls {
@@ -137,20 +140,22 @@ h1 svg {
   font-weight: 500;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 175, 55, 0.3);
+  z-index: 5;
 }
 
 /* Sidebar styling */
 .sidebar {
   position: absolute;
   top: 0;
-  right: -350px;
+  right: 0px;
   width: 350px;
   height: 100%;
   background-color: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
   box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
-  z-index: 10;
+  z-index: 20; /* Higher than map but lower than popups */
   transition: right 0.3s ease;
   border-left: 1px solid rgba(212, 175, 55, 0.3);
   padding: 20px;
@@ -217,6 +222,7 @@ h1 svg {
   accent-color: var(--secondary);
   width: 16px;
   height: 16px;
+  cursor: pointer;
 }
 
 .filter-checkbox label {
@@ -248,7 +254,13 @@ h1 svg {
 .date-filter input[type="date"]:focus {
   outline: none;
   border-color: var(--secondary);
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Chrome/Safari date input styling */
+.date-filter input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5) sepia(0.5);
+  cursor: pointer;
 }
 
 #reset-filters {
@@ -282,6 +294,10 @@ h1 svg {
   margin-right: 10px;
   border: 2px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.legend-label {
+  font-size: 14px;
 }
 
 /* Recent Alerts */
@@ -334,6 +350,7 @@ h1 svg {
   border: 1px solid rgba(212, 175, 55, 0.3) !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
 }
 
 .maplibregl-ctrl-group button {
@@ -345,10 +362,19 @@ h1 svg {
   background-color: rgba(212, 175, 55, 0.1) !important;
 }
 
+/* Fix for MapLibre control icon colors */
+.maplibregl-ctrl button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,
+.maplibregl-ctrl button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon,
+.maplibregl-ctrl button.maplibregl-ctrl-compass .maplibregl-ctrl-icon,
+.maplibregl-ctrl button.maplibregl-ctrl-fullscreen .maplibregl-ctrl-icon {
+  filter: invert(100%) !important;
+}
+
 .maplibregl-ctrl-attrib {
   background-color: rgba(20, 20, 20, 0.7) !important;
   color: var(--light) !important;
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
 }
 
 .maplibregl-ctrl-attrib a {
@@ -358,6 +384,7 @@ h1 svg {
 /* Custom Popup */
 .maplibregl-popup {
   max-width: 300px;
+  z-index: 30 !important; /* Ensure popups appear above sidebar */
 }
 
 .maplibregl-popup-content {
@@ -368,6 +395,19 @@ h1 svg {
   border: 1px solid var(--secondary) !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.2) !important;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
+.maplibregl-popup-close-button {
+  color: var(--light) !important;
+  font-size: 20px !important;
+  padding: 5px 10px !important;
+  transition: all 0.2s ease;
+}
+
+.maplibregl-popup-close-button:hover {
+  color: var(--secondary) !important;
+  background-color: transparent !important;
 }
 
 .maplibregl-popup-tip {
@@ -385,10 +425,17 @@ h1 svg {
 }
 
 .popup-date,
-.popup-location {
+.popup-location,
+.popup-suspect {
   font-size: 0.9rem;
   color: var(--light);
   margin-bottom: 8px;
+}
+
+.popup-suspect {
+  margin-top: 8px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  padding-top: 8px;
 }
 
 .popup-type {
@@ -455,6 +502,17 @@ h1 svg {
   }
 }
 
+/* Triton logo specific styling for SVG  */
+.triton-gold {
+  fill: var(--secondary);
+}
+
+.triton-outline {
+  fill: none;
+  stroke: var(--secondary);
+  stroke-width: 1.5;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -493,5 +551,15 @@ h1 svg {
   
   .filter-options {
     max-height: 150px;
+  }
+}
+
+/* Fix for Firefox (which doesn't support backdrop-filter) */
+@-moz-document url-prefix() {
+  .sidebar, 
+  .maplibregl-popup-content, 
+  .maplibregl-ctrl-group, 
+  .maplibregl-ctrl-attrib {
+    background-color: rgba(10, 10, 10, 0.95) !important;
   }
 }

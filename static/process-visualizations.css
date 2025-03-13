@@ -1,0 +1,1017 @@
+/* process-visualizations.css */
+/* Styles for process page visualization components */
+
+/* Base Styles */
+.vis-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 0 auto;
+  }
+  
+  .vis-container h3 {
+    color: var(--secondary);
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .vis-caption {
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+  
+  /* Animation Keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes scanMove {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Challenge Visualization (Step 1) */
+  .geocoding-failure-demo {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .terminal {
+    width: 100%;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .terminal-header {
+    background-color: #333;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: #ff5f56;
+  }
+  
+  .terminal-button:nth-child(2) {
+    background-color: #ffbd2e;
+  }
+  
+  .terminal-button:nth-child(3) {
+    background-color: #27c93f;
+  }
+  
+  .terminal-title {
+    margin-left: 10px;
+    font-size: 0.8rem;
+    color: #ddd;
+  }
+  
+  .terminal-body {
+    padding: 15px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    color: #f8f8f8;
+    min-height: 200px;
+  }
+  
+  .terminal-line {
+    margin-bottom: 8px;
+  }
+  
+  .terminal-line.error {
+    color: #ff5555;
+  }
+  
+  .terminal-line.blink {
+    animation: blink 1s infinite;
+  }
+  
+  /* OCR Map Scanning Visualization (Step 2) */
+  .map-ocr-demo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    gap: 20px;
+  }
+  
+  .campus-map {
+    width: 100%;
+    height: 250px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+  }
+  
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--secondary);
+    box-shadow: 0 0 10px var(--secondary), 0 0 20px var(--secondary);
+    z-index: 10;
+    animation: scanMove 3s infinite;
+  }
+  
+  .map-label {
+    position: absolute;
+    background-color: rgba(212, 175, 55, 0.5);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  
+  .ocr-results {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .ocr-header {
+    background-color: #333;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: var(--secondary);
+  }
+  
+  .ocr-body {
+    padding: 12px;
+  }
+  
+  .ocr-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .ocr-label {
+    font-weight: 500;
+  }
+  
+  .ocr-coords {
+    font-family: monospace;
+    opacity: 0.7;
+  }
+  
+  /* Campus-Specific Geocoding Visualization (Step 3) */
+  .geocoding-db-demo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    gap: 20px;
+  }
+  
+  .campus-map-mini {
+    width: 100%;
+    height: 200px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .campus-outline {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 30% 40% 35% 50%;
+  }
+  
+  .location-pin {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .location-pin:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+  }
+  
+  .location-pin::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(10, 10, 10, 0.8);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .location-pin:hover::after {
+    opacity: 1;
+  }
+  
+  .geocode-database {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .db-header {
+    background-color: #333;
+    padding: 8px 15px;
+  }
+  
+  .db-title {
+    color: var(--secondary);
+    font-size: 0.9rem;
+  }
+  
+  .db-body {
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .db-body pre {
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #f8f8f8;
+    white-space: pre-wrap;
+  }
+  
+  .highlight {
+    background-color: rgba(212, 175, 55, 0.2);
+    color: var(--secondary);
+    padding: 0 3px;
+    border-radius: 3px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+  }
+  
+  /* Real-Time Data Processing Visualization (Step 4) */
+  .data-pipeline-demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .pipeline-node {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pipeline-node.active {
+    border-color: var(--secondary);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  .node-icon {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  
+  .node-label {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  
+  .pipeline-arrow {
+    margin: 0 10px;
+    color: rgba(212, 175, 55, 0.5);
+  }
+  
+  /* LLM Comparison Visualization */
+  .llm-comparison-chart {
+    width: 100%;
+    max-width: 550px;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .comparison-table {
+    padding: 15px;
+    overflow-x: auto;
+  }
+  
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--light);
+    font-size: 0.9rem;
+  }
+  
+  .comparison-table th, 
+  .comparison-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .comparison-table th {
+    background-color: rgba(10, 10, 10, 0.5);
+    color: var(--secondary);
+    font-weight: 600;
+  }
+  
+  .comparison-table td:first-child {
+    text-align: left;
+    font-family: monospace;
+    max-width: 180px;
+  }
+  
+  .accuracy {
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  
+  .accuracy.high {
+    background-color: rgba(61, 220, 151, 0.2);
+    color: var(--success);
+  }
+  
+  .accuracy.medium {
+    background-color: rgba(255, 205, 0, 0.2);
+    color: var(--warning);
+  }
+  
+  .accuracy.low {
+    background-color: rgba(255, 73, 92, 0.2);
+    color: var(--danger);
+  }
+  
+  /* Interactive Visualization Demo (Step 5) */
+  .map-interface-demo {
+    width: 100%;
+    max-width: 550px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .map-header {
+    background-color: #333;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .map-title {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .map-controls {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .map-filter {
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  
+  .map-body {
+    display: flex;
+    height: 300px;
+  }
+  
+  .demo-map {
+    flex: 2;
+    background-color: #2a2a2a;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .map-marker {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid white;
+  }
+  
+  .map-marker.violent {
+    background-color: var(--danger);
+  }
+  
+  .map-marker.property {
+    background-color: var(--warning);
+  }
+  
+  .map-marker.other {
+    background-color: var(--success);
+  }
+  
+  .map-popup {
+    position: absolute;
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 1px solid var(--secondary);
+    border-radius: 6px;
+    width: 200px;
+    transform: translate(-50%, -120%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+  
+  .popup-header {
+    padding: 8px 10px;
+    background-color: rgba(10, 10, 10, 0.5);
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .popup-body {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  
+  .popup-body p {
+    margin: 5px 0;
+  }
+  
+  .alert-type {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-top: 5px;
+  }
+  
+  .alert-type.violent {
+    background-color: rgba(255, 73, 92, 0.2);
+    color: var(--danger);
+    border: 1px solid rgba(255, 73, 92, 0.4);
+  }
+  
+  .alert-type.property {
+    background-color: rgba(255, 205, 0, 0.2);
+    color: var(--warning);
+    border: 1px solid rgba(255, 205, 0, 0.4);
+  }
+  
+  .alert-type.other {
+    background-color: rgba(61, 220, 151, 0.2);
+    color: var(--success);
+    border: 1px solid rgba(61, 220, 151, 0.4);
+  }
+  
+  .map-sidebar {
+    flex: 1;
+    background-color: rgba(10, 10, 10, 0.5);
+    border-left: 1px solid rgba(212, 175, 55, 0.2);
+    overflow-y: auto;
+  }
+  
+  .sidebar-header {
+    padding: 10px;
+    background-color: rgba(30, 30, 30, 0.7);
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .alert-list {
+    padding: 5px;
+  }
+  
+  .alert-item {
+    padding: 8px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .alert-item:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+  }
+  
+  .alert-title {
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-bottom: 3px;
+  }
+  
+  .alert-meta {
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+  
+  /* Dashboard visualization styles */
+  .dashboard-preview {
+    width: 100%;
+    max-width: 550px;
+    height: 300px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-header {
+    background-color: #333;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .dashboard-title {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .dashboard-controls {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dashboard-control {
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .dashboard-control:hover {
+    background-color: rgba(212, 175, 55, 0.2);
+  }
+  
+  .dashboard-body {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .dashboard-map {
+    flex: 2;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dashboard-sidebar {
+    flex: 1;
+    background-color: rgba(30, 30, 30, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-section {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    padding: 10px;
+  }
+  
+  .sidebar-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  
+  .sidebar-content {
+    font-size: 0.75rem;
+  }
+  
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    opacity: 0.9;
+  }
+  
+  .stat-label {
+    color: var(--light);
+  }
+  
+  .stat-value {
+    font-weight: 500;
+  }
+  
+  .chart-placeholder {
+    height: 60px;
+    background-color: rgba(10, 10, 10, 0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .map-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .mini-marker {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid white;
+  }
+  
+  .mini-marker.violent {
+    background-color: var(--danger);
+  }
+  
+  .mini-marker.property {
+    background-color: var(--warning);
+  }
+  
+  .mini-marker.other {
+    background-color: var(--success);
+  }
+  
+  /* Privacy & Security Visualization (Step 6) */
+  .security-framework-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    gap: 20px;
+  }
+  
+  .security-layers {
+    position: relative;
+    width: 250px;
+    height: 250px;
+  }
+  
+  .security-layer {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px dashed rgba(212, 175, 55, 0.4);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .security-layer.highlight {
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+  
+  #layer-https {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotate 20s linear infinite;
+  }
+  
+  #layer-access {
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    animation: rotate 15s linear infinite reverse;
+  }
+  
+  #layer-sanitization {
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    animation: rotate 10s linear infinite;
+  }
+  
+  .security-core {
+    position: absolute;
+    top: 42.5%;
+    left: 42.5%;
+    width: 15%;
+    height: 15%;
+    background-color: rgba(255, 73, 92, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 73, 92, 0.5);
+  }
+  
+  .layer-label {
+    position: absolute;
+    background-color: rgba(10, 10, 10, 0.8);
+    color: var(--secondary);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  
+  #layer-https .layer-label {
+    top: -15px;
+    left: calc(50% - 65px);
+  }
+  
+  #layer-access .layer-label {
+    bottom: -15px;
+    left: calc(50% - 50px);
+  }
+  
+  #layer-sanitization .layer-label {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .core-label {
+    font-size: 0.7rem;
+    color: var(--danger);
+  }
+  
+  .security-details {
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .security-item {
+    padding: 10px 15px;
+    max-height: 200px;
+  }
+  
+  .item-header {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .item-body {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  
+  /* Mistral LLM Integration Visualization (Step 7) */
+  .llm-geocoding-demo {
+    width: 100%;
+    max-width: 550px;
+  }
+  
+  .llm-process {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .process-step {
+    flex: 1;
+    min-width: 150px;
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .process-step.active {
+    border-color: var(--secondary);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  .step-number {
+    background-color: rgba(10, 10, 10, 0.5);
+    color: var(--secondary);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin: 10px auto;
+  }
+  
+  .step-content {
+    padding: 0 10px 15px;
+  }
+  
+  .step-header {
+    text-align: center;
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .step-body {
+    font-size: 0.8rem;
+  }
+  
+  .input-text {
+    font-family: monospace;
+    padding: 8px;
+    background-color: rgba(10, 10, 10, 0.3);
+    border-radius: 4px;
+    line-height: 1.4;
+  }
+  
+  .llm-processing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .processing-animation {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .processing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: pulse 0.6s infinite;
+  }
+  
+  .processing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .processing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .processing-text {
+    font-size: 0.75rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+  
+  .output-json {
+    font-family: monospace;
+    font-size: 0.8rem;
+    padding: 10px;
+    background-color: rgba(10, 10, 10, 0.3);
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.4;
+    margin: 0;
+  }
+  
+  .process-connector {
+    display: flex;
+    align-items: center;
+    color: var(--secondary);
+    opacity: 0.7;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .comparison-table {
+      font-size: 0.8rem;
+    }
+    
+    .dashboard-body {
+      flex-direction: column;
+    }
+    
+    .dashboard-sidebar {
+      height: 150px;
+    }
+    
+    .llm-process {
+      flex-direction: column;
+    }
+    
+    .process-step {
+      width: 100%;
+    }
+    
+    .data-pipeline-demo {
+      flex-direction: column;
+    }
+    
+    .pipeline-node {
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    
+    .node-icon {
+      margin-bottom: 0;
+    }
+    
+    .pipeline-arrow {
+      transform: rotate(90deg);
+      margin: 5px 0;
+    }
+  }
