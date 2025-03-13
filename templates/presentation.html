@@ -1,0 +1,459 @@
+<!-- templates/presentation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCSD Alert Depot - Project Presentation</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- MapLibre GL JS CSS -->
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/presentation.css" />
+  <!-- Favicon -->
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+          <style>
+            .triton-gold {
+              fill: #ffd700;
+            }
+            .triton-outline {
+              fill: none;
+              stroke: #ffd700;
+              stroke-width: 1.5;
+            }
+          </style>
+          
+          <!-- Trident Base -->
+          <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+          <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+          
+          <!-- Trident Shaft -->
+          <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+          
+          <!-- Trident Head - Center Prong -->
+          <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+          
+          <!-- Trident Head - Side Prongs -->
+          <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+          <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+          
+          <!-- Water Waves -->
+          <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+          <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+        </svg>
+        <span>UCSD Alert Depot</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#tech">Technology</a></li>
+          <li><a href="#future">Future</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="/" class="nav-btn">View App</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+              <style>
+                .triton-gold {
+                  fill: #ffd700;
+                }
+                .triton-outline {
+                  fill: none;
+                  stroke: #ffd700;
+                  stroke-width: 1.5;
+                }
+              </style>
+              
+              <!-- Trident Base -->
+              <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+              <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+              
+              <!-- Trident Shaft -->
+              <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+              
+              <!-- Trident Head - Center Prong -->
+              <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+              
+              <!-- Trident Head - Side Prongs -->
+              <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+              <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+              
+              <!-- Water Waves -->
+              <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+              <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+            </svg>
+          </div>
+          <h1>UCSD ALERT DEPOT</h1>
+          <p class="subtitle">Enhancing campus safety through real-time geospatial visualization of security alerts</p>
+          <div class="hero-buttons">
+            <a href="#demo" class="btn btn-primary">View Demo</a>
+            <a href="/" class="btn btn-secondary">Launch App</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>About the Project</h2>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p>UCSD Alert Depot is a real-time dashboard and map of UCSD Police Alerts designed to keep students and community members informed about safety incidents happening around campus. Our mission is to enhance campus safety awareness by providing an intuitive, geospatial representation of security events.</p>
+            <p>The project began as a response to the traditional text-based alerts that lack visual context, making it difficult for users to understand the proximity and patterns of campus incidents. By leveraging modern web technologies and artificial intelligence, we've created an interactive platform that transforms complex data into accessible visual information.</p>
+          </div>
+          <div class="about-image">
+            <img src="/api/placeholder/600/400" alt="UCSD Campus Map" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Key Features</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>Real-Time Alerts</h3>
+            <p>Automatically scrapes and processes UCSD Police alerts as they're published, providing up-to-date information on campus safety incidents.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+              </svg>
+            </div>
+            <h3>Interactive Mapping</h3>
+            <p>Visualize incidents on an interactive map with filtering options for alert types, crime categories, and date ranges.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <h3>AI-Powered Geocoding</h3>
+            <p>Utilizes local LLMs to automatically geocode locations from textual descriptions, even recognizing campus-specific landmarks and buildings.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+            </div>
+            <h3>Data Analysis</h3>
+            <p>Identifies patterns, high-risk areas, and temporal trends to help users make informed decisions about campus safety.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Community Focus</h3>
+            <p>Designed with UCSD students, faculty, and visitors in mind, with plans to expand to the broader San Diego area.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <h3>Data Export</h3>
+            <p>Download incident data as CSV for further analysis or integration with other safety systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+      <div class="container">
+        <div class="section-header">
+          <h2>Interactive Demo</h2>
+        </div>
+        <div class="demo-content">
+          <div class="demo-text">
+            <p>Experience our interactive map visualization of campus safety alerts. Filter by date, alert type, and crime category to see patterns and hotspots across the UCSD campus.</p>
+            <div class="demo-controls">
+              <div class="control-group">
+                <label>Alert Type:</label>
+                <select id="demo-alert-type">
+                  <option value="all">All Types</option>
+                  <option value="Timely Warning">Timely Warning</option>
+                  <option value="Triton Alert">Triton Alert</option>
+                  <option value="Community Alert">Community Alert</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label>Crime Type:</label>
+                <select id="demo-crime-type">
+                  <option value="all">All Crimes</option>
+                  <option value="Burglary">Burglary</option>
+                  <option value="Sexual Assault">Sexual Assault</option>
+                  <option value="Robbery">Robbery</option>
+                  <option value="Theft">Theft</option>
+                </select>
+              </div>
+              <button id="update-demo" class="btn btn-primary">Update Map</button>
+            </div>
+          </div>
+          <div class="demo-map-container">
+            <div id="demo-map"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="tech" class="tech">
+      <div class="container">
+        <div class="section-header">
+          <h2>Technology Stack</h2>
+        </div>
+        <div class="tech-content">
+          <div class="tech-grid">
+            <div class="tech-card">
+              <h3>Frontend</h3>
+              <ul>
+                <li>HTML5, CSS3, JavaScript</li>
+                <li>MapLibre GL JS for interactive mapping</li>
+                <li>Responsive design for all devices</li>
+              </ul>
+            </div>
+            <div class="tech-card">
+              <h3>Backend</h3>
+              <ul>
+                <li>FastAPI for high-performance API endpoints</li>
+                <li>Python for data processing and analysis</li>
+                <li>AsyncIO for real-time data handling</li>
+              </ul>
+            </div>
+            <div class="tech-card">
+              <h3>Data Processing</h3>
+              <ul>
+                <li>Beautiful Soup for web scraping</li>
+                <li>spaCy for natural language processing</li>
+                <li>Local LLMs (Mistral) for geocoding</li>
+              </ul>
+            </div>
+            <div class="tech-card">
+              <h3>Data Storage</h3>
+              <ul>
+                <li>JSON for lightweight data storage</li>
+                <li>CSV exports for data sharing</li>
+                <li>Geocoded location database</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tech-diagram">
+            <img src="/api/placeholder/800/400" alt="System Architecture Diagram" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Work Section -->
+    <section id="future" class="future">
+      <div class="container">
+        <div class="section-header">
+          <h2>Future Development</h2>
+        </div>
+        <div class="future-content">
+          <div class="future-image">
+            <img src="/api/placeholder/600/400" alt="Future Vision" />
+          </div>
+          <div class="future-text">
+            <h3>Expanding Our Vision</h3>
+            <p>We're committed to enhancing UCSD Alert Depot with additional features and broader coverage:</p>
+            <ul class="future-list">
+              <li>
+                <span class="future-icon">🔔</span>
+                <div>
+                  <h4>Real-time Notifications</h4>
+                  <p>Implementing push notifications for new alerts in user-defined areas of interest.</p>
+                </div>
+              </li>
+              <li>
+                <span class="future-icon">🌆</span>
+                <div>
+                  <h4>City-Wide Expansion</h4>
+                  <p>Extending coverage to the broader San Diego area by integrating with city 911 and police data.</p>
+                </div>
+              </li>
+              <li>
+                <span class="future-icon">👥</span>
+                <div>
+                  <h4>Crowd-Sourced Reporting</h4>
+                  <p>Adding capability for community members to report and verify incidents in real-time.</p>
+                </div>
+              </li>
+              <li>
+                <span class="future-icon">📊</span>
+                <div>
+                  <h4>Advanced Analytics</h4>
+                  <p>Developing predictive models to identify emerging safety trends and potential hotspots.</p>
+                </div>
+              </li>
+              <li>
+                <span class="future-icon">🔌</span>
+                <div>
+                  <h4>API Integration</h4>
+                  <p>Creating robust APIs for third-party apps and websites to incorporate our alert data.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Team</h2>
+        </div>
+        <div class="team-content">
+          <div class="team-grid">
+            <div class="team-member">
+              <div class="member-image">
+                <img src="/api/placeholder/250/250" alt="Kliment Ho" />
+              </div>
+              <h3>Kliment Ho</h3>
+              <p class="member-role">Lead Developer</p>
+              <p class="member-bio">Front-end development and data visualization specialist focusing on the mapping interface and geocoding integration.</p>
+            </div>
+            <div class="team-member">
+              <div class="member-image">
+                <img src="/api/placeholder/250/250" alt="Ashley Chu" />
+              </div>
+              <h3>Ashley Chu</h3>
+              <p class="member-role">Data Scientist</p>
+              <p class="member-bio">Backend development and data processing expert handling alert data structures and API endpoints.</p>
+            </div>
+            <div class="team-member">
+              <div class="member-image">
+                <img src="/api/placeholder/250/250" alt="Jun-Hee Hwang" />
+              </div>
+              <h3>Jun-Hee Hwang</h3>
+              <p class="member-role">Research & Documentation</p>
+              <p class="member-bio">Research and documentation specialist coordinating project requirements and communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact/Feedback Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>Contact Us</h2>
+        </div>
+        <div class="contact-content">
+          <p>We'd love to hear your feedback and suggestions for improving UCSD Alert Depot. Please reach out with any questions or ideas.</p>
+          <div class="contact-buttons">
+            <a href="mailto:team@ucsdalertdepot.edu" class="btn btn-primary">Email Us</a>
+            <a href="https://github.com/ucsdalertdepot" class="btn btn-secondary">GitHub Repository</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+            <style>
+              .triton-gold {
+                fill: #ffd700;
+              }
+              .triton-outline {
+                fill: none;
+                stroke: #ffd700;
+                stroke-width: 1.5;
+              }
+            </style>
+            
+            <!-- Trident Base -->
+            <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+            <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+            
+            <!-- Trident Shaft -->
+            <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+            
+            <!-- Trident Head - Center Prong -->
+            <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+            
+            <!-- Trident Head - Side Prongs -->
+            <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+            <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+            
+            <!-- Water Waves -->
+            <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+            <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+          </svg>
+          UCSD Alert Depot
+        </div>
+        <div class="footer-links">
+          <a href="/">Main Application</a>
+          <a href="/instructions">Instructions</a>
+          <a href="/export_csv">Download Data</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 UCSD Alert Depot. A project for Professor Zaslavsky's Geospatial Data Analysis Class.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MapLibre GL JS -->
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <!-- Custom JS -->
+  <script src="/static/presentation.js"></script>
+</body>
+</html>

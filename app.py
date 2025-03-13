@@ -298,3 +298,20 @@ async def health_check():
         "memory_usage_mb": round(process.memory_info().rss / (1024 * 1024), 2),
         "cpu_percent": process.cpu_percent(interval=0.1)
     }
+
+@app.get("/presentation", response_class=HTMLResponse)
+async def presentation(request: Request):
+    """Serve the project presentation page."""
+    return templates.TemplateResponse("presentation.html", {"request": request})
+
+
+@app.get("/process", response_class=HTMLResponse)
+async def process(request: Request):
+    """Serve the project process page with scrollama visualization."""
+    return templates.TemplateResponse("process.html", {"request": request})
+
+# Check that your templates directory is properly set up in app.py:
+# templates = Jinja2Templates(directory="templates")
+
+# Also ensure your static files directory is mounted:
+# app.mount("/static", StaticFiles(directory="static"), name="static")

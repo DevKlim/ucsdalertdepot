@@ -700,3 +700,55 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
   });
+
+  function addAlertMarkers(map, alerts) {
+    // Clear existing markers...
+    
+    alerts.forEach(alert => {
+      // Determine marker color...
+      
+      // Create popup with offset to prevent jumping
+      const popup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: true,
+        maxWidth: '300px',
+        className: 'custom-popup',
+        offset: [0, -15], // This offset prevents the popup from appearing under cursor
+        anchor: 'bottom'
+      }).setHTML(/* your popup content */);
+      
+      // Create marker element
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+      // Style your marker here...
+      
+      // Handle hover events
+      el.onmouseover = function() {
+        this.style.transform = 'scale(1.2)';
+        popup.addTo(map); // Add popup on hover
+      };
+      
+      el.onmouseout = function() {
+        this.style.transform = 'scale(1)';
+        popup.remove(); // Remove popup when not hovering
+      };
+      
+      // Create marker
+      const marker = new maplibregl.Marker({
+        element: el,
+        anchor: 'center'
+      })
+      .setLngLat([alert.lng, alert.lat])
+      .addTo(map);
+      
+      // Store popup with marker for reference
+      marker.getElement()._popup = popup;
+      marker.getElement()._popupLngLat = [alert.lng, alert.lat];
+      
+      // Optional: Add click handler for toggling popup
+      marker.getElement().addEventListener('click', function(e) {
+        e.stopPropagation();
+        // Toggle popup logic...
+      });
+    });
+  }

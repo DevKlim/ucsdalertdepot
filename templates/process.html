@@ -1,0 +1,638 @@
+<!-- templates/process.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCSD Alert Depot - Our Process</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- MapLibre GL JS CSS -->
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <!-- Scrollama -->
+  <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/process.css" />
+  <!-- Favicon -->
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+          <style>
+            .triton-gold {
+              fill: #ffd700;
+            }
+            .triton-outline {
+              fill: none;
+              stroke: #ffd700;
+              stroke-width: 1.5;
+            }
+          </style>
+          
+          <!-- Trident Base -->
+          <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+          <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+          
+          <!-- Trident Shaft -->
+          <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+          
+          <!-- Trident Head - Center Prong -->
+          <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+          
+          <!-- Trident Head - Side Prongs -->
+          <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+          <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+          
+          <!-- Water Waves -->
+          <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+          <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+        </svg>
+        <span>UCSD Alert Depot</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Main App</a></li>
+          <li><a href="/presentation">Presentation</a></li>
+          <li><a href="#intro" class="active">Our Process</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Intro Section with Hero -->
+    <section id="intro" class="hero">
+      <div class="section-content">
+        <div class="hero-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+            <style>
+              .triton-gold {
+                fill: #ffd700;
+              }
+              .triton-outline {
+                fill: none;
+                stroke: #ffd700;
+                stroke-width: 1.5;
+              }
+            </style>
+            
+            <!-- Trident Base -->
+            <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+            <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+            
+            <!-- Trident Shaft -->
+            <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+            
+            <!-- Trident Head - Center Prong -->
+            <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+            
+            <!-- Trident Head - Side Prongs -->
+            <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+            <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+            
+            <!-- Water Waves -->
+            <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+            <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+          </svg>
+        </div>
+        <h1>The Making of UCSD Alert Depot</h1>
+        <p class="subtitle">A journey through our research, methodology, and development process</p>
+        <div class="scroll-indicator">
+          <span>Scroll to Explore</span>
+          <div class="scroll-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M19 12l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrollama Sections -->
+    <div id="scrolly">
+      <!-- Fixed visualization area -->
+      <div class="sticky-graphic">
+        <div id="visualization"></div>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps-container">
+        <!-- Step 1: Challenge -->
+        <div class="step" data-step="challenge">
+          <div class="step-content">
+            <h2>The Challenge</h2>
+            <p>UCSD campus alerts often reference location names that global mapping services don't recognize – such as "Price Center," "Ridgewalk," or residence hall names. Standard geocoding fails to translate these campus-specific references into precise coordinates.</p>
+            <p>Our goal was to create a system that accurately maps alerts when they mention locations like "Lot P103 near Revelle" or "BCB Café at Warren Mall" – providing a visual interface that helps students stay informed about campus safety.</p>
+            <div class="tech-highlight">
+              <div class="tech-icon">🔍</div>
+              <div class="tech-text">
+                <h4>The Problem</h4>
+                <p>Traditional geocoding services like Google Maps cannot accurately locate many campus-specific buildings, landmarks, and areas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: OCR Map Extraction -->
+        <div class="step" data-step="ocr">
+          <div class="step-content">
+            <h2>Map Label Extraction with OCR</h2>
+            <p>We developed a process to extract location names directly from the UCSD campus map using Optical Character Recognition (OCR). By scanning the map and detecting text labels for buildings, roads, and landmarks, we could build a custom gazetteer specifically for UCSD.</p>
+            <div class="code-snippet">
+              <pre><code>
+# Sample Python code for map OCR processing
+import pytesseract
+from PIL import Image
+
+def extract_map_labels(map_image_path):
+    image = Image.open(map_image_path)
+    # OCR settings optimized for map text
+    custom_config = r'--oem 3 --psm 11'
+    
+    # Extract text with bounding boxes (hOCR format)
+    hocr_data = pytesseract.image_to_pdf_or_hocr(
+        image, extension='hocr', 
+        config=custom_config
+    )
+    
+    # Process bounding boxes to get text and positions
+    # This data is used to create a map label database
+    map_labels = process_hocr_for_labels(hocr_data)
+    return map_labels</code></pre>
+            </div>
+            <p>We calibrated the campus map image with real-world coordinates (latitude/longitude of reference points) and used an affine transform to convert the pixel positions of each extracted label into precise geographic coordinates.</p>
+            <div class="tech-highlight">
+              <div class="tech-icon">🖼️</div>
+              <div class="tech-text">
+                <h4>OCR for Map Data</h4>
+                <p>We used Tesseract for efficient local processing and fell back to Google Vision API for more challenging text recognition when needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Campus Geocoding -->
+        <div class="step" data-step="geocoding">
+          <div class="step-content">
+            <h2>Campus-Specific Geocoding</h2>
+            <p>We built a custom geocoding database specifically tailored for UCSD. This gazetteer contains official building names, internal campus roads, landmarks, and even informal areas like "Muir Quad" that traditional geocoders don't recognize.</p>
+            <div class="code-snippet">
+              <pre><code>
+{
+  "Warren Mall": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr"
+  },
+  "BCB Café": {
+    "lat": 32.8822,
+    "lng": -117.2345,
+    "address": "BCB Café, Warren Mall, UC San Diego"
+  },
+  "Pepper Canyon": {
+    "lat": 32.8782,
+    "lng": -117.2392,
+    "address": "Pepper Canyon, UC San Diego"
+  },
+  // Many more campus locations...
+}</code></pre>
+            </div>
+            <p>This custom geocoding solution enables us to precisely locate any campus-specific reference in alerts, providing students with exact information about where incidents occur.</p>
+            <div class="tech-highlight">
+              <div class="tech-icon">🧠</div>
+              <div class="tech-text">
+                <h4>AI-Enhanced Geocoding</h4>
+                <p>For ambiguous location descriptions, we implemented NLP and language models to match unclear references to known locations in our database.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Real-Time Processing -->
+        <div class="step" data-step="realtime">
+          <div class="step-content">
+            <h2>Real-Time Data Processing</h2>
+            <p>To provide timely information, we created a pipeline that automatically scrapes safety alerts from the UCSD Police Department website, processes the text to extract key details (location, incident type, date/time), and geocodes the locations using our custom database.</p>
+            <div class="code-snippet">
+              <pre><code>
+# Scraper for UCSD police alerts
+import requests
+from bs4 import BeautifulSoup
+import re
+
+def scrape_ucsd_alerts():
+    alerts_url = "https://police.ucsd.edu/alerts/warnings.html"
+    response = requests.get(alerts_url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    alerts = []
+    # Process each alert link from the page
+    for link in soup.select("ul li a"):
+        if "Timely Warning" in link.text or "Triton Alert" in link:
+            # Extract details and process the alert
+            alert_details = extract_alert_details(link)
+            
+            # Geocode the location
+            coordinates = geocode_campus_location(
+                alert_details["location_text"]
+            )
+            alert_details.update(coordinates)
+            
+            alerts.append(alert_details)
+    
+    return alerts</code></pre>
+            </div>
+            <div class="tech-highlight">
+              <div class="tech-icon">⚡</div>
+              <div class="tech-text">
+                <h4>FastAPI Backend</h4>
+                <p>We chose FastAPI for its performance and async capabilities, ensuring our system can handle concurrent users and real-time updates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Visualization -->
+        <div class="step" data-step="visualization">
+          <div class="step-content">
+            <h2>Interactive Visualization</h2>
+            <p>We developed an interactive web-based visualization that displays alerts on a campus map. Users can filter by alert type, crime category, or date range to focus on specific safety concerns.</p>
+            <div class="code-snippet">
+              <pre><code>
+// MapLibre GL code for custom map display
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+  center: [-117.2340, 32.8801], // UCSD campus
+  zoom: 14
+});
+
+// Add custom map markers for alerts
+function addAlertMarkers(alertsData) {
+  alertsData.forEach(alert => {
+    // Determine marker color based on alert type
+    let color;
+    if (alert.crime_type === 'Violent Crime') {
+      color = '#FF495C'; // Red
+    } else if (alert.crime_type === 'Property Crime') {
+      color = '#FFD700'; // Gold
+    } else {
+      color = '#3DDC97'; // Green
+    }
+    
+    // Create custom marker with animation
+    const marker = new maplibregl.Marker({
+      color: color,
+      scale: 0.8
+    })
+    .setLngLat([alert.lng, alert.lat])
+    .setPopup(new maplibregl.Popup().setHTML(
+      `<h3>${alert.title}</h3>
+       <p>Date: ${alert.date}</p>
+       <p>Location: ${alert.location_text}</p>`
+    ))
+    .addTo(map);
+  });
+}</code></pre>
+            </div>
+            <div class="tech-highlight">
+              <div class="tech-icon">🗺️</div>
+              <div class="tech-text">
+                <h4>Modern Mapping</h4>
+                <p>We selected MapLibre GL for vector rendering, offering a smoother, more interactive experience than traditional raster maps.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Privacy & Security -->
+        <div class="step" data-step="privacy">
+          <div class="step-content">
+            <h2>Privacy & Security Considerations</h2>
+            <p>Handling safety data requires careful attention to privacy. We implemented measures to protect personal information while still providing useful safety awareness.</p>
+            <p>Our approach includes:</p>
+            <ul>
+              <li>Only displaying information that is officially released by authorities</li>
+              <li>Avoiding overly specific location details that could identify individuals</li>
+              <li>Securing all data transmission with HTTPS encryption</li>
+              <li>Implementing rate limiting and input validation to prevent misuse</li>
+            </ul>
+            <div class="tech-highlight">
+              <div class="tech-icon">🔒</div>
+              <div class="tech-text">
+                <h4>Data Protection</h4>
+                <p>We adopted principles from GDPR and CCPA in our design, ensuring transparency and user control over any collected information.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 7: Comparison with Existing Systems -->
+        <div class="step" data-step="comparison">
+          <div class="step-content">
+            <h2>Comparison with Existing Systems</h2>
+            <p>We evaluated our solution against established systems to ensure we were bringing real value:</p>
+            <div class="comparison-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>UCSD Alert Depot</th>
+                    <th>ArcGIS</th>
+                    <th>CrimeMapping</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Campus-specific locations</td>
+                    <td>✅ Excellent</td>
+                    <td>⚠️ Requires setup</td>
+                    <td>❌ Limited</td>
+                  </tr>
+                  <tr>
+                    <td>Update frequency</td>
+                    <td>✅ Minutes</td>
+                    <td>⚠️ Variable</td>
+                    <td>❌ Daily/Weekly</td>
+                  </tr>
+                  <tr>
+                    <td>Cost</td>
+                    <td>✅ Free (open source)</td>
+                    <td>❌ Licensing fees</td>
+                    <td>❌ Subscription</td>
+                  </tr>
+                  <tr>
+                    <td>Customization</td>
+                    <td>✅ Fully customizable</td>
+                    <td>⚠️ Complex</td>
+                    <td>❌ None</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Unlike general crime mapping systems, our solution is tailored for campus context, updates within minutes of alerts being issued, and combines official alerts with precise location data.</p>
+          </div>
+        </div>
+
+        <!-- Step 8: Development Process -->
+        <div class="step" data-step="development">
+          <div class="step-content">
+            <h2>Our Development Process</h2>
+            <p>We approached this project with a systematic methodology:</p>
+            <div class="process-timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>1. Data Collection</h4>
+                  <p>We gathered historical alerts from UCSD Police Department and identified the structure and format of their safety notifications.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>2. Location Extraction</h4>
+                  <p>Used OCR on campus maps to build a comprehensive database of campus locations with precise coordinates.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>3. Backend Development</h4>
+                  <p>Created a FastAPI service for data processing, geocoding, and serving alert information to clients.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>4. Frontend Implementation</h4>
+                  <p>Built an interactive web interface with MapLibre GL for visualizing alerts on a campus map.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>5. AI Integration</h4>
+                  <p>Enhanced location parsing with NLP and language models to improve the accuracy of geocoding.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>6. Testing & Refinement</h4>
+                  <p>Iteratively tested with historical data and refined our processing pipeline for accuracy.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 9: Mistral Implementation -->
+        <div class="step" data-step="mistral">
+          <div class="step-content">
+            <h2>LLM-Powered Geocoding with Mistral</h2>
+            <p>A key innovation in our system is the use of Large Language Models (LLMs) for intelligent geocoding. We implemented Mistral AI to improve location processing:</p>
+            <div class="code-snippet">
+              <pre><code>
+# Using Mistral AI to improve geocoding
+from mistralai import Mistral
+
+def geocode_unknown_locations_with_mistral(unknown_locations):
+    """
+    Use Mistral AI to geocode unknown location addresses to coordinates.
+    Returns: Dictionary mapping each location to its coordinates and address
+    """
+    client = Mistral(api_key=API_KEY)
+    
+    # Build a detailed prompt for the LLM to understand campus context
+    prompt = build_geocoding_prompt(unknown_locations)
+    
+    response = client.chat.complete(
+        model="mistral-large-latest",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    # Extract and process the structured JSON response
+    result_text = response.choices[0].message.content
+    geocoded_results = json.loads(extract_json_from_response(result_text))
+    
+    locations_dict = {}
+    for result in geocoded_results:
+        location = result["location"]
+        name = result["name"]
+        address = result["address"]
+        lat = float(result["lat"])
+        lng = float(result["lng"])
+        
+        locations_dict[location] = {
+            "name": name, 
+            "address": address,
+            "lat": lat, 
+            "lng": lng
+        }
+    
+    return locations_dict</code></pre>
+            </div>
+            <p>By structuring detailed prompts to the Mistral model, we achieved highly accurate geocoding that understands complex location descriptions like "near the main entrance of Geisel Library" or "Parking Lot P103 northwest corner."</p>
+            <div class="tech-highlight">
+              <div class="tech-icon">🤖</div>
+              <div class="tech-text">
+                <h4>LLM Benefits</h4>
+                <p>Using Mistral-large allowed us to interpret locations that traditional geocoding would miss completely, such as informal areas and newly constructed campus buildings.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 10: Future Expansion -->
+        <div class="step" data-step="future">
+          <div class="step-content">
+            <h2>Future Expansion</h2>
+            <p>Our project is designed for scalability and future growth:</p>
+            <div class="future-plans">
+              <div class="future-item">
+                <div class="future-icon">🌆</div>
+                <h4>Broader San Diego Integration</h4>
+                <p>Extending beyond campus to incorporate SDPD and Sheriff data for a comprehensive regional safety map.</p>
+              </div>
+              <div class="future-item">
+                <div class="future-icon">🏫</div>
+                <h4>Multi-Campus Support</h4>
+                <p>Adapting our system to work with other UC campuses by providing a template and modular processing pipeline.</p>
+              </div>
+              <div class="future-item">
+                <div class="future-icon">👥</div>
+                <h4>Community Reporting</h4>
+                <p>Adding capabilities for students and staff to submit incident reports with appropriate verification mechanisms.</p>
+              </div>
+              <div class="future-item">
+                <div class="future-icon">📊</div>
+                <h4>Advanced Analytics</h4>
+                <p>Implementing predictive analytics and trend visualization to identify patterns in campus safety incidents.</p>
+              </div>
+            </div>
+            <p>The modular architecture of our system makes these expansions achievable without major rewrites. Each component—from data ingestion to geocoding to visualization—is designed to scale independently.</p>
+          </div>
+        </div>
+
+        <!-- Step 11: Tech Stack Summary -->
+        <div class="step" data-step="tech-stack">
+          <div class="step-content">
+            <h2>Our Technology Stack</h2>
+            <div class="tech-stack">
+              <div class="tech-stack-group">
+                <h4>Frontend</h4>
+                <ul>
+                  <li>HTML5, CSS3, JavaScript</li>
+                  <li>MapLibre GL for interactive mapping</li>
+                  <li>Responsive design with modern CSS</li>
+                </ul>
+              </div>
+              <div class="tech-stack-group">
+                <h4>Backend</h4>
+                <ul>
+                  <li>FastAPI for high-performance endpoints</li>
+                  <li>Python for data processing</li>
+                  <li>Scraping with Beautiful Soup</li>
+                </ul>
+              </div>
+              <div class="tech-stack-group">
+                <h4>AI & NLP</h4>
+                <ul>
+                  <li>Mistral AI for intelligent geocoding</li>
+                  <li>Tesseract OCR for map processing</li>
+                  <li>spaCy for entity extraction</li>
+                </ul>
+              </div>
+              <div class="tech-stack-group">
+                <h4>Data Storage</h4>
+                <ul>
+                  <li>JSON for location database</li>
+                  <li>GeoJSON for spatial data</li>
+                  <li>CSV exports for analysis</li>
+                </ul>
+              </div>
+            </div>
+            <p>This modern stack balances performance needs with development efficiency, allowing us to create a responsive, accurate system that meets campus safety needs.</p>
+          </div>
+        </div>
+
+        <!-- Step 12: Conclusion -->
+        <div class="step" data-step="conclusion">
+          <div class="step-content">
+            <h2>Impact & Conclusion</h2>
+            <p>UCSD Alert Depot represents a significant improvement in how campus safety information is communicated and visualized:</p>
+            <ul class="impact-list">
+              <li><strong>Improved Accuracy:</strong> Precise location mapping of campus-specific references</li>
+              <li><strong>Faster Awareness:</strong> Real-time updates instead of daily or weekly refreshes</li>
+              <li><strong>Better Context:</strong> Visual representation provides immediate spatial understanding</li>
+              <li><strong>Community Service:</strong> Open-source solution that can be adapted by other institutions</li>
+            </ul>
+            <p>By combining OCR, AI-powered geocoding, and modern web technologies, we've created a system that makes campus safety information more accessible and actionable for the UCSD community.</p>
+            <div class="cta-buttons">
+              <a href="/" class="btn btn-primary">Try the App</a>
+              <a href="/presentation" class="btn btn-secondary">View Presentation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+            <style>
+              .triton-gold {
+                fill: #ffd700;
+              }
+              .triton-outline {
+                fill: none;
+                stroke: #ffd700;
+                stroke-width: 1.5;
+              }
+            </style>
+            
+            <!-- Trident Base -->
+            <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+            <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+            
+            <!-- Trident Shaft -->
+            <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+            
+            <!-- Trident Head - Center Prong -->
+            <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+            
+            <!-- Trident Head - Side Prongs -->
+            <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+            <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+            
+            <!-- Water Waves -->
+            <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+            <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+          </svg>
+          UCSD Alert Depot
+        </div>
+        <div class="footer-links">
+          <a href="/">Main Application</a>
+          <a href="/presentation">Presentation</a>
+          <a href="/instructions">Instructions</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 UCSD Alert Depot. A project for Professor Zaslavsky's Geospatial Data Analysis Class.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MapLibre GL JS -->
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <!-- Custom JS -->
+  <script src="/static/process.js"></script>
+</body>
+</html>

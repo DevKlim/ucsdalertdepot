@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .triton-gold {
+      fill: #ffd700;
+    }
+    .triton-outline {
+      fill: none;
+      stroke: #ffd700;
+      stroke-width: 1.5;
+    }
+  </style>
+  
+  <!-- Trident Base -->
+  <path class="triton-gold" d="M50,80 L53,65 L47,65 L50,80 Z" />
+  <rect class="triton-gold" x="47" y="60" width="6" height="5" />
+  
+  <!-- Trident Shaft -->
+  <rect class="triton-gold" x="48.5" y="25" width="3" height="35" />
+  
+  <!-- Trident Head - Center Prong -->
+  <path class="triton-gold" d="M50,25 L53,15 L47,15 L50,25 Z" />
+  
+  <!-- Trident Head - Side Prongs -->
+  <path class="triton-gold" d="M42,25 C42,25 40,20 42,15 C44,15 46,18 46,20 C46,22 44,25 42,25 Z" />
+  <path class="triton-gold" d="M58,25 C58,25 60,20 58,15 C56,15 54,18 54,20 C54,22 56,25 58,25 Z" />
+  
+  <!-- Water Waves -->
+  <path class="triton-outline" d="M30,45 C35,40 45,50 50,45 C55,40 65,50 70,45" />
+  <path class="triton-outline" d="M25,55 C30,50 40,60 50,55 C60,50 70,60 75,55" />
+</svg>
