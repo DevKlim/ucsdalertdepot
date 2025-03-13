@@ -8,7 +8,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- MapLibre GL JS CSS -->
-  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.css" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/static/style.css" />
   <!-- Favicon -->
@@ -133,6 +134,58 @@
           <!-- Reset Filters Button -->
           <button id="reset-filters" class="btn btn-primary">Reset Filters</button>
           
+          <!-- Geocoding Comparison Feature (new) -->
+          <div class="filter-group geocoding-comparison">
+            <h3>Geocoding Comparison</h3>
+            <p class="comparison-description">Compare how different geocoding services and LLMs interpret campus locations.</p>
+            <div class="loading-placeholder geocoding-comparison-loading">Loading comparison data...</div>
+            <div class="comparison-selector">
+              <label for="geocoding-comparison-selector">Select Service:</label>
+              <select id="geocoding-comparison-selector" style="display: none;">
+                <option value="current">Current (Custom Geocoding)</option>
+                <!-- Other options will be populated dynamically -->
+              </select>
+            </div>
+            <div id="active-geocoding-service" class="active-service">
+              Active: Current (Custom Geocoding)
+            </div>
+            <div class="service-metrics" style="display: none;">
+              <div class="metrics-title">Geocoding Accuracy Metrics:</div>
+              <div class="metric-item">
+                <span class="metric-label">Locations Found</span>
+                <span class="metric-value" id="locations-found">0%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Avg. Distance Error</span>
+                <span class="metric-value" id="avg-distance">0 meters</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Campus Location Accuracy</span>
+                <span class="metric-value" id="campus-accuracy">0%</span>
+              </div>
+            </div>
+            <div class="comparison-note">
+              Note: Campus-specific locations like "Warren Mall" are often mislocated by standard geocoding services.
+            </div>
+            <div class="comparison-info">
+              <button class="btn btn-small" id="toggle-info">About Geocoding Services ℹ️</button>
+              <div class="comparison-info-content" style="display: none;">
+                <div class="info-section">
+                  <h4>About the Geocoding Services</h4>
+                  <p>This comparison demonstrates how different geocoding approaches handle campus-specific locations:</p>
+                  <ul>
+                    <li><strong>Custom Geocoding:</strong> Our specialized database for UCSD campus</li>
+                    <li><strong>DeepSeek-R1:</strong> A large language model with general knowledge</li>
+                    <li><strong>Google Gemini Pro:</strong> Google's advanced language model</li>
+                    <li><strong>Mistral Large:</strong> An open-source language model</li>
+                    <li><strong>OpenStreetMaps:</strong> Traditional geocoding service</li>
+                  </ul>
+                  <p>The comparison highlights how specialized geocoding improves accuracy for campus locations that standard services struggle with.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <!-- Map Legend -->
           <div class="legend">
             <h3>Legend</h3>
@@ -166,5 +219,6 @@
   <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
   <!-- Custom JS -->
   <script src="/static/app.js"></script>
+  <script src="/static/geoswitcher.js"></script>
 </body>
 </html>

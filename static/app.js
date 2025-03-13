@@ -1,449 +1,672 @@
-// app.js - Fixed version
+// app.js - Main JavaScript file for the UCSD Crime Map application
 
+// Global variables
+
+let crimeMap = null;
+let alerts = [];
+let crimeCounts = {};
+let filteredFeatures = [];
+let markersVisible = true;
+let heatmapVisible = false;
+let heatmapLayer = null;
+const DEFAULT_LAT = 32.8801;
+const DEFAULT_LNG = -117.2340;
+const DEFAULT_ZOOM = 14;
+
+// Initialize the map when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize the map with alerts data
-  fetchAndInitializeMap();
-  
-  // Set up event listeners for the UI
-  setupEventListeners();
-  
-  // Set up filter functionality
-  setupFilters();
+    // Check if maplibregl is defined
+    if (typeof maplibregl === 'undefined') {
+        console.error('MapLibre GL JS is not loaded. Please make sure the library is included.');
+        return;
+    }
+    
+    // Load the map
+    crimeMap = new maplibregl.Map({
+        container: 'map',
+        style: 'https://demotiles.maplibre.org/style.json', // MapLibre demo style or your custom style
+        center: [DEFAULT_LNG, DEFAULT_LAT],
+        zoom: DEFAULT_ZOOM
+    });
+    
+    // Add map controls
+    crimeMap.addControl(new maplibregl.NavigationControl(), 'top-right');
+    
+    // Initialize when the map loads
+    crimeMap.on('load', function() {
+        // Fetch data and initialize the map display
+        fetchAndInitializeMap();
+        
+        // Set up event listeners
+        setupEventListeners();
+    });
 });
 
-// Get crime data and initialize map
+// Fetch crime data and initialize the map
 async function fetchAndInitializeMap() {
-  // Show loading indicator
-  document.querySelector('.map-loading').style.display = 'block';
-  
-  try {
-    // Fetch crime data from API
-    const response = await fetch('/api/crimes');
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    try {
+        // Show loading indicator
+        document.getElementById('loading-indicator').style.display = 'block';
+        
+        // Fetch the data
+        const response = await fetch('/api/crimes');
+        if (!response.ok) {
+            throw new Error('Failed to fetch crime data');
+        }
+        
+        // Parse the response
+        const data = await response.json();
+        alerts = data.features;
+        
+        // Process the data
+        processAlertData();
+        
+        // Add the data source to the map
+        crimeMap.addSource('alerts', {
+            type: 'geojson',
+            data: data
+        });
+        
+        // Add a layer for the markers
+        crimeMap.addLayer({
+            id: 'alert-points',
+            type: 'circle',
+            source: 'alerts',
+            paint: {
+                'circle-radius': 6,
+                'circle-color': [
+                    'match',
+                    ['get', 'crime_type'],
+                    'Burglary', '#FF5733',
+                    'Robbery', '#C70039',
+                    'Motor Vehicle Theft', '#900C3F',
+                    'Sexual Assault Known Perpetrator', '#581845',
+                    'Sexual Battery', '#581845',
+                    'Aggravated Assault', '#FFC300',
+                    'Arson', '#FF5733',
+                    'Weapons Law Violation', '#C70039',
+                    'Micromobility Device Theft (Motor Vehicle)', '#FFC300',
+                    'Sexual Battery Unknown Perpetrator', '#581845',
+                    '#2874A6' // Default color for other types
+                ],
+                'circle-opacity': 0.8,
+                'circle-stroke-width': 1,
+                'circle-stroke-color': '#ffffff'
+            }
+        });
+        
+        // Add a layer for heat map (initially hidden)
+        createHeatmapLayer();
+        
+        // Add popup on click
+        setupMapPopups();
+        
+        // Update the filters
+        updateFilters();
+        
+        // Show recent alerts
+        updateRecentAlerts(alerts);
+        
+        // Hide loading indicator
+        document.getElementById('loading-indicator').style.display = 'none';
+        
+    } catch (error) {
+        console.error('Error initializing map:', error);
+        document.getElementById('loading-indicator').textContent = 'Error loading data';
     }
-    const data = await response.json();
-    
-    // Initialize map with the data
-    initializeMap(data);
-    
-    // Fetch filter options
-    fetchFilterOptions();
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    document.querySelector('.map-loading').textContent = 'Error loading data. Please try again later.';
-  }
 }
 
-// Initialize the map with GeoJSON data
-function initializeMap(geojson) {
-  // Create the map
-  const map = new maplibregl.Map({
-    container: 'map',
-    style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', // Dark theme style
-    center: [-117.2340, 32.8801], // UCSD campus
-    zoom: 14,
-    maxZoom: 18,
-    minZoom: 10
-  });
-  
-  // Add navigation controls
-  map.addControl(new maplibregl.NavigationControl(), 'top-right');
-  
-  // Fix map container size to fit window
-  adjustMapSize();
-  window.addEventListener('resize', adjustMapSize);
-  
-  // Handle missing images
-  map.on('styleimagemissing', (e) => {
-    const id = e.id; // Get the missing image id
-    console.log(`Creating placeholder for missing image: ${id}`);
+// Process the alert data to extract types and counts
+function processAlertData() {
+    // Extract all unique crime types
+    const crimeTypes = new Set();
+    const alertTypes = new Set();
+    crimeCounts = {};
     
-    // Create a new blank canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = 16;
-    canvas.height = 16;
-    
-    // Add a simple colored square as a placeholder
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffd700'; // Gold color
-    ctx.fillRect(0, 0, 16, 16);
-    
-    // Add the canvas as a new image to the map
-    map.addImage(id, canvas);
-  });
-  
-  // Once the map is loaded, add the data
-  map.on('load', function() {
-    // Hide loading indicator
-    document.querySelector('.map-loading').style.display = 'none';
-    
-    // Add the geojson as a source
-    map.addSource('alerts', {
-      type: 'geojson',
-      data: geojson
+    alerts.forEach(feature => {
+        const props = feature.properties;
+        const crimeType = props.crime_type;
+        const alertType = props.alert_type;
+        
+        crimeTypes.add(crimeType);
+        alertTypes.add(alertType);
+        
+        // Count crimes by type
+        if (crimeCounts[crimeType]) {
+            crimeCounts[crimeType]++;
+        } else {
+            crimeCounts[crimeType] = 1;
+        }
     });
     
-    // Add a layer to visualize the points
-    map.addLayer({
-      id: 'alerts-layer',
-      type: 'circle',
-      source: 'alerts',
-      paint: {
-        'circle-radius': 8,
-        'circle-color': getCrimeColor(),
-        'circle-opacity': 0.8,
-        'circle-stroke-width': 2,
-        'circle-stroke-color': '#ffffff'
-      }
+    // Update crime type selector
+    updateCrimeTypeSelector(Array.from(crimeTypes));
+    
+    // Update alert type selector
+    updateAlertTypeSelector(Array.from(alertTypes));
+}
+
+// Update the crime type selector with available types
+function updateCrimeTypeSelector(crimeTypes) {
+    const crimeTypeFilter = document.getElementById('crime-type-filter');
+    if (!crimeTypeFilter) return;
+    
+    // Clear loading text
+    crimeTypeFilter.innerHTML = '';
+    
+    // Add "All" option
+    const allOption = document.createElement('div');
+    allOption.className = 'filter-option';
+    allOption.innerHTML = `
+        <input type="checkbox" id="crime-all" name="crime-type" value="all" checked>
+        <label for="crime-all">All Types</label>
+    `;
+    crimeTypeFilter.appendChild(allOption);
+    
+    // Sort crime types by count (descending)
+    crimeTypes.sort((a, b) => {
+        return (crimeCounts[b] || 0) - (crimeCounts[a] || 0);
     });
     
-    // Add click event for popups
-    map.on('click', 'alerts-layer', function(e) {
-      const properties = e.features[0].properties;
-      
-      // Create popup content
-      const popupContent = `
-        <div class="popup-title">${properties.title}</div>
-        <div class="popup-date">Date: ${properties.date}</div>
-        <div class="popup-location">Location: ${properties.location_text}</div>
-        <div class="popup-type ${getCrimeTypeClass(properties.crime_type)}">${properties.crime_type}</div>
-        ${properties.suspect_info && properties.suspect_info !== 'Not specified' 
-          ? `<div class="popup-suspect">Suspect Info: ${properties.suspect_info}</div>` 
-          : ''}
-      `;
-      
-      // Create and display popup
-      new maplibregl.Popup({
+    // Add each crime type
+    crimeTypes.forEach(type => {
+        if (!type) return; // Skip empty types
+        
+        const count = crimeCounts[type] || 0;
+        const option = document.createElement('div');
+        option.className = 'filter-option';
+        option.innerHTML = `
+            <input type="checkbox" id="crime-${type.replace(/\s+/g, '-').toLowerCase()}" name="crime-type" value="${type}" checked>
+            <label for="crime-${type.replace(/\s+/g, '-').toLowerCase()}">${type} (${count})</label>
+        `;
+        crimeTypeFilter.appendChild(option);
+    });
+    
+    // Add event listeners to checkboxes
+    const crimeCheckboxes = document.querySelectorAll('input[name="crime-type"]');
+    crimeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.value === 'all') {
+                // If "All" is clicked, update all other checkboxes
+                const checked = this.checked;
+                crimeCheckboxes.forEach(cb => {
+                    if (cb.value !== 'all') {
+                        cb.checked = checked;
+                    }
+                });
+            } else {
+                // If individual type is clicked, update the "All" checkbox
+                const allChecked = document.getElementById('crime-all');
+                const typeCheckboxes = Array.from(document.querySelectorAll('input[name="crime-type"]:not([value="all"])'));
+                const allTypesChecked = typeCheckboxes.every(cb => cb.checked);
+                const noTypesChecked = typeCheckboxes.every(cb => !cb.checked);
+                
+                if (allTypesChecked) {
+                    allChecked.checked = true;
+                    allChecked.indeterminate = false;
+                } else if (noTypesChecked) {
+                    allChecked.checked = false;
+                    allChecked.indeterminate = false;
+                } else {
+                    allChecked.indeterminate = true;
+                }
+            }
+            
+            // Apply filters
+            applyFilters();
+        });
+    });
+}
+
+// Update the alert type selector with available types
+function updateAlertTypeSelector(alertTypes) {
+    const alertTypeFilter = document.getElementById('alert-type-filter');
+    if (!alertTypeFilter) return;
+    
+    // Clear loading text
+    alertTypeFilter.innerHTML = '';
+    
+    // Add "All" option
+    const allOption = document.createElement('div');
+    allOption.className = 'filter-option';
+    allOption.innerHTML = `
+        <input type="checkbox" id="alert-all" name="alert-type" value="all" checked>
+        <label for="alert-all">All Types</label>
+    `;
+    alertTypeFilter.appendChild(allOption);
+    
+    // Add each alert type
+    alertTypes.forEach(type => {
+        if (!type) return; // Skip empty types
+        
+        const option = document.createElement('div');
+        option.className = 'filter-option';
+        option.innerHTML = `
+            <input type="checkbox" id="alert-${type.replace(/\s+/g, '-').toLowerCase()}" name="alert-type" value="${type}" checked>
+            <label for="alert-${type.replace(/\s+/g, '-').toLowerCase()}">${type}</label>
+        `;
+        alertTypeFilter.appendChild(option);
+    });
+    
+    // Add event listeners to checkboxes
+    const alertCheckboxes = document.querySelectorAll('input[name="alert-type"]');
+    alertCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.value === 'all') {
+                // If "All" is clicked, update all other checkboxes
+                const checked = this.checked;
+                alertCheckboxes.forEach(cb => {
+                    if (cb.value !== 'all') {
+                        cb.checked = checked;
+                    }
+                });
+            } else {
+                // If individual type is clicked, update the "All" checkbox
+                const allChecked = document.getElementById('alert-all');
+                const typeCheckboxes = Array.from(document.querySelectorAll('input[name="alert-type"]:not([value="all"])'));
+                const allTypesChecked = typeCheckboxes.every(cb => cb.checked);
+                const noTypesChecked = typeCheckboxes.every(cb => !cb.checked);
+                
+                if (allTypesChecked) {
+                    allChecked.checked = true;
+                    allChecked.indeterminate = false;
+                } else if (noTypesChecked) {
+                    allChecked.checked = false;
+                    allChecked.indeterminate = false;
+                } else {
+                    allChecked.indeterminate = true;
+                }
+            }
+            
+            // Apply filters
+            applyFilters();
+        });
+    });
+}
+
+// Set up event listeners for the UI
+function setupEventListeners() {
+    // View toggle
+    const viewToggle = document.getElementById('view-toggle');
+    if (viewToggle) {
+        viewToggle.addEventListener('change', function() {
+            if (this.value === 'markers') {
+                showMarkers();
+                hideHeatmap();
+            } else if (this.value === 'heatmap') {
+                hideMarkers();
+                showHeatmap();
+            } else if (this.value === 'both') {
+                showMarkers();
+                showHeatmap();
+            }
+        });
+    }
+    
+    // Date range filter
+    const dateFilterBtn = document.getElementById('apply-date-filter');
+    if (dateFilterBtn) {
+        dateFilterBtn.addEventListener('click', function() {
+            applyFilters();
+        });
+    }
+    
+    // Reset filters
+    const resetBtn = document.getElementById('reset-filters');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            resetFilters();
+        });
+    }
+    
+    // Fetch date range
+    fetchDateRange();
+}
+
+// Setup map popups
+function setupMapPopups() {
+    // Create a popup but don't add it to the map yet
+    const popup = new mapboxgl.Popup({
         closeButton: true,
         closeOnClick: true,
-        maxWidth: '300px',
-        className: 'custom-popup',
-        offset: [0, -10]
-      })
-      .setLngLat(e.features[0].geometry.coordinates)
-      .setHTML(popupContent)
-      .addTo(map);
+        maxWidth: '300px'
     });
     
-    // Change cursor to pointer when hovering over alerts
-    map.on('mouseenter', 'alerts-layer', function() {
-      map.getCanvas().style.cursor = 'pointer';
+    // Show popup on click
+    crimeMap.on('click', 'alert-points', function(e) {
+        const feature = e.features[0];
+        const props = feature.properties;
+        
+        // Format date
+        const date = props.date;
+        
+        // Create popup content
+        const content = `
+            <div class="popup-content">
+                <h3>${props.title}</h3>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Type:</strong> ${props.alert_type}</p>
+                <p><strong>Crime:</strong> ${props.crime_type}</p>
+                <p><strong>Location:</strong> ${props.location_text}</p>
+                ${props.address ? `<p><strong>Address:</strong> ${props.address}</p>` : ''}
+                ${props.suspect_info !== 'Not specified' ? `<p><strong>Suspect Info:</strong> ${props.suspect_info}</p>` : ''}
+                ${props.geocode_source ? `<p><small>Geocoded by: ${props.geocode_source}</small></p>` : ''}
+            </div>
+        `;
+        
+        // Set popup contents and location
+        popup
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(content)
+            .addTo(crimeMap);
     });
     
-    map.on('mouseleave', 'alerts-layer', function() {
-      map.getCanvas().style.cursor = '';
+    // Change cursor to pointer when hovering over a point
+    crimeMap.on('mouseenter', 'alert-points', function() {
+        crimeMap.getCanvas().style.cursor = 'pointer';
     });
     
-    // Store the map in window for filter access
-    window.crimeMap = map;
-    window.crimeData = geojson;
-    
-    // Add crime data to recent alerts panel
-    updateRecentAlerts(geojson.features);
-  });
+    // Change cursor back when leaving a point
+    crimeMap.on('mouseleave', 'alert-points', function() {
+        crimeMap.getCanvas().style.cursor = '';
+    });
 }
 
-// Adjust map container size
-function adjustMapSize() {
-  const mapContainer = document.querySelector('.map-container');
-  if (mapContainer) {
-    const headerHeight = document.querySelector('header').offsetHeight;
-    const windowHeight = window.innerHeight;
-    const maxHeight = windowHeight - headerHeight - 40; // 40px for margins
-    mapContainer.style.height = `${maxHeight}px`;
-  }
+// Create heatmap layer
+function createHeatmapLayer() {
+    crimeMap.addLayer({
+        id: 'alerts-heat',
+        type: 'heatmap',
+        source: 'alerts',
+        maxzoom: 15,
+        paint: {
+            // Increase weight based on frequency
+            'heatmap-weight': 1,
+            // Increase intensity as zoom level increases
+            'heatmap-intensity': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 1,
+                15, 3
+            ],
+            // Color heatmap based on density
+            'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                0, 'rgba(33,102,172,0)',
+                0.2, 'rgb(103,169,207)',
+                0.4, 'rgb(209,229,240)',
+                0.6, 'rgb(253,219,199)',
+                0.8, 'rgb(239,138,98)',
+                1, 'rgb(178,24,43)'
+            ],
+            // Adjust radius with zoom level
+            'heatmap-radius': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                0, 2,
+                12, 20,
+                15, 30
+            ],
+            // Opacity based on zoom level
+            'heatmap-opacity': 0.7
+        }
+    }, 'alert-points');
+    
+    // Initially hide heatmap
+    hideHeatmap();
 }
 
-// Set up event listeners
-function setupEventListeners() {
-  // Toggle sidebar
-  document.getElementById('toggleSidebar').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('open');
-  });
-  
-  // Close sidebar
-  document.getElementById('closeSidebar').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.remove('open');
-  });
-  
-  // Reset filters
-  document.getElementById('reset-filters').addEventListener('click', function() {
-    // Reset all filter checkboxes
-    document.querySelectorAll('#crime-type-filters input[type="checkbox"]').forEach(checkbox => {
-      checkbox.checked = true;
+// Show markers
+function showMarkers() {
+    markersVisible = true;
+    crimeMap.setLayoutProperty('alert-points', 'visibility', 'visible');
+}
+
+// Hide markers
+function hideMarkers() {
+    markersVisible = false;
+    crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
+}
+
+// Show heatmap
+function showHeatmap() {
+    heatmapVisible = true;
+    crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'visible');
+}
+
+// Hide heatmap
+function hideHeatmap() {
+    heatmapVisible = false;
+    crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'none');
+}
+
+// Apply filters
+function applyFilters() {
+    // Get selected crime types
+    const crimeCheckboxes = document.querySelectorAll('input[name="crime-type"]:checked:not([value="all"])');
+    const selectedCrimeTypes = Array.from(crimeCheckboxes).map(cb => cb.value);
+    
+    // Get selected alert types
+    const alertCheckboxes = document.querySelectorAll('input[name="alert-type"]:checked:not([value="all"])');
+    const selectedAlertTypes = Array.from(alertCheckboxes).map(cb => cb.value);
+    
+    // Get date range
+    const dateFrom = document.getElementById('date-from').value;
+    const dateTo = document.getElementById('date-to').value;
+    
+    // Build filter query
+    let queryParams = [];
+    
+    if (selectedCrimeTypes.length > 0) {
+        const crimeTypesParam = selectedCrimeTypes.map(type => `crime_types=${encodeURIComponent(type)}`).join('&');
+        queryParams.push(crimeTypesParam);
+    }
+    
+    if (selectedAlertTypes.length > 0) {
+        const alertTypesParam = selectedAlertTypes.map(type => `alert_types=${encodeURIComponent(type)}`).join('&');
+        queryParams.push(alertTypesParam);
+    }
+    
+    if (dateFrom) {
+        queryParams.push(`date_from=${encodeURIComponent(dateFrom)}`);
+    }
+    
+    if (dateTo) {
+        queryParams.push(`date_to=${encodeURIComponent(dateTo)}`);
+    }
+    
+    // Fetch filtered data
+    const url = '/api/crimes' + (queryParams.length > 0 ? '?' + queryParams.join('&') : '');
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Update map data source
+            crimeMap.getSource('alerts').setData(data);
+            
+            // Update filtered features
+            filteredFeatures = data.features;
+            
+            // Update recent alerts
+            updateRecentAlerts(filteredFeatures);
+            
+            // Update filter status
+            updateFilterStatus(filteredFeatures.length, alerts.length);
+        })
+        .catch(error => {
+            console.error('Error applying filters:', error);
+        });
+}
+
+// Reset filters to show all data
+function resetFilters() {
+    // Reset crime type checkboxes
+    document.querySelectorAll('input[name="crime-type"]').forEach(cb => {
+        cb.checked = true;
     });
     
-    document.querySelectorAll('.filter-checkbox input[type="checkbox"]').forEach(checkbox => {
-      checkbox.checked = true;
+    // Reset alert type checkboxes
+    document.querySelectorAll('input[name="alert-type"]').forEach(cb => {
+        cb.checked = true;
     });
     
-    // Reset date inputs
+    // Reset date range
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
     
-    // Apply filters (in this case, reset to show all)
+    // Apply filters (which will now show all)
     applyFilters();
-  });
 }
 
-// Set up filter functionality
-function setupFilters() {
-  // Alert type filter checkboxes
-  document.getElementById('filter-timely-warning').addEventListener('change', applyFilters);
-  document.getElementById('filter-triton-alert').addEventListener('change', applyFilters);
-  document.getElementById('filter-community-alert').addEventListener('change', applyFilters);
-  document.getElementById('filter-other-alert').addEventListener('change', applyFilters);
-  
-  // Date range inputs
-  document.getElementById('date-from').addEventListener('change', applyFilters);
-  document.getElementById('date-to').addEventListener('change', applyFilters);
+// Update filter status text
+function updateFilterStatus(filteredCount, totalCount) {
+    const filterStatus = document.getElementById('filter-status');
+    if (filterStatus) {
+        if (filteredCount === totalCount) {
+            filterStatus.textContent = `Showing all ${totalCount} alerts`;
+        } else {
+            filterStatus.textContent = `Showing ${filteredCount} of ${totalCount} alerts`;
+        }
+    }
 }
 
-// Get crime type CSS class
-function getCrimeTypeClass(crimeType) {
-  if (!crimeType) return 'popup-type-other';
-  
-  const violentCrimes = ['Assault', 'Battery', 'Sexual Assault', 'Robbery', 'Hate Crime', 'Aggravated Assault'];
-  const propertyCrimes = ['Burglary', 'Theft', 'Auto Theft', 'Vandalism', 'Break-in'];
-  
-  if (violentCrimes.some(crime => crimeType.includes(crime))) {
-    return 'popup-type-violent';
-  } else if (propertyCrimes.some(crime => crimeType.includes(crime))) {
-    return 'popup-type-property';
-  } else {
-    return 'popup-type-other';
-  }
+// Fetch date range for the data
+function fetchDateRange() {
+    fetch('/api/date-range')
+        .then(response => response.json())
+        .then(data => {
+            const dateFrom = document.getElementById('date-from');
+            const dateTo = document.getElementById('date-to');
+            
+            if (dateFrom && data.start_date) {
+                dateFrom.placeholder = data.start_date;
+            }
+            
+            if (dateTo && data.end_date) {
+                dateTo.placeholder = data.end_date;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching date range:', error);
+        });
 }
 
-// Get color for crime circle based on type
-function getCrimeColor() {
-  return [
-    'match',
-    ['get', 'crime_type'],
-    // Violent crimes - red
-    'Assault', '#FF495C',
-    'Sexual Assault', '#FF495C',
-    'Robbery', '#FF495C',
-    'Battery', '#FF495C',
-    'Hate Crime', '#FF495C',
-    'Aggravated Assault', '#FF495C',
+// Update list of filters
+function updateFilters() {
+    // Fetch crime types
+    fetch('/api/crime-types')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Crime types loaded from API');
+        })
+        .catch(error => {
+            console.error('Error fetching crime types:', error);
+        });
     
-    // Property crimes - gold
-    'Burglary', '#FFD700',
-    'Theft', '#FFD700',
-    'Auto Theft', '#FFD700',
-    'Vandalism', '#FFD700',
-    'Break-in', '#FFD700',
-    
-    // Default - green
-    '#3DDC97'
-  ];
+    // Fetch alert types
+    fetch('/api/alert-types')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Alert types loaded from API');
+        })
+        .catch(error => {
+            console.error('Error fetching alert types:', error);
+        });
 }
 
-// Apply filters to the map
-function applyFilters() {
-  const map = window.crimeMap;
-  if (!map || !window.crimeData) return;
-  
-  // Get selected alert types
-  const alertTypes = [];
-  if (document.getElementById('filter-timely-warning').checked) alertTypes.push('Timely Warning');
-  if (document.getElementById('filter-triton-alert').checked) alertTypes.push('Triton Alert');
-  if (document.getElementById('filter-community-alert').checked) alertTypes.push('Community Alert Bulletin');
-  if (document.getElementById('filter-other-alert').checked) alertTypes.push('Other');
-  
-  // Get selected crime types
-  const crimeTypes = [];
-  document.querySelectorAll('#crime-type-filters input[type="checkbox"]:checked').forEach(checkbox => {
-    crimeTypes.push(checkbox.value);
-  });
-  
-  // Get date range
-  const dateFrom = document.getElementById('date-from').value;
-  const dateTo = document.getElementById('date-to').value;
-  
-  // Convert HTML dates to MM/DD/YYYY for API
-  const fromDateFormatted = dateFrom ? formatDateForAPI(dateFrom) : null;
-  const toDateFormatted = dateTo ? formatDateForAPI(dateTo) : null;
-  
-  // Build API URL with filters
-  let url = '/api/crimes';
-  const params = new URLSearchParams();
-  
-  if (alertTypes.length > 0 && alertTypes.length < 4) {
-    alertTypes.forEach(type => params.append('alert_types', type));
-  }
-  
-  if (crimeTypes.length > 0 && crimeTypes.length < document.querySelectorAll('#crime-type-filters input[type="checkbox"]').length) {
-    crimeTypes.forEach(type => params.append('crime_types', type));
-  }
-  
-  if (fromDateFormatted) params.append('date_from', fromDateFormatted);
-  if (toDateFormatted) params.append('date_to', toDateFormatted);
-  
-  if (params.toString()) {
-    url += '?' + params.toString();
-  }
-  
-  // Fetch filtered data
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      // Update the map source
-      map.getSource('alerts').setData(data);
-      
-      // Update recent alerts panel
-      updateRecentAlerts(data.features);
-    })
-    .catch(error => {
-      console.error('Error applying filters:', error);
-    });
-}
-
-// Format date from HTML input (YYYY-MM-DD) to API format (MM/DD/YYYY)
-function formatDateForAPI(htmlDate) {
-  const parts = htmlDate.split('-');
-  if (parts.length !== 3) return null;
-  return `${parts[1]}/${parts[2]}/${parts[0]}`;
-}
-
-// Fetch filter options (crime types, alert types, date range)
-function fetchFilterOptions() {
-  // Fetch crime types
-  fetch('/api/crime-types')
-    .then(response => response.json())
-    .then(data => {
-      populateCrimeTypeFilters(data.crime_types);
-    })
-    .catch(error => {
-      console.error('Error fetching crime types:', error);
-    });
-  
-  // Fetch date range
-  fetch('/api/date-range')
-    .then(response => response.json())
-    .then(data => {
-      // Set min/max dates on date inputs
-      if (data.start_date) {
-        const startDate = formatDateFromAPI(data.start_date);
-        document.getElementById('date-from').min = startDate;
-        document.getElementById('date-to').min = startDate;
-      }
-      
-      if (data.end_date) {
-        const endDate = formatDateFromAPI(data.end_date);
-        document.getElementById('date-from').max = endDate;
-        document.getElementById('date-to').max = endDate;
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching date range:', error);
-    });
-}
-
-// Format date from API (MM/DD/YYYY) to HTML input format (YYYY-MM-DD)
-function formatDateFromAPI(apiDate) {
-  const parts = apiDate.split('/');
-  if (parts.length !== 3) return '';
-  return `${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`;
-}
-
-// Populate crime type filter checkboxes
-function populateCrimeTypeFilters(crimeTypes) {
-  const container = document.getElementById('crime-type-filters');
-  
-  // Clear loading placeholder
-  container.innerHTML = '';
-  
-  // Add a checkbox for each crime type
-  crimeTypes.forEach(crimeType => {
-    const checkbox = document.createElement('div');
-    checkbox.className = 'filter-checkbox';
-    checkbox.innerHTML = `
-      <input type="checkbox" id="filter-crime-${crimeType.replace(/\s+/g, '-').toLowerCase()}" 
-             value="${crimeType}" checked>
-      <label for="filter-crime-${crimeType.replace(/\s+/g, '-').toLowerCase()}">${crimeType}</label>
-    `;
-    container.appendChild(checkbox);
-    
-    // Add event listener to the new checkbox
-    checkbox.querySelector('input').addEventListener('change', applyFilters);
-  });
-}
-
-// Update recent alerts panel
+// Update the recent alerts panel
 function updateRecentAlerts(features) {
-  const container = document.getElementById('recent-alerts');
-  
-  // Sort by date (newest first)
-  const sortedFeatures = [...features].sort((a, b) => {
-    const dateA = new Date(convertToISODate(a.properties.date));
-    const dateB = new Date(convertToISODate(b.properties.date));
-    return dateB - dateA;
-  });
-  
-  // Take only the 5 most recent
-  const recentFeatures = sortedFeatures.slice(0, 5);
-  
-  // Clear container
-  container.innerHTML = '';
-  
-  if (recentFeatures.length === 0) {
-    container.innerHTML = '<div class="loading-placeholder">No alerts match current filters</div>';
-    return;
-  }
-  
-  // Add each alert
-  recentFeatures.forEach(feature => {
-    const props = feature.properties;
-    const alertItem = document.createElement('div');
-    alertItem.className = 'alert-item';
-    alertItem.innerHTML = `
-      <div class="alert-title">${props.title}</div>
-      <div class="alert-meta">
-        <span>${props.date}</span>
-        <span class="popup-type ${getCrimeTypeClass(props.crime_type)}">${props.crime_type}</span>
-      </div>
-    `;
+    const recentAlertsList = document.getElementById('recent-alerts-list');
+    if (!recentAlertsList) return;
     
-    // Add click event to center map on this alert
-    alertItem.addEventListener('click', function() {
-      // Center map on this location
-      window.crimeMap.flyTo({
-        center: feature.geometry.coordinates,
-        zoom: 16,
-        essential: true
-      });
-      
-      // Create popup for this alert
-      new maplibregl.Popup({
-        closeButton: true,
-        closeOnClick: true,
-        maxWidth: '300px',
-        className: 'custom-popup',
-        offset: [0, -10]
-      })
-      .setLngLat(feature.geometry.coordinates)
-      .setHTML(`
-        <div class="popup-title">${props.title}</div>
-        <div class="popup-date">Date: ${props.date}</div>
-        <div class="popup-location">Location: ${props.location_text}</div>
-        <div class="popup-type ${getCrimeTypeClass(props.crime_type)}">${props.crime_type}</div>
-        ${props.suspect_info && props.suspect_info !== 'Not specified' 
-          ? `<div class="popup-suspect">Suspect Info: ${props.suspect_info}</div>` 
-          : ''}
-      `)
-      .addTo(window.crimeMap);
+    // Sort by date (newest first)
+    const sortedFeatures = [...features].sort((a, b) => {
+        const dateA = parseAlertDate(a.properties.date);
+        const dateB = parseAlertDate(b.properties.date);
+        return dateB - dateA;
     });
     
-    container.appendChild(alertItem);
-  });
+    // Take the top 10
+    const recentFeatures = sortedFeatures.slice(0, 10);
+    
+    // Clear the list
+    recentAlertsList.innerHTML = '';
+    
+    // Add each alert to the list
+    if (recentFeatures.length === 0) {
+        recentAlertsList.innerHTML = '<li class="no-alerts">No alerts match the current filters</li>';
+    } else {
+        recentFeatures.forEach(feature => {
+            const props = feature.properties;
+            const date = props.date;
+            
+            const alertItem = document.createElement('li');
+            alertItem.className = 'alert-item';
+            alertItem.innerHTML = `
+                <div class="alert-date">${date}</div>
+                <div class="alert-title">${props.title}</div>
+                <div class="alert-location">${props.location_text}</div>
+            `;
+            
+            // Add click event to center map on this alert
+            alertItem.addEventListener('click', function() {
+                const coords = feature.geometry.coordinates;
+                crimeMap.flyTo({
+                    center: coords,
+                    zoom: 15
+                });
+                
+                // Create a popup for this alert
+                new mapboxgl.Popup({
+                    closeButton: true,
+                    closeOnClick: true,
+                    maxWidth: '300px'
+                })
+                    .setLngLat(coords)
+                    .setHTML(`
+                        <div class="popup-content">
+                            <h3>${props.title}</h3>
+                            <p><strong>Date:</strong> ${date}</p>
+                            <p><strong>Type:</strong> ${props.alert_type}</p>
+                            <p><strong>Crime:</strong> ${props.crime_type}</p>
+                            <p><strong>Location:</strong> ${props.location_text}</p>
+                            ${props.address ? `<p><strong>Address:</strong> ${props.address}</p>` : ''}
+                            ${props.suspect_info !== 'Not specified' ? `<p><strong>Suspect Info:</strong> ${props.suspect_info}</p>` : ''}
+                            ${props.geocode_source ? `<p><small>Geocoded by: ${props.geocode_source}</small></p>` : ''}
+                        </div>
+                    `)
+                    .addTo(crimeMap);
+            });
+            
+            recentAlertsList.appendChild(alertItem);
+        });
+    }
 }
 
-// Convert MM/DD/YYYY to ISO date (YYYY-MM-DD)
-function convertToISODate(dateStr) {
-  const parts = dateStr.split('/');
-  if (parts.length !== 3) return dateStr;
-  return `${parts[2]}-${parts[0]}-${parts[1]}`;
+// Parse alert date string into a Date object
+function parseAlertDate(dateStr) {
+    // Handle various date formats
+    if (!dateStr || dateStr === 'Unknown') {
+        return new Date(0); // Default to epoch for unknown dates
+    }
+    
+    // Try MM/DD/YYYY format
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+        return new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
+    }
+    
+    // Try other formats
+    return new Date(dateStr);
+}
+
+// Add geocoding service comparison functionality
+// This function is called by the geocoding-service.js script
+function setupGeocodingComparison() {
+    // This function will be implemented in a separate file
+    console.log('Geocoding comparison setup function called');
 }

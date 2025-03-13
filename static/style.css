@@ -344,6 +344,390 @@ h1 svg {
   color: var(--text-light);
 }
 
+/* Geocoding Comparison Section */
+.geocoding-comparison {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.geocoding-comparison h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.geocoding-comparison h3::before {
+  content: "📍";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.comparison-description {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Selector Styling */
+.comparison-selector {
+  margin: 12px 0;
+}
+
+.comparison-selector label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--secondary);
+}
+
+.comparison-selector select {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: rgba(20, 20, 20, 0.8);
+  color: var(--light);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.comparison-selector select:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.comparison-selector select option {
+  background-color: #1a1a1a;
+  color: var(--light);
+  padding: 8px;
+}
+
+* Active Service Indicator */
+.active-service {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  margin: 15px 0;
+  background-color: rgba(212, 175, 55, 0.1);
+  border-radius: 4px;
+  text-align: center;
+  border-left: 3px solid var(--secondary);
+  transition: all 0.3s ease;
+}
+
+/* Comparison Note */
+.comparison-note {
+  font-size: 0.85rem;
+  margin-top: 15px;
+  padding: 12px;
+  background-color: rgba(20, 20, 20, 0.5);
+  border-left: 3px solid var(--secondary);
+  border-radius: 0 4px 4px 0;
+  color: var(--text-light);
+}
+
+/* Service comparison metrics */
+.service-metrics {
+  margin-top: 15px;
+  font-size: 0.85rem;
+}
+
+.metrics-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--secondary);
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  padding: 4px 0;
+  border-bottom: 1px dotted rgba(212, 175, 55, 0.2);
+}
+
+.metric-label {
+  color: var(--text-light);
+}
+
+.metric-value {
+  font-weight: 500;
+}
+
+.metric-value.good {
+  color: var(--success);
+}
+
+.metric-value.bad {
+  color: var(--danger);
+}
+
+/* Add these styles to your style.css file */
+
+/* Service Switcher Styles */
+.service-switcher {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.service-switcher h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  color: #f8f9fa;
+}
+
+.service-switcher h3::before {
+  content: "📍";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.service-description {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.service-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.service-list {
+  margin: 15px 0;
+}
+
+.service-loading {
+  padding: 10px;
+  font-style: italic;
+  color: #ccc;
+}
+
+.service-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.service-option:hover {
+  background-color: rgba(212, 175, 55, 0.05);
+}
+
+.service-option input[type="radio"] {
+  margin-top: 3px;
+}
+
+.service-option label {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 100%;
+  margin-left: 8px;
+}
+
+.service-name {
+  font-weight: 600;
+  color: gold;
+}
+
+.service-option .service-description {
+  font-size: 13px;
+  margin: 2px 0 5px;
+  color: #ccc;
+}
+
+.service-stats {
+  font-size: 12px;
+  color: gold;
+  opacity: 0.8;
+}
+
+/* Service metrics styles */
+.service-metrics {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  padding: 12px;
+  background-color: rgba(20, 20, 20, 0.3);
+  border-radius: 4px;
+  display: none; /* Initially hidden, will be shown when services are loaded */
+}
+
+.service-metrics h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: gold;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 4px 0;
+  border-bottom: 1px dotted rgba(212, 175, 55, 0.2);
+}
+
+.metric-label {
+  color: #ccc;
+}
+
+.metric-value {
+  font-weight: 500;
+}
+
+.metric-value.good {
+  color: #4caf50;
+}
+
+.metric-value.bad {
+  color: #f44336;
+}
+
+/* Service info styles */
+.service-info {
+  margin-top: 15px;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #fff;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-small:hover {
+  background-color: rgba(212, 175, 55, 0.2);
+}
+
+.service-info-content {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: rgba(20, 20, 20, 0.5);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  display: none;
+}
+
+.info-section h4 {
+  color: gold;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.info-section p {
+  margin-bottom: 10px;
+  line-height: 1.4;
+  color: #ccc;
+}
+
+.info-section ul {
+  margin-left: 20px;
+  margin-bottom: 12px;
+  color: #ccc;
+}
+
+.info-section li {
+  margin-bottom: 5px;
+}
+
+/* Notification styles */
+.map-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.map-notification.success {
+  background-color: rgba(46, 125, 50, 0.9);
+}
+
+.map-notification.error {
+  background-color: rgba(198, 40, 40, 0.9);
+}
+
+.map-notification.info {
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+/* Custom buttons for service actions */
+.service-actions .btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.service-actions .btn-primary {
+  background-color: #1976d2;
+  color: white;
+}
+
+.service-actions .btn-primary:hover {
+  background-color: #1565c0;
+}
+
+.service-actions .btn-secondary {
+  background-color: #424242;
+  color: white;
+}
+
+.service-actions .btn-secondary:hover {
+  background-color: #303030;
+}
+
+.service-actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Geocoding control panel - for fallback creation */
+.geocoding-control-panel {
+  background-color: rgba(20, 20, 20, 0.8);
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 10px;
+}
+
+/* Loading indicator */
+.geocoding-comparison-loading {
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(20, 20, 20, 0.5);
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
 /* MapLibre GL Controls */
 .maplibregl-ctrl-group {
   background-color: rgba(20, 20, 20, 0.8) !important;

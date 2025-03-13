@@ -2,16 +2,21 @@
 import json
 import csv
 import datetime
+import copy
+import os
+import subprocess
+import shutil
 from fastapi import FastAPI, Request, Response, Query
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from geocode_routes import geocode_router
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
 from typing import Optional, List
-import os
 
 app = FastAPI()
+app.include_router(geocode_router)
 
 # Global toggle for scraping (default OFF)
 SCRAPING_ENABLED = False
@@ -20,11 +25,28 @@ SCRAPING_ENABLED = False
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# Updated to use the geocoded data file
+# Data file and directories
 DATA_FILE = "ucsd_alerts_geocoded.json"
 BACKUP_DIR = "data_backups"
+GEOCODE_LOC_DIR = "geocoded_loc"  # Custom directory for geocoding service files
 
-# Perform minimal check on startup to ensure the data file exists
+# Geocoding service files - look in the geocoded_loc directory
+def find_geocoding_services():
+    """Find all available geocoding service files in the geocoded_loc directory."""
+    services = {}
+    if os.path.exists(GEOCODE_LOC_DIR):
+        for file in os.listdir(GEOCODE_LOC_DIR):
+            if file.endswith("_geocode.json"):
+                service_name = file.replace("_geocode.json", "")
+                services[service_name] = os.path.join(GEOCODE_LOC_DIR, file)
+    return services
+
+# Directories for processing
+GEOCODE_BACKUPS_DIR = os.path.join(BACKUP_DIR, "geocode_backups")
+GEOCODE_SERVICES_DIR = "geocode_services"
+GEOCODE_GEOJSON_DIR = "geocode_geojson"
+
+# Perform startup checks
 @app.on_event("startup")
 async def startup_event():
     # Check if data file exists, create empty one if it doesn't
@@ -40,13 +62,221 @@ async def startup_event():
             print(f"Successfully loaded {len(data)} alerts from data file.")
         except Exception as e:
             print(f"Error loading data file: {e}")
+    
+    # Ensure directories exist
+    for directory in [BACKUP_DIR, GEOCODE_BACKUPS_DIR, GEOCODE_SERVICES_DIR, GEOCODE_GEOJSON_DIR]:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+            print(f"Created directory: {directory}")
+    
+    # Create original backup if it doesn't exist
+    original_backup = os.path.join(GEOCODE_BACKUPS_DIR, "ucsd_alerts_geocoded_original.json")
+    if not os.path.exists(original_backup) and os.path.exists(DATA_FILE):
+        try:
+            shutil.copy2(DATA_FILE, original_backup)
+            print(f"Created original backup: {original_backup}")
+        except Exception as e:
+            print(f"Error creating original backup: {e}")
+    
+    # Find available geocoding services
+    services = find_geocoding_services()
+    print(f"Found {len(services)} geocoding services: {list(services.keys())}")
 
+# Main index page
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
     """Serve the main HTML page."""
-    # Pass the current scraping status to the template
     return templates.TemplateResponse("index.html", {"request": request, "scraping_enabled": SCRAPING_ENABLED})
 
+# API Routes for geocoding service operations
+@app.get("/api/geocoding-metadata")
+async def get_geocoding_metadata():
+    """Return metadata about available geocoding services."""
+    services = []
+    
+    # Add current service
+    services.append({
+        "id": "current",
+        "name": "Current (Custom)",
+        "description": "Our specialized database for UCSD campus"
+    })
+    
+    # Find service files in the geocoded_loc directory
+    geocoding_services = find_geocoding_services()
+    
+    # Add each service
+    for service_id, file_path in geocoding_services.items():
+        service_info = {
+            "id": service_id,
+            "file": file_path,
+            "name": format_service_name(service_id),
+            "description": get_service_description(service_id)
+        }
+        
+        # Add to services list
+        services.append(service_info)
+    
+    return {"services": services}
+
+@app.post("/api/apply-geocoding/{service_id}")
+async def apply_geocoding_service(service_id: str):
+    """Apply a geocoding service to the main alerts file."""
+    # If restoring current, use the original backup
+    if service_id == "current":
+        return await restore_original_geocoding()
+    
+    # Find the service file
+    geocoding_services = find_geocoding_services()
+    if service_id not in geocoding_services:
+        return JSONResponse({"error": f"Geocoding service '{service_id}' not found"}, status_code=404)
+    
+    service_file = geocoding_services[service_id]
+    
+    # Create a backup
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_file = os.path.join(GEOCODE_BACKUPS_DIR, f"ucsd_alerts_geocoded_{timestamp}.json")
+    try:
+        shutil.copy2(DATA_FILE, backup_file)
+    except Exception as e:
+        return JSONResponse({"error": f"Failed to create backup: {str(e)}"}, status_code=500)
+    
+    # Apply the geocoding
+    try:
+        # Load original alerts
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            alerts = json.load(f)
+        
+        # Load geocoding data
+        with open(service_file, "r", encoding="utf-8") as f:
+            geocoding_data = json.load(f)
+        
+        # Apply geocoding
+        updated_alerts = []
+        updated_count = 0
+        
+        for alert in alerts:
+            location_text = alert.get("location_text")
+            if location_text in geocoding_data:
+                geo_info = geocoding_data[location_text]
+                if geo_info.get("lat") is not None and geo_info.get("lng") is not None:
+                    # Create a copy of the alert
+                    updated_alert = copy.deepcopy(alert)
+                    # Update coordinates
+                    updated_alert["lat"] = geo_info["lat"]
+                    updated_alert["lng"] = geo_info["lng"]
+                    updated_alert["address"] = geo_info["address"]
+                    updated_alert["geocode_source"] = service_id
+                    updated_alerts.append(updated_alert)
+                    updated_count += 1
+                else:
+                    # Keep original if missing coordinates
+                    updated_alerts.append(alert)
+            else:
+                # Keep original if not in geocoding data
+                updated_alerts.append(alert)
+        
+        # Save updated alerts
+        with open(DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump(updated_alerts, f, indent=2)
+        
+        return {
+            "success": True, 
+            "message": f"Applied {service_id} geocoding",
+            "updated_count": updated_count,
+            "total_count": len(alerts)
+        }
+    except Exception as e:
+        # Restore from backup on error
+        try:
+            shutil.copy2(backup_file, DATA_FILE)
+        except:
+            pass
+        return JSONResponse({"error": f"Error applying geocoding: {str(e)}"}, status_code=500)
+
+@app.post("/api/restore-geocoding")
+async def restore_original_geocoding():
+    """Restore the original geocoding from backup."""
+    original_backup = os.path.join(GEOCODE_BACKUPS_DIR, "ucsd_alerts_geocoded_original.json")
+    
+    # Check if original backup exists
+    if not os.path.exists(original_backup):
+        return JSONResponse({"error": "Original backup not found"}, status_code=404)
+    
+    # Restore from backup
+    try:
+        shutil.copy2(original_backup, DATA_FILE)
+        return {"success": True, "message": "Restored original geocoding"}
+    except Exception as e:
+        return JSONResponse({"error": f"Error restoring original geocoding: {str(e)}"}, status_code=500)
+
+@app.get("/api/geocoding-metrics/{service_id}")
+async def get_geocoding_metrics(service_id: str):
+    """Return metrics for a geocoding service."""
+    # Simulated metrics for demonstration
+    metrics = {
+        'current': {
+            'locationsFound': '98%',
+            'avgDistance': '15 meters',
+            'campusAccuracy': '97%'
+        },
+        'deepseek': {
+            'locationsFound': '87%',
+            'avgDistance': '112 meters',
+            'campusAccuracy': '82%'
+        },
+        'gemini-pro': {
+            'locationsFound': '85%',
+            'avgDistance': '145 meters',
+            'campusAccuracy': '79%'
+        },
+        'mistral': {
+            'locationsFound': '73%',
+            'avgDistance': '210 meters',
+            'campusAccuracy': '68%'
+        },
+        'openstreetmaps': {
+            'locationsFound': '62%',
+            'avgDistance': '323 meters',
+            'campusAccuracy': '45%'
+        }
+    }
+    
+    # Return metrics or defaults
+    if service_id in metrics:
+        return metrics[service_id]
+    else:
+        return {
+            'locationsFound': '-',
+            'avgDistance': '-',
+            'campusAccuracy': '-'
+        }
+
+# Helper Functions for geocoding services
+def format_service_name(service_id: str) -> str:
+    """Format a service ID into a user-friendly name."""
+    name_map = {
+        'current': 'Current (Custom)',
+        'deepseek': 'DeepSeek-R1 LLM',
+        'gemini-pro': 'Google Gemini Pro',
+        'mistral': 'Mistral Large',
+        'openstreetmaps': 'OpenStreetMaps'
+    }
+    
+    return name_map.get(service_id, service_id.capitalize())
+
+def get_service_description(service_id: str) -> str:
+    """Get a description for a service ID."""
+    description_map = {
+        'current': 'Our specialized database for UCSD campus',
+        'deepseek': 'A large language model with general knowledge',
+        'gemini-pro': 'Google\'s advanced language model',
+        'mistral': 'An open-source language model',
+        'openstreetmaps': 'Traditional geocoding service'
+    }
+    
+    return description_map.get(service_id, 'Alternative geocoding service')
+
+# Original API Routes
 @app.get("/api/crimes", response_class=JSONResponse)
 async def get_crimes(
     alert_types: Optional[List[str]] = Query(None),
@@ -125,7 +355,7 @@ async def get_crimes(
     features = []
     for alert in data:
         # Make sure the alert has the required location data
-        if "lat" in alert and "lng" in alert:
+        if "lat" in alert and "lng" in alert and alert["lat"] is not None and alert["lng"] is not None:
             feature = {
                 "type": "Feature",
                 "properties": {
@@ -138,7 +368,8 @@ async def get_crimes(
                     "details_url": alert.get("details_url", ""),
                     "location_text": alert["location_text"],
                     "precise_location": alert.get("precise_location", alert["location_text"]),
-                    "address": alert.get("address", "")  # Include address if available
+                    "address": alert.get("address", ""),
+                    "geocode_source": alert.get("geocode_source", "custom")  # Add geocoding source
                 },
                 "geometry": {
                     "type": "Point",
@@ -239,7 +470,7 @@ async def export_csv():
     # Include all fields, including geocoded fields
     headers = ["date", "alert_title", "alert_type", "crime_type", "is_update", 
                "location_text", "precise_location", "address", "suspect_info", 
-               "description", "lat", "lng"]
+               "description", "lat", "lng", "geocode_source"]
     
     def iter_csv():
         from io import StringIO
@@ -289,6 +520,9 @@ async def health_check():
     except Exception as e:
         data_stats["error"] = str(e)
     
+    # Get info about geocoding services
+    geocoding_stats = {"services": list(find_geocoding_services().keys())}
+    
     return {
         "status": "ok",
         "timestamp": datetime.datetime.now().isoformat(),
@@ -296,7 +530,8 @@ async def health_check():
         "data_file": DATA_FILE,
         "data_stats": data_stats,
         "memory_usage_mb": round(process.memory_info().rss / (1024 * 1024), 2),
-        "cpu_percent": process.cpu_percent(interval=0.1)
+        "cpu_percent": process.cpu_percent(interval=0.1),
+        "geocoding_stats": geocoding_stats
     }
 
 @app.get("/presentation", response_class=HTMLResponse)
@@ -304,14 +539,7 @@ async def presentation(request: Request):
     """Serve the project presentation page."""
     return templates.TemplateResponse("presentation.html", {"request": request})
 
-
 @app.get("/process", response_class=HTMLResponse)
 async def process(request: Request):
     """Serve the project process page with scrollama visualization."""
     return templates.TemplateResponse("process.html", {"request": request})
-
-# Check that your templates directory is properly set up in app.py:
-templates = Jinja2Templates(directory="templates")
-
-# Also ensure your static files directory is mounted:
-# app.mount("/static", StaticFiles(directory="static"), name="static")

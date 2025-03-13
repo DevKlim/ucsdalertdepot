@@ -1,4 +1,4 @@
-/* static/process.css - Updated to work with visualizations */
+/* static/process.css */
 :root {
     --primary: #121212;     /* Nearly Black */
     --secondary: #ffd700;   /* Rich Gold */
@@ -152,7 +152,7 @@
   
   /* Hero Section */
   .hero {
-    height: 200vh;
+    height: 170vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -198,7 +198,7 @@
   
   .scroll-indicator {
     position: absolute;
-    bottom: -100px;
+    bottom: -75px;
     left: 38%;
     transform: translateX(-50%);
     display: flex;
@@ -232,7 +232,7 @@
       filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
     }
   }
-
+  
   /* Project Focus Styling */
   .project-focus {
     background-color: rgba(20, 20, 20, 0.7);
@@ -306,37 +306,31 @@
     }
   }
   
-  /* Scrollama Setup - Updated for visualizations */
+  /* Layout setup - show all visualizations and text side by side */
   #scrolly {
     position: relative;
-    display: block; /* Changed from flex to block */
-    width: 100%;
-  }
-  
-  /* Changed from sticky container to individual visualization divs */
-  .visualizations-container {
-    position: relative; /* Not sticky anymore */
-    width: 100%;
-    height: auto; /* Auto height */
     display: block;
-    z-index: 10;
+    width: 100%;
+    max-width: 100%;
+    background-color: var(--primary);
   }
   
-  /* Each step now has its own visualization side-by-side */
+  /* Each step has its own visualization side-by-side */
   .step {
-    display: flex; /* Make each step a flex container */
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 4rem 2rem;
     margin: 0;
     position: relative;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
   }
   
   /* Visualization for each step */
   .step-vis {
-    width: 48%; /* Just under half the container */
+    width: 48%;
     position: relative;
-    min-height: 400px; /* Set a minimum height */
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,7 +338,7 @@
   
   /* Text content for each step */
   .step-content {
-    width: 48%; /* Just under half the container */
+    width: 48%;
     background-color: rgba(20, 20, 20, 0.8);
     border-radius: 8px;
     padding: 2rem;
@@ -356,64 +350,6 @@
   .step.is-active .step-content {
     border-color: rgba(212, 175, 55, 0.5);
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.2);
-  }
-  
-  /* Step Content Styling */
-  .code-snippet {
-    margin: 1.5rem 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    border-left: 4px solid var(--secondary);
-    overflow: hidden;
-  }
-  
-  .code-snippet pre {
-    padding: 1rem;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    font-size: 0.85rem;
-    color: #e6e6e6;
-  }
-  
-  .code-snippet code {
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
-  }
-  
-  .tech-highlight {
-    display: flex;
-    align-items: center;
-    background-color: rgba(212, 175, 55, 0.1);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 2rem 0;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-  }
-  
-  .tech-icon {
-    font-size: 2rem;
-    margin-right: 1rem;
-    background-color: rgba(212, 175, 55, 0.2);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .tech-text {
-    flex: 1;
-  }
-  
-  .tech-text h4 {
-    font-size: 1.2rem;
-    color: var(--secondary);
-    margin-bottom: 0.5rem;
-  }
-  
-  .tech-text p {
-    margin-bottom: 0;
-    font-size: 0.95rem;
   }
   
   /* Vision statement in hero */
@@ -622,7 +558,7 @@
   }
   
   .vision-callout:before {
-    content: "";
+    content: "``";
     position: absolute;
     top: -20px;
     left: 20px;
@@ -729,6 +665,65 @@
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
   }
   
+  /* Code snippets */
+  .code-snippet {
+    margin: 1.5rem 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    border-left: 4px solid var(--secondary);
+    overflow: hidden;
+  }
+  
+  .code-snippet pre {
+    padding: 1rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    font-size: 0.85rem;
+    color: #e6e6e6;
+  }
+  
+  .code-snippet code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  }
+  
+  /* Tech highlight boxes */
+  .tech-highlight {
+    display: flex;
+    align-items: center;
+    background-color: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .tech-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    background-color: rgba(212, 175, 55, 0.2);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tech-text {
+    flex: 1;
+  }
+  
+  .tech-text h4 {
+    font-size: 1.2rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+  }
+  
+  .tech-text p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+  }
+  
   /* Footer */
   footer {
     background-color: var(--dark);
@@ -738,14 +733,17 @@
     box-shadow: 0 -5px 30px var(--shadow-gold);
   }
   
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
   .footer-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
   }
   
   .footer-logo {
@@ -782,30 +780,21 @@
     font-size: 0.9rem;
   }
   
-  /* Media Queries */
+  /* Responsive Design */
   @media (max-width: 1200px) {
-    .visualizations-container,
-    .steps-container {
+    .step {
+      flex-direction: column;
+      padding: 3rem 1rem;
+    }
+    
+    .step-vis,
+    .step-content {
       width: 100%;
     }
     
-    #scrolly {
-      flex-direction: column;
-    }
-    
-    .visualizations-container {
-      height: 50vh;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    
-    .step-content {
-      max-width: 100%;
-    }
-    
-    .step {
-      padding: 3rem 1.5rem;
+    .step-vis {
+      margin-bottom: 2rem;
+      min-height: 300px;
     }
   }
   
@@ -836,21 +825,38 @@
       margin: 0.25rem 0.5rem;
     }
     
-    .step-content {
-      padding: 1.5rem;
+    .step {
+      padding: 2rem 1rem;
+    }
+    
+    /* Add these additional responsive styles */
+    .step-vis {
+      min-height: 250px;
+    }
+    
+    .tech-highlight {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .tech-icon {
+      margin-bottom: 1rem;
+    }
+    
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
     }
     
     .future-feature {
       flex-direction: column;
+      padding: 1rem;
     }
     
     .feature-icon {
       margin-right: 0;
       margin-bottom: 1rem;
-    }
-    
-    .region-list {
-      grid-template-columns: 1fr;
     }
     
     .roadmap-phase:before {
@@ -862,8 +868,29 @@
       height: 12px;
     }
     
-    .visualizations-container {
-      height: 40vh;
+    .phase-header h4 {
+      font-size: 1rem;
+    }
+    
+    .vision-callout {
+      padding: 1.5rem;
+    }
+    
+    .vision-callout p {
+      font-size: 1rem;
+    }
+    
+    .code-snippet pre {
+      font-size: 0.75rem;
+    }
+    
+    .footer-content {
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .footer-links {
+      margin-top: 1rem;
+      justify-content: center;
     }
   }
-  

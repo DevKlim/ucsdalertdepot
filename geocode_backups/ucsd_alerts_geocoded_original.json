@@ -10,10 +10,9 @@
     "precise_location": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8814,
-    "lng": -117.2353,
-    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.8820504581951,
+    "lng": -117.23474443943455,
+    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/30/2025",
@@ -26,10 +25,9 @@
     "precise_location": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8823,
-    "lng": -117.2346,
-    "address": "Pepper Canyon Apartments, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87820616198307,
+    "lng": -117.23932170109032,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/30/2025",
@@ -42,10 +40,9 @@
     "precise_location": "Muir College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8778,
-    "lng": -117.2412,
-    "address": "Muir College Residences, 9400 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.878987778802426,
+    "lng": -117.24075016240717,
+    "address": "Muir College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/27/2025",
@@ -58,10 +55,9 @@
     "precise_location": "Eighth College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8825,
-    "lng": -117.239,
-    "address": "Eighth College, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.885117054136956,
+    "lng": -117.24054108492939,
+    "address": "Eighth College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/23/2025",
@@ -89,10 +85,9 @@
     "precise_location": "Gilman Dr & Via Alicante, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Low",
-    "lat": 32.8764,
-    "lng": -117.2394,
-    "address": "Intersection of Gilman Dr & Via Alicante, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88291618215747,
+    "lng": -117.23491406504296,
+    "address": "Gilman Dr & Via Alicante, La Jolla, CA 92093"
   },
   {
     "date": "01/23/2025",
@@ -105,10 +100,9 @@
     "precise_location": "Gilman Dr & Via Alicante, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8764,
-    "lng": -117.2394,
-    "address": "Intersection of Gilman Dr & Via Alicante, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88257505445994,
+    "lng": -117.23493646332275,
+    "address": "Gilman Dr & Via Alicante, La Jolla, CA 92093"
   },
   {
     "date": "01/23/2025",
@@ -121,10 +115,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8793,
-    "lng": -117.2362,
-    "address": "Old Student Center, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88012660787663,
+    "lng": -117.23381767424067,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/23/2025",
@@ -137,10 +130,9 @@
     "precise_location": "Gilman Dr & Via Alicante, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8764,
-    "lng": -117.2394,
-    "address": "Intersection of Gilman Dr & Via Alicante, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.882934146459505,
+    "lng": -117.23528573724802,
+    "address": "Gilman Dr & Via Alicante, La Jolla, CA 92093"
   },
   {
     "date": "01/17/2025",
@@ -198,10 +190,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8852,
-    "lng": -117.2424,
-    "address": "RIMAC Arena, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.71568998175925,
+    "lng": -117.16134029266777,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "01/16/2025",
@@ -214,10 +205,9 @@
     "precise_location": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.882,
-    "lng": -117.235,
-    "address": "Pepper Canyon Living & Learning Neighborhood, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87797043382964,
+    "lng": -117.23893251720385,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/16/2025",
@@ -230,10 +220,9 @@
     "precise_location": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.882,
-    "lng": -117.235,
-    "address": "Pepper Canyon Living & Learning Neighborhood, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87815843588674,
+    "lng": -117.23932593191468,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/02/2025",
@@ -246,10 +235,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8802,
-    "lng": -117.2348,
-    "address": "Cognitive Science Building, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87998348970845,
+    "lng": -117.23388621868261,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/04/2025",
@@ -262,10 +250,9 @@
     "precise_location": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8823,
-    "lng": -117.2346,
-    "address": "Pepper Canyon Apartments, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87798911116429,
+    "lng": -117.23940156285873,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "12/29/2024",
@@ -278,10 +265,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8665,
-    "lng": -117.2512,
-    "address": "Scripps Institution of Oceanography, 8610 Kennel Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.880056020523696,
+    "lng": -117.23422906250788,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "12/26/2024",
@@ -294,10 +280,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8734,
-    "lng": -117.2246,
-    "address": "3850 Miramar St, San Diego, CA 92122",
-    "geocode_source": "deepseek"
+    "lat": 32.88000626631517,
+    "lng": -117.23403954483214,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "12/04/2024",
@@ -310,10 +295,9 @@
     "precise_location": "San Diego, CA",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.9446,
-    "lng": -117.2168,
-    "address": "9600 Black Gold Rd, San Diego, CA 92126",
-    "geocode_source": "deepseek"
+    "lat": 32.71582701779687,
+    "lng": -117.16116624514318,
+    "address": "San Diego, CA"
   },
   {
     "date": "12/04/2024",
@@ -356,10 +340,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8819,
-    "lng": -117.2329,
-    "address": "Engineering Building Unit II, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880064286148965,
+    "lng": -117.23400407459262,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/18/2024",
@@ -402,10 +385,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8746,
-    "lng": -117.2388,
-    "address": "Russell Lane & Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88027543105756,
+    "lng": -117.23429132340293,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "10/29/2024",
@@ -418,10 +400,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8433,
-    "lng": -117.2521,
-    "address": "Nordstrom Rack, 8875 Villa La Jolla Dr, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.844648830338656,
+    "lng": -117.27397838901452,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "10/23/2024",
@@ -434,10 +415,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8752,
-    "lng": -117.2408,
-    "address": "York Hall, Revelle College, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.715611022318804,
+    "lng": -117.16140038012877,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "10/23/2024",
@@ -465,10 +445,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8667,
-    "lng": -117.251,
-    "address": "Scripps Institution of Oceanography, 8610 Kennel Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.844929968032574,
+    "lng": -117.27370695124321,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "09/27/2024",
@@ -511,10 +490,9 @@
     "precise_location": "9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8798,
-    "lng": -117.2383,
-    "address": "Mandeville Auditorium, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88019876511846,
+    "lng": -117.23640598200218,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "08/24/2024 2:20 AM",
@@ -527,10 +505,9 @@
     "precise_location": "9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8798,
-    "lng": -117.2383,
-    "address": "Mandeville Auditorium, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88055622025083,
+    "lng": -117.23609762025171,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "08/07/2024 2:23 PM",
@@ -573,10 +550,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8813,
-    "lng": -117.2336,
-    "address": "Computer Science & Engineering Building, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.715961542886504,
+    "lng": -117.16116887507388,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "06/11/2024",
@@ -589,10 +565,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8835,
-    "lng": -117.2425,
-    "address": "ERC Residences, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.71573719752338,
+    "lng": -117.16117411393229,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "Unknown",
@@ -635,10 +610,9 @@
     "precise_location": "9417 East Medical Center Drive, La Jolla, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8853,
-    "lng": -117.2315,
-    "address": "Athena Parking Structure, 9417 E Medical Center Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880835293260816,
+    "lng": -117.23184594211668,
+    "address": "9417 East Medical Center Drive, La Jolla, CA 92037"
   },
   {
     "date": "05/13/2024 8:38 A.M.",
@@ -651,10 +625,9 @@
     "precise_location": "3366 N. Torrey Pines Ct, La Jolla, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8972,
-    "lng": -117.2423,
-    "address": "3366 N Torrey Pines Ct, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.89438767202966,
+    "lng": -117.23692343997557,
+    "address": "3366 N. Torrey Pines Ct, La Jolla, CA 92037"
   },
   {
     "date": "04/23/2024 7:19 P.M.",
@@ -667,10 +640,9 @@
     "precise_location": "3232 Fifth Avenue, San Diego, CA 92103",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8857,
-    "lng": -117.2319,
-    "address": "Matthews Apartments, 9460 Innovation Ln, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.72660588353531,
+    "lng": -117.15967503367152,
+    "address": "3232 Fifth Avenue, San Diego, CA 92103"
   },
   {
     "date": "04/22/2024 8:10 P.M.",
@@ -698,10 +670,9 @@
     "precise_location": "9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8796,
-    "lng": -117.2365,
-    "address": "Library Walk, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87986991286902,
+    "lng": -117.23588968509037,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "03/21/2024 5:15 PM",
@@ -759,10 +730,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8996,
-    "lng": -117.2416,
-    "address": "UCSD Extended Studies, 9600 N Torrey Pines Rd, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.71574550214888,
+    "lng": -117.16131897173435,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "03/04/2024 8:15 AM",
@@ -775,10 +745,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8747,
-    "lng": -117.241,
-    "address": "La Jolla Playhouse, 2910 La Jolla Village Dr, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.84499297042078,
+    "lng": -117.273867379064,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "03/03/2024",
@@ -791,10 +760,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8807,
-    "lng": -117.2373,
-    "address": "Sun God Lawn, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880226347390845,
+    "lng": -117.23426486010801,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "03/01/2024",
@@ -807,10 +775,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8829,
-    "lng": -117.2311,
-    "address": "School of Medicine Building 4, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880005566894404,
+    "lng": -117.23397086849685,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/28/2024",
@@ -823,10 +790,9 @@
     "precise_location": "3869 Miramar St, San Diego, CA 92121",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8733,
-    "lng": -117.2245,
-    "address": "3869 Miramar St, San Diego, CA 92122",
-    "geocode_source": "deepseek"
+    "lat": 32.869220909361516,
+    "lng": -117.17182977105944,
+    "address": "3869 Miramar St, San Diego, CA 92121"
   },
   {
     "date": "02/28/2024",
@@ -854,10 +820,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.866,
-    "lng": -117.252,
-    "address": "Scripps Institution of Oceanography, 8610 Kennel Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.87990002548025,
+    "lng": -117.23406272721088,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/11/2024 at 8:34 AM",
@@ -870,10 +835,9 @@
     "precise_location": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8815,
-    "lng": -117.235,
-    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88221988993152,
+    "lng": -117.2344383892472,
+    "address": "Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "12/20/2023 at 4:43 AM",
@@ -916,10 +880,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8765,
-    "lng": -117.241,
-    "address": "Keeling Apartments, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88020313988984,
+    "lng": -117.2337895712962,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/20/2023 at 8:47 am",
@@ -947,10 +910,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8838,
-    "lng": -117.2382,
-    "address": "Seventh College West, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880344179248404,
+    "lng": -117.23398812996929,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/10/2023",
@@ -963,10 +925,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8733,
-    "lng": -117.2245,
-    "address": "Mesa Nueva Housing, 3867 Miramar St, San Diego, CA 92122",
-    "geocode_source": "deepseek"
+    "lat": 32.879927275373156,
+    "lng": -117.2339382811696,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/05/2023",
@@ -979,10 +940,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8733,
-    "lng": -117.2245,
-    "address": "Mesa Nueva Housing, 3867 Miramar St, San Diego, CA 92122",
-    "geocode_source": "deepseek"
+    "lat": 32.88029726733554,
+    "lng": -117.23422798774882,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/03/2023",
@@ -1055,10 +1015,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8842,
-    "lng": -117.2297,
-    "address": "Scholars Dr N & Exploration Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.7159298608507,
+    "lng": -117.16091984132132,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "10/20/2023 9:29 A.M.",
@@ -1101,10 +1060,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.873,
-    "lng": -117.227,
-    "address": "South Mesa Apartments, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880034773969264,
+    "lng": -117.23396249779371,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "09/27/2023",
@@ -1147,10 +1105,9 @@
     "precise_location": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8823,
-    "lng": -117.2346,
-    "address": "Pepper Canyon Apartments, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87798599732899,
+    "lng": -117.23937650966246,
+    "address": "Pepper Canyon, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "08/16/2023",
@@ -1178,10 +1135,9 @@
     "precise_location": "9460 Innovation Lane, La Jolla, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8857,
-    "lng": -117.2319,
-    "address": "9460 Innovation Ln, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88851696732175,
+    "lng": -117.22501811218623,
+    "address": "9460 Innovation Lane, La Jolla, CA 92037"
   },
   {
     "date": "07/20/2023 1:36 PM",
@@ -1254,10 +1210,9 @@
     "precise_location": "3685 Voigt Dr, San Diego, CA 92121",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8795,
-    "lng": -117.2445,
-    "address": "Triton Clubhouse, 3685 Voigt Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.874495368378646,
+    "lng": -117.23047700996607,
+    "address": "3685 Voigt Dr, San Diego, CA 92121"
   },
   {
     "date": "07/05/2023",
@@ -1285,10 +1240,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8996,
-    "lng": -117.2416,
-    "address": "9600 N Torrey Pines Rd, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.8800634194156,
+    "lng": -117.23407216742142,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "07/03/2023",
@@ -1301,10 +1255,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8996,
-    "lng": -117.2416,
-    "address": "9600 N Torrey Pines Rd, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.88019218486311,
+    "lng": -117.23375435508625,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "06/07/2023",
@@ -1332,10 +1285,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8435,
-    "lng": -117.2523,
-    "address": "VA Hospital Bus Stop, 3350 La Jolla Village Dr, San Diego, CA 92161",
-    "geocode_source": "deepseek"
+    "lat": 32.84483902844924,
+    "lng": -117.27419476089334,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "06/03/2023",
@@ -1363,10 +1315,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8851,
-    "lng": -117.2411,
-    "address": "Central Campus Trolley Station, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.71557904156283,
+    "lng": -117.16116034305526,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "04/23/2023",
@@ -1394,10 +1345,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.879,
-    "lng": -117.244,
-    "address": "Marshall Lower Apartments, 2915 Voigt Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87994576926888,
+    "lng": -117.23385486698453,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "03/19/2023",
@@ -1410,10 +1360,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8665,
-    "lng": -117.2512,
-    "address": "Scripps Institution of Oceanography, 8610 Kennel Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.71573098293742,
+    "lng": -117.16114077159038,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "03/16/2023",
@@ -1426,10 +1375,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.7548,
-    "lng": -117.1682,
-    "address": "4168 Front St, San Diego, CA 92103",
-    "geocode_source": "deepseek"
+    "lat": 32.88002727615351,
+    "lng": -117.23404762414539,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/28/2023",
@@ -1442,10 +1390,9 @@
     "precise_location": "9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8796,
-    "lng": -117.2365,
-    "address": "Price Center, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87977560932209,
+    "lng": -117.23582258813461,
+    "address": "9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/25/2023",
@@ -1458,10 +1405,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8938,
-    "lng": -117.2461,
-    "address": "Sulpizio Cardiovascular Center, 9434 Medical Center Dr, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.88006372404492,
+    "lng": -117.23378845075882,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/21/2023 7:16 pm",
@@ -1489,10 +1435,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.7549,
-    "lng": -117.1683,
-    "address": "Arbor Parking Structure, 200 W Arbor Dr, San Diego, CA 92103",
-    "geocode_source": "deepseek"
+    "lat": 32.87986598911376,
+    "lng": -117.23409359367027,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/07/2023",
@@ -1520,10 +1465,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: Low",
-    "lat": 32.8854,
-    "lng": -117.2316,
-    "address": "Jacobs Medical Center, 9300 Campus Point Dr, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.84465038755963,
+    "lng": -117.27398470298077,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "11/27/2022 3:10 pm",
@@ -1551,10 +1495,9 @@
     "precise_location": "1000 York Lane, San Diego, CA 92131",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8755,
-    "lng": -117.2405,
-    "address": "1000 York Ln, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.77693210822502,
+    "lng": -117.11072108870698,
+    "address": "1000 York Lane, San Diego, CA 92131"
   },
   {
     "date": "06/22/2022",
@@ -1567,10 +1510,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.755,
-    "lng": -117.1684,
-    "address": "Hillcrest Medical Center, 200 W Arbor Dr, San Diego, CA 92103",
-    "geocode_source": "deepseek"
+    "lat": 32.87994957825939,
+    "lng": -117.23410944162401,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "06/17/2022",
@@ -1598,10 +1540,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8665,
-    "lng": -117.2512,
-    "address": "Scripps Institution of Oceanography, 8610 Kennel Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.71565652511418,
+    "lng": -117.16108581198226,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "06/12/2022",
@@ -1629,10 +1570,9 @@
     "precise_location": "La Jolla, San Diego, CA 92037",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8589,
-    "lng": -117.2573,
-    "address": "8300 Camino Del Oro, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.84481348681497,
+    "lng": -117.27422795236305,
+    "address": "La Jolla, San Diego, CA 92037"
   },
   {
     "date": "06/03/2022",
@@ -1660,10 +1600,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Low",
-    "lat": 32.8749,
-    "lng": -117.2415,
-    "address": "9500 Gilman Dr, Suite 1904, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87994675059567,
+    "lng": -117.23390446519159,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "04/26/2022",
@@ -1706,10 +1645,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8851,
-    "lng": -117.2411,
-    "address": "Central Campus Trolley Station, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880361051901254,
+    "lng": -117.23427992209251,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "03/22/2022",
@@ -1752,10 +1690,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.875,
-    "lng": -117.241,
-    "address": "Revelle College, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88031396820231,
+    "lng": -117.23382258086325,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "03/04/2022",
@@ -1798,10 +1735,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8815,
-    "lng": -117.235,
-    "address": "Warren Lecture Hall, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.87985645607997,
+    "lng": -117.23412290577336,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/17/2022",
@@ -1829,10 +1765,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.879,
-    "lng": -117.244,
-    "address": "Marshall Lower Apartments, 2915 Voigt Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.880079634913095,
+    "lng": -117.23394890824339,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "01/21/2022",
@@ -1950,10 +1885,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8857,
-    "lng": -117.2416,
-    "address": "Campus Point Parking Structure, 8950 Villa La Jolla Dr, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.879980063929075,
+    "lng": -117.23423264770013,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "08/28/2021",
@@ -1966,10 +1900,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8795,
-    "lng": -117.244,
-    "address": "Voigt Dr & Hopkins Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.879901805841236,
+    "lng": -117.23422312511568,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "02/04/2021",
@@ -2147,10 +2080,9 @@
     "precise_location": "San Diego, California, USA",
     "suspect_info": "Not specified",
     "description": "Crime severity: High",
-    "lat": 32.8669,
-    "lng": -117.2545,
-    "address": "8670 Discovery Way, La Jolla, CA 92037",
-    "geocode_source": "deepseek"
+    "lat": 32.71545089852852,
+    "lng": -117.16122101549252,
+    "address": "San Diego, California, USA"
   },
   {
     "date": "03/28/2020",
@@ -2223,10 +2155,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.8831,
-    "lng": -117.234,
-    "address": "AP&M Building, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88004178022921,
+    "lng": -117.23431344258128,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/24/2019 3:00 PM",
@@ -2239,10 +2170,9 @@
     "precise_location": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093",
     "suspect_info": "Not specified",
     "description": "Crime severity: Medium",
-    "lat": 32.879,
-    "lng": -117.244,
-    "address": "Thurgood Marshall College, 9500 Gilman Dr, La Jolla, CA 92093",
-    "geocode_source": "deepseek"
+    "lat": 32.88020193875784,
+    "lng": -117.23393660272018,
+    "address": "University of California San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
   },
   {
     "date": "11/6/2019 8:00 PM",

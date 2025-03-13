@@ -84,20 +84,20 @@ window.visualizationHandler = function(stepId) {
               <div class="terminal-title">Geocoding Terminal</div>
             </div>
             <div class="terminal-body">
-              <div class="terminal-line">$ geocode "Price Center, UCSD"</div>
-              <div class="terminal-line error">ERROR: Location not found</div>
-              <div class="terminal-line">$ geocode "Geisel Library"</div>
+              <div class="terminal-line">$ geocode "Sixth College, UCSD"</div>
+              <div class="terminal-line error">ERROR: No clear address</div>
+              <div class="terminal-line">$ geocode "Bus Stop by Pangaea"</div>
               <div class="terminal-line error">ERROR: Ambiguous location (multiple results)</div>
-              <div class="terminal-line">$ geocode "Warren Mall"</div>
+              <div class="terminal-line">$ geocode "Eighth College"</div>
               <div class="terminal-line error">ERROR: No results</div>
-              <div class="terminal-line">$ geocode "Pepper Canyon Apartments"</div>
-              <div class="terminal-line error">ERROR: Location not found</div>
+              <div class="terminal-line">$ geocode "Trolley Station"</div>
+              <div class="terminal-line error">ERROR: Ambiguous location</div>
               <div class="terminal-line blink">_</div>
             </div>
           </div>
         </div>
         <div class="vis-caption">
-          Traditional geocoding services fail to recognize campus-specific locations
+          Traditional geocoding services tend to fail at recognizing campus-specific locations
         </div>
       </div>
     `;
@@ -127,9 +127,9 @@ window.visualizationHandler = function(stepId) {
             <!-- Detected building labels -->
             <div class="map-label" style="top: 25%; left: 40%;">Geisel Library</div>
             <div class="map-label" style="top: 35%; left: 60%;">Price Center</div>
-            <div class="map-label" style="top: 50%; left: 25%;">Warren College</div>
-            <div class="map-label" style="top: 70%; left: 55%;">Pepper Canyon</div>
-            <div class="map-label" style="top: 40%; left: 75%;">Revelle College</div>
+            <div class="map-label" style="top: 50%; left: 25%;">Sixth College</div>
+            <div class="map-label" style="top: 70%; left: 55%;">Center Hall</div>
+            <div class="map-label" style="top: 40%; left: 75%;">Trolley Station</div>
           </div>
           
           <div class="ocr-results">
@@ -144,15 +144,15 @@ window.visualizationHandler = function(stepId) {
                 <span class="ocr-coords">(32.8794, -117.2359)</span>
               </div>
               <div class="ocr-item">
-                <span class="ocr-label">Warren College</span>
+                <span class="ocr-label">Sixth College</span>
                 <span class="ocr-coords">(32.8822, -117.2345)</span>
               </div>
               <div class="ocr-item">
-                <span class="ocr-label">Pepper Canyon</span>
-                <span class="ocr-coords">(32.8782, -117.2392)</span>
+                <span class="ocr-label">Trolley Station</span>
+                <span class="ocr-coords">(32.5242, -117.1355)</span>
               </div>
               <div class="ocr-item">
-                <span class="ocr-label">Revelle College</span>
+                <span class="ocr-label">Center Hall</span>
                 <span class="ocr-coords">(32.8740, -117.2410)</span>
               </div>
             </div>
@@ -742,43 +742,43 @@ window.visualizationHandler = function(stepId) {
           <div class="api-diagram">
             <!-- External Applications -->
             <div class="api-section" id="external-apps">
-              <div class="section-header">External Applications</div>
+              <div class="section-header"></div>
               <div class="section-body">
-                <div class="app-icon">📱</div>
-                <div class="app-icon">💻</div>
-                <div class="app-icon">🌐</div>
+                <div class="app-icon"></div>
+                <div class="app-icon"></div>
+                <div class="app-icon"></div>
               </div>
             </div>
             
             <!-- API Layer -->
             <div class="api-arrows down">
-              <div class="arrow">⇅</div>
-              <div class="arrow">⇅</div>
-              <div class="arrow">⇅</div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
             </div>
             
             <div class="api-section" id="api-layer">
               <div class="section-header">API Endpoints</div>
               <div class="section-body api-endpoints">
-                <div class="endpoint">/api/crimes</div>
-                <div class="endpoint">/api/geocode</div>
-                <div class="endpoint">/api/date-range</div>
+                <div class="endpoint"></div>
+                <div class="endpoint"></div>
+                <div class="endpoint">-range</div>
               </div>
             </div>
             
             <!-- Core Systems -->
             <div class="api-arrows down">
-              <div class="arrow">⇅</div>
-              <div class="arrow">⇅</div>
-              <div class="arrow">⇅</div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
+              <div class="arrow"></div>
             </div>
             
             <div class="api-section" id="core-systems">
-              <div class="section-header">Core Systems</div>
+              <div class="section-header"></div>
               <div class="section-body">
-                <div class="system-item">Geocoding Engine</div>
-                <div class="system-item">Alert Database</div>
-                <div class="system-item">Visualization Engine</div>
+                <div class="system-item"></div>
+                <div class="system-item"></div>
+                <div class="system-item"></div>
               </div>
             </div>
           </div>
