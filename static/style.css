@@ -563,3 +563,30 @@ h1 svg {
     background-color: rgba(10, 10, 10, 0.95) !important;
   }
 }
+.triton_alert {
+  width: 50%; /* Adjust as needed */
+  max-width: 200px; /* Limit the max size */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  margin: 10px;
+  padding: 10px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.focus-point {
+  margin: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.focus-points {
+  margin: 100px;
+  padding: 10px;
+}
