@@ -311,7 +311,7 @@ async def process(request: Request):
     return templates.TemplateResponse("process.html", {"request": request})
 
 # Check that your templates directory is properly set up in app.py:
-# templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="templates")
 
 # Also ensure your static files directory is mounted:
 # app.mount("/static", StaticFiles(directory="static"), name="static")
