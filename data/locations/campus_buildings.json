@@ -1,0 +1,417 @@
+{
+    "BCB Caf\u00e9 Coffee Cart, Warren Mall, UC San Diego": {
+        "lat": 32.880963,
+        "lng": -117.234592,
+        "address": "BCB Caf\u00e9, Warren Mall, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+    },
+    "Pepper Canyon Apartments, UC San Diego": {
+        "lat": 32.88064545,
+        "lng": -117.23183834161202,
+        "address": "Canyonview Aquatics and Activities Center, Voigt Drive, 92161, Voigt Drive, San Diego, California, United States"
+    },
+    "Muir College Residential Housing, UC San Diego": {
+        "lat": 32.87851261831127,
+        "lng": -117.24143046198681,
+        "address": "Muir College, UC San Diego, 9500 Gilman Dr, La Jolla, CA 92093"
+    },
+    "La Jolla, CA": {
+        "lat": 32.8401623,
+        "lng": -117.2740777,
+        "address": "La Jolla, 92037, San Diego, California, United States"
+    },
+    "UC San Diego": {
+        "lat": 32.8744092,
+        "lng": -117.23611849678872,
+        "address": "UC San Diego School of Medicine, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "RIMAC/Liontree Arena and northern section of campus": {
+        "lat": 32.88530605,
+        "lng": -117.239514849845,
+        "address": "RIMAC Arena, Hopkins Drive, 92093, Hopkins Drive, La Jolla, California, United States"
+    },
+    "RIMAC/Liontree Arena": {
+        "lat": 32.88530605,
+        "lng": -117.239514849845,
+        "address": "RIMAC Arena, Hopkins Drive, 92093, Hopkins Drive, La Jolla, California, United States"
+    },
+    "Pepper Canyon Living and Learning Neighborhood": {
+        "lat": 32.88198885,
+        "lng": -117.23972563975705,
+        "address": "Ridge Walk North Living and Learning Neighborhood, San Diego, California, United States"
+    },
+    "Cognitive Sciences Building, UC San Diego": {
+        "lat": 32.880534,
+        "lng": -117.23932435907118,
+        "address": "Cognitive Science Building, Peterson Loop, 92093, Peterson Loop, San Diego, California, United States"
+    },
+    "One Miramar Apartments, UC San Diego": {
+        "lat": 32.873770300000004,
+        "lng": -117.22622580148638,
+        "address": "One Miramar Street, San Diego, California, United States"
+    },
+    "9600 Block of Black Gold Road, San Diego": {
+        "lat": 32.8835266,
+        "lng": -117.2471637,
+        "address": "Black Gold Road, 92093, San Diego, California, United States"
+    },
+    "9600 Block of Black Gold Road": {
+        "lat": -37.82013725,
+        "lng": 145.1500496182243,
+        "address": "Blackburn, Railway Road, 3130, Railway Road, City of Whitehorse, VIC, Australia"
+    },
+    "Engineering Building Unit II (EBU II), UC San Diego": {
+        "lat": 32.8811913,
+        "lng": -117.23361338989017,
+        "address": "Engineering II, Voigt Drive, 92093, Voigt Drive, San Diego, California, United States"
+    },
+    "8875 Villa La Jolla Drive (the Nordstrom Rack)": {
+        "lat": 32.869476250000005,
+        "lng": -117.2333336438864,
+        "address": "Nordstrom Rack, Villa la Jolla Drive, 92161, Villa la Jolla Drive, La Jolla, California, United States"
+    },
+    "York Hall": {
+        "lat": 40.765029999999996,
+        "lng": -73.97988681588421,
+        "address": "Carnegie Hall, West 56th Street, 10019, West 56th Street, New York, NY, United States"
+    },
+    "San Diego": {
+        "lat": 32.7174202,
+        "lng": -117.162772,
+        "address": "San Diego, California, United States"
+    },
+    "3135 Matthews Lane": {
+        "lat": 32.6318065,
+        "lng": -84.4315862,
+        "address": "Matthews Lake Dam, 31812, Georgia, United States"
+    },
+    "Mandeville Auditorium": {
+        "lat": 32.8777424,
+        "lng": -117.2394425,
+        "address": "Mandeville Auditorium, Mandeville Loop, 92093, Mandeville Loop, San Diego, CA, United States"
+    },
+    "Douglas Hall": {
+        "lat": 15.546485449999999,
+        "lng": -61.302080403796325,
+        "address": "Douglas-Charles Airport, Melville Hall Airport Access Road, Melville Hall Airport Access Road, Saint Andrew Parish, Dominica"
+    },
+    "Torrey Pines North Parking structures": {
+        "lat": 32.8842189,
+        "lng": -117.2430956098396,
+        "address": "Pangea Parking Structure, Pangea Drive, 92093, Pangea Drive, San Diego, CA, United States"
+    },
+    "Computer Science and Engineering Building": {
+        "lat": 34.980413850000005,
+        "lng": -101.91502703682886,
+        "address": "Engineering and Computer Sciences Building, 4th Avenue, 79016, 4th Avenue, Canyon, TX, United States"
+    },
+    "Eleanor Roosevelt College Residences": {
+        "lat": 32.885091200000005,
+        "lng": -117.24220110581237,
+        "address": "Eleanor Roosevelt College, San Diego, California, United States"
+    },
+    "La Jolla": {
+        "lat": 32.8401623,
+        "lng": -117.2740777,
+        "address": "La Jolla, 92037, San Diego, California, United States"
+    },
+    "Warren Neighborhood": {
+        "lat": 38.761158,
+        "lng": -91.1990409,
+        "address": "Macedonia Neighborhood, Missouri, United States"
+    },
+    "3366 N. Torrey Pines Ct.": {
+        "lat": 32.8937062,
+        "lng": -117.241748602471,
+        "address": "3366, North Torrey Pines Road, 92093, North Torrey Pines Road, La Jolla, CA, United States"
+    },
+    "the Matthews Apartments": {
+        "lat": 50.815082950000004,
+        "lng": -0.10741256036101111,
+        "address": "The French Apartments, De Courcel Road, BN2 5TF, De Courcel Road, Brighton, England, United Kingdom"
+    },
+    "the Mandeville Auditorium": {
+        "lat": 32.8777424,
+        "lng": -117.2394425,
+        "address": "Mandeville Auditorium, Mandeville Loop, 92093, Mandeville Loop, San Diego, CA, United States"
+    },
+    "Library Walk": {
+        "lat": 38.906464150000005,
+        "lng": -77.07215224910715,
+        "address": "Lauinger Library, Library Walk, 20057, Library Walk, Washington, DC, United States"
+    },
+    "Unknown": {
+        "lat": 26.49253305,
+        "lng": 92.33087891709363,
+        "address": "unknown, Assam, India"
+    },
+    "9 a (Precise: INCLUSION)": {
+        "lat": -38.1019193,
+        "lng": 145.3921783,
+        "address": "9, Inclusion Road, 3978, Inclusion Road, City of Casey, Victoria, Australia"
+    },
+    "the La Jolla Playhouse": {
+        "lat": 32.8714798,
+        "lng": -117.24107361315555,
+        "address": "La Jolla Playhouse, Theatre District Drive, 92093, Theatre District Drive, San Diego, California, United States"
+    },
+    "School of Medicine Building 4, UC San Diego": {
+        "lat": 32.8744092,
+        "lng": -117.23611849678872,
+        "address": "UC San Diego School of Medicine, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "3869 Miramar Street, Cala Building": {
+        "lat": 32.8755245,
+        "lng": -117.22288460593603,
+        "address": "Cala, 3869, Miramar Street, 92092, Miramar Street, La Jolla, CA, United States"
+    },
+    "School of Medicine, UC San Diego": {
+        "lat": 32.8744092,
+        "lng": -117.23611849678872,
+        "address": "UC San Diego School of Medicine, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "Scripps Institution of Oceanography, UC San Diego": {
+        "lat": 32.70735325,
+        "lng": -117.23801755512991,
+        "address": "Scripps Institution of Oceanography - Nimitz Marine Facility, San Diego, California, United States"
+    },
+    "Warren Mall, UC San Diego": {
+        "lat": 32.8813878,
+        "lng": -117.23534857007576,
+        "address": "Fallen Star, Warren Mall, 92093, Warren Mall, San Diego, California, United States"
+    },
+    "Mesa Verde Hall, UC San Diego": {
+        "lat": 32.9057704,
+        "lng": -117.14371178719941,
+        "address": "Mesa Verde Park, San Diego, California, United States"
+    },
+    "Keeling Apartments, UC San Diego": {
+        "lat": 32.874246049999996,
+        "lng": -117.24306446257606,
+        "address": "Keeling Apartments North Tower, Scholars Drive South, 92093, Scholars Drive South, San Diego, California, United States"
+    },
+    "Center Hall, UC San Diego": {
+        "lat": 32.7183855,
+        "lng": -117.15786261978207,
+        "address": "Copley Symphony Hall, 8th Avenue, 92101, 8th Avenue, San Diego, CA, United States"
+    },
+    "Mesa Nueva Housing, UC San Diego": {
+        "lat": 32.874892849999995,
+        "lng": -117.22313242889231,
+        "address": "Mesa Nueva, San Diego, California, United States"
+    },
+    "campus intersection of Scholars Drive North and Exploration Drive": {
+        "lat": 43.7285212,
+        "lng": -79.60630692591994,
+        "address": "Humber Polytechnic, Humberline Drive, M9W 5L7, Humberline Drive, Toronto, Ontario, Canada"
+    },
+    "University of California San Diego": {
+        "lat": 32.85150015,
+        "lng": -117.18187595988937,
+        "address": "University of California, San Diego Health, Greenwich Drive, 92122, Greenwich Drive, San Diego, CA, United States"
+    },
+    "Mesa Nueva, UC San Diego": {
+        "lat": 32.874892849999995,
+        "lng": -117.22313242889231,
+        "address": "Mesa Nueva, San Diego, California, United States"
+    },
+    "School of Medicine and Chancellor\u00e2\u0080\u0099s Complex, UC San Diego": {
+        "lat": 32.8744092,
+        "lng": -117.23611849678872,
+        "address": "UC San Diego School of Medicine, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "Preuss School": {
+        "lat": 32.8833189,
+        "lng": -117.22244263237154,
+        "address": "The Preuss School, Campus Point Drive, 92039, Campus Point Drive, San Diego, California, United States"
+    },
+    "Residential Areas around campus": {
+        "lat": -23.0009372,
+        "lng": -45.5649596,
+        "address": "Residencial Arco-Iris, 12061-200, Taubat\u00e9, S\u00e3o Paulo, Brasil"
+    },
+    "Cafe Ventanas": {
+        "lat": 3.6670218,
+        "lng": -75.3698083,
+        "address": "Cerro Ventanas, Chaparral, Tolima, Colombia"
+    },
+    "3867 Miramar Street \u2013 Mesa Nueva Artesa": {
+        "lat": 32.87492305,
+        "lng": -117.22198642688738,
+        "address": "Artesa, 3867, Miramar Street, 92037, Miramar Street, La Jolla, CA, United States"
+    },
+    "Sun God Lawn": {
+        "lat": 32.878651399999995,
+        "lng": -117.24012696620696,
+        "address": "Sun God Lawn, San Diego, California, United States"
+    },
+    "Biological Grade, Scripps Institution of Oceanography": {
+        "lat": 32.70735325,
+        "lng": -117.23801755512991,
+        "address": "Scripps Institution of Oceanography - Nimitz Marine Facility, San Diego, California, United States"
+    },
+    "ERC, UC San Diego": {
+        "lat": 32.8744092,
+        "lng": -117.23611849678872,
+        "address": "UC San Diego School of Medicine, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "Jacobs Medical Center, La Jolla": {
+        "lat": 32.869962400000006,
+        "lng": -117.22659345094678,
+        "address": "La Jolla Medical & Surgical Center, University Center Lane, 92161, University Center Lane, San Diego, CA, United States"
+    },
+    "1000 York Lane": {
+        "lat": 39.9342387,
+        "lng": -76.7437917,
+        "address": "1000, Box Hill Lane, 17403, Box Hill Lane, York, PA, United States"
+    },
+    "UCSD Hillcrest Hospital": {
+        "lat": 36.0241361,
+        "lng": -78.9179659,
+        "address": "Hillcrest Drive, 27705, Durham, North Carolina, United States"
+    },
+    "Biological Grade at parking lot #011": {
+        "lat": 42.249022499999995,
+        "lng": -71.81792373274295,
+        "address": "The Lofts at Loomworks Parking Lot, Hollis Street, 01610, Hollis Street, Worcester, Massachusetts, United States"
+    },
+    "Leichtag Biomedical Research Building": {
+        "lat": 32.87655125,
+        "lng": -117.23689031121185,
+        "address": "Leichtag Family Foundation Biomedical Research Building, Library Walk, 92093, Library Walk, San Diego, California, United States"
+    },
+    "Kellogg Park, La Jolla Shores, 8300 Camino Del Oro, La Jolla, CA, 92037": {
+        "lat": 32.8591064,
+        "lng": -117.2544983,
+        "address": "Camino del Oro, 02037, San Diego, California, United States"
+    },
+    "La Jolla Shores Hotel, La Jolla, CA": {
+        "lat": 32.8511435,
+        "lng": -117.25328645938964,
+        "address": "Hotel La Jolla, Torrey Pines Road, 02037, Torrey Pines Road, La Jolla, CA, United States"
+    },
+    "Mesa Housing, UC San Diego": {
+        "lat": 32.8740758,
+        "lng": -117.22230239635255,
+        "address": "North Mesa Housing Playground, C Mesa, 92039, C Mesa, San Diego, California, United States"
+    },
+    "Revelle College area, UC San Diego": {
+        "lat": 32.87446225,
+        "lng": -117.24098209937156,
+        "address": "Revelle College, San Diego, California, United States"
+    },
+    "UC San Diego Health La Jolla Trolley Platform": {
+        "lat": 32.8780878,
+        "lng": -117.2252034043437,
+        "address": "UC San Diego Health, La Jolla Campus, Campus Point Drive, 92039, Campus Point Drive, San Diego, California, United States"
+    },
+    "York Hall, UC San Diego": {
+        "lat": 32.8745172,
+        "lng": -117.24006461935586,
+        "address": "York Hall, Herbert York Lane, 92093, Herbert York Lane, San Diego, CA, United States"
+    },
+    "Tioga Hall, UC San Diego": {
+        "lat": 32.87905375,
+        "lng": -117.24338581002445,
+        "address": "Tioga Hall, Scholars Drive South, 92093, Scholars Drive South, San Diego, CA, United States"
+    },
+    "Latin America Hall": {
+        "lat": 32.8851097,
+        "lng": -117.24349774912014,
+        "address": "Latin America Hall, North Torrey Pines Road, 92093, North Torrey Pines Road, San Diego, California, United States"
+    },
+    "One Miramar": {
+        "lat": 32.873770300000004,
+        "lng": -117.22622580148638,
+        "address": "One Miramar Street, San Diego, California, United States"
+    },
+    "6th College": {
+        "lat": 50.847825650000004,
+        "lng": 0.49306477545032634,
+        "address": "Bexhill 6th Form College, Penland Road, TN40 2JG, Penland Road, Bexhill-on-Sea, England, United Kingdom"
+    },
+    "Campus Point Parking Structure": {
+        "lat": 32.88023815,
+        "lng": -117.22520525839332,
+        "address": "Campus Point Parking Structure, Medical Center Drive, 92161, Medical Center Drive, San Diego, California, United States"
+    },
+    "Campus Point Parking Structure, UC San Diego": {
+        "lat": 32.8780878,
+        "lng": -117.2252034043437,
+        "address": "UC San Diego Health, La Jolla Campus, Campus Point Drive, 92039, Campus Point Drive, San Diego, California, United States"
+    },
+    "Hopkins Parking Structure, UC San Diego": {
+        "lat": 32.8837554,
+        "lng": -117.23935862276531,
+        "address": "Hopkins Parking Structure, Voigt Drive, 92093, Voigt Drive, San Diego, California, United States"
+    },
+    "University City area, UC San Diego": {
+        "lat": 32.87265,
+        "lng": -117.214022,
+        "address": "University City, 92039, San Diego, California, United States"
+    },
+    "9126 Regents Rd and 9238 Regents Rd": {
+        "lat": 42.098046,
+        "lng": -70.990241,
+        "address": "N.Quincy St. and Regent Rd, North Quincy Street, 02402, North Quincy Street, Brockton, MA, United States"
+    },
+    "the United States": {
+        "lat": 39.7837304,
+        "lng": -100.445882,
+        "address": "United States of America, United States"
+    },
+    "the Sun God Lawn": {
+        "lat": 1.3999603999999999,
+        "lng": 99.42983272544998,
+        "address": "Bandar Udara Aek Godang, Siloting, Sumatera Utara, Indonesia"
+    },
+    "the Rita Atkinson Residences": {
+        "lat": 32.87257245,
+        "lng": -117.23517887907337,
+        "address": "Rita Atkinson Residences, Pharmacy Lane, 92161, Pharmacy Lane, San Diego, California, United States"
+    },
+    "9000 Villa La Jolla Drive": {
+        "lat": 32.8666754,
+        "lng": -117.2332427,
+        "address": "Villa La Jolla Drive, 92161, San Diego, California, United States"
+    },
+    "Parking lot #352, UC San Diego": {
+        "lat": 32.708225,
+        "lng": -117.022634,
+        "address": "352, Billow Drive, 92114, Billow Drive, San Diego, California, United States"
+    },
+    "Applied Mathematics and Physics (AP&M), UC San Diego": {
+        "lat": 32.87935365,
+        "lng": -117.24106740309279,
+        "address": "Applied Physics and Mathematics, Ridge Walk, 92093, Ridge Walk, San Diego, CA, United States"
+    },
+    "Thurgood Marshall College Residence Halls, UC San Diego": {
+        "lat": 32.88351765,
+        "lng": -117.24275286245246,
+        "address": "Thurgood Marshall Residence Halls, Scholars Drive North, 92093, Scholars Drive North, San Diego, CA, United States"
+    },
+    "8600 La Jolla Scenic Drive North, San Diego": {
+        "lat": 32.829716,
+        "lng": -117.254021,
+        "address": "La Jolla Scenic Drive South, 92037, San Diego, California, United States"
+    },
+    "United States": {
+        "lat": 39.7837304,
+        "lng": -100.445882,
+        "address": "United States of America, United States"
+    },
+    "3857 Miramar Street, UC San Diego": {
+        "lat": 32.749042,
+        "lng": -117.117703,
+        "address": "3857, 35th Street, 92104, 35th Street, San Diego, California, United States"
+    },
+    "Argo Hall": {
+        "lat": 47.2823987,
+        "lng": 8.215540713034034,
+        "address": "Hallwilersee, Meisterschwanden, Aargau, Schweiz/Suisse/Svizzera/Svizra"
+    },
+    "San Diego State": {
+        "lat": 32.7174202,
+        "lng": -117.162772,
+        "address": "San Diego, California, United States"
+    }
+}

@@ -1,7 +1,6 @@
-fastapi
-uvicorn
-requests
-beautifulsoup4
-jinja2
-apscheduler
-spacy
+flask==2.3.3
+mistralai==0.0.10
+requests==2.31.0
+python-dotenv==1.0.0
+marshmallow==3.20.1
+pytest==7.4.2

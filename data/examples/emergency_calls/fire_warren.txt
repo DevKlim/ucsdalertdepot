@@ -1,0 +1,13 @@
+Dispatcher: 911, what's your emergency?
+Caller: Hi, I'm at the Warren College residence hall at UC San Diego. There's a fire in the kitchen on the third floor. Someone was cooking and the stove caught fire!
+Dispatcher: Is everyone evacuating the building?
+Caller: Yes, the fire alarm is going off and people are leaving. But the fire is spreading pretty quickly.
+Dispatcher: Is anyone injured?
+Caller: I saw one person who burned their hand trying to put it out. They're outside now.
+Dispatcher: What's your name?
+Caller: Sarah Johnson, I'm an RA in the building.
+Dispatcher: Stay on the line, Sarah. I'm sending fire trucks now. Which building in Warren College is this?
+Caller: It's Beyers Hall, B-E-Y-E-R-S Hall. The fire is in apartment 304.
+Dispatcher: Okay, and is the smoke very thick?
+Caller: Yes, it's getting worse. The third floor hallway is filling with smoke.
+Dispatcher: Fire department is on the way. Please stay outside and make sure everyone remains clear of the building.

@@ -66,66 +66,6 @@ h1 svg {
   gap: 10px;
 }
 
-.quick-test-agent {
-  background-color: #000000;
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-.test-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-#test-transcript {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.agent-result {
-  background-color: rgb(0, 0, 0);
-  padding: 12px;
-  border-radius: 4px;
-  border-left: 4px solid #00629B;
-}
-.loading {
-  text-align: center;
-  padding: 20px;
-  color: #666;
-}
-.error {
-  background-color: rgb(0, 0, 0);
-  color: #c00;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.quick-test-agent-section {
-  background-color: #000000;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-.test-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-.test-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-
-.demo-link {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .btn {
   display: inline-flex;
   align-items: center;

@@ -1,0 +1,4 @@
+Dispatcher: 911, what's your emergency?
+Caller: I'm at the Warren College residence hall at UC San Diego. There's a fire in the kitchen on the third floor.
+Dispatcher: Is everyone evacuating the building?
+Caller: Yes, the fire alarm is going off and people are leaving.

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safe Campus Agent - Emergency Notification System</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- React and ReactDOM -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Babel -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+          <path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        UCSD Safe Campus Agent
+      </h1>
+      <div class="controls">
+        <a href="/" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Home
+        </a>
+        <a href="/instructions" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Instructions
+        </a>
+        <a href="/presentation" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          Project Presentation
+        </a>
+        <a href="/process" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          Our Process
+        </a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div id="demo-container"></div>
+  </div>
+  
+  <script type="text/babel">
+    // React hooks
+    const { useState, useEffect } = React;
+    
+    const SafeCampusDemo = () => {
+      const [transcript, setTranscript] = useState('');
+      const [loading, setLoading] = useState(false);
+      const [results, setResults] = useState(null);
+      const [activeTab, setActiveTab] = useState('summary');
+      const [location, setLocation] = useState({ lat: 32.8801, lng: -117.2340 });
+      const [mapLoaded, setMapLoaded] = useState(false);
+      const [llmClassification, setLlmClassification] = useState(null);
+      const [viewMode, setViewMode] = useState('transcript'); // transcript or conversation
+
+      // Sample transcript for quick testing
+      const sampleTranscript = `Dispatcher: 911, what's your emergency?
+
+Caller: Hi, I'm at Geisel Library on campus, and there's someone acting very suspicious. They're walking around looking at people's belongings and trying doors to locked rooms.
+
+Dispatcher: Can you describe this person?
+
+Caller: Yes, it's a man wearing a black hoodie and jeans. He's about 6 feet tall with short dark hair. He keeps looking around nervously and checking if people are watching him.
+
+Dispatcher: Where exactly are you seeing this?
+
+Caller: I'm on the 2nd floor in the east wing. He's gone into the study rooms a few times, and I saw him try to open someone's backpack when they stepped away.
+
+Dispatcher: Is he there right now?
+
+Caller: Yes, he's still here walking around. He's now heading toward the elevator area.
+
+Dispatcher: OK, I'm sending campus security. Are you in a safe location?
+
+Caller: Yes, I'm sitting with a group of people. He's not paying attention to me.
+
+Dispatcher: Good. What's your name?
+
+Caller: Alex Chen. I'm a student here.
+
+Dispatcher: OK Alex, officers are on the way. Stay where you are and call back if anything changes.`;
+
+      const sampleConversation = [
+        { speaker: "Dispatcher", text: "911, what's your emergency?" },
+        { speaker: "Caller", text: "I need to report a gas leak at the Warren College apartments. There's a really strong smell in the hallway of Building C." },
+        { speaker: "Dispatcher", text: "Are people evacuating the building?" },
+        { speaker: "Caller", text: "Some people have left, but I'm not sure everyone knows about it. The smell is really strong near apartment 305." },
+        { speaker: "Dispatcher", text: "I'll dispatch emergency services right away. Are you in a safe location away from the smell?" },
+        { speaker: "Caller", text: "Yes, I'm outside the building now." },
+        { speaker: "Dispatcher", text: "Good. Can you tell me your name and contact information?" },
+        { speaker: "Caller", text: "My name is Jamie Rodriguez. My phone number is 555-123-4567." },
+        { speaker: "Dispatcher", text: "Thank you, Jamie. Emergency services are on their way. Please stay clear of the building and warn others not to enter." },
+        { speaker: "Caller", text: "I will. Thank you." },
+      ];
+
+      const [conversation, setConversation] = useState(sampleConversation);
+      const [newMessage, setNewMessage] = useState({ speaker: "Caller", text: "" });
+
+      // Initialize map after component mounts
+      useEffect(() => {
+        if (results && !mapLoaded) {
+          // In a real implementation, this would initialize a map
+          // For the demo, we'll just set the flag
+          setMapLoaded(true);
+        }
+      }, [results, mapLoaded]);
+
+      const loadSample = () => {
+        if (viewMode === 'transcript') {
+          setTranscript(sampleTranscript);
+        } else {
+          setConversation(sampleConversation);
+        }
+      };
+
+      const toggleViewMode = () => {
+        setViewMode(viewMode === 'transcript' ? 'conversation' : 'transcript');
+      };
+
+      const addMessage = () => {
+        if (newMessage.text.trim()) {
+          setConversation([...conversation, { ...newMessage }]);
+          setNewMessage({ ...newMessage, text: "" });
+        }
+      };
+
+      const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          addMessage();
+        }
+      };
+
+      const deleteMessage = (index) => {
+        const updatedConversation = [...conversation];
+        updatedConversation.splice(index, 1);
+        setConversation(updatedConversation);
+      };
+
+      // Convert conversation to transcript format
+      const conversationToTranscript = () => {
+        return conversation.map(msg => `${msg.speaker}: ${msg.text}`).join('\n\n');
+      };
+
+      // Process transcript using LLM for location extraction and classification
+      const processTranscript = () => {
+        const textToProcess = viewMode === 'transcript' ? transcript : conversationToTranscript();
+        
+        if (!textToProcess.trim()) {
+          alert('Please enter a transcript or conversation first.');
+          return;
+        }
+
+        setLoading(true);
+        
+        // Call the API
+        fetch('/api/process_call', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ transcript: textToProcess })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setLocation(data.location);
+          setLlmClassification(data.classification);
+          setResults(data);
+          setLoading(false);
+          setActiveTab('summary');
+        })
+        .catch(error => {
+          console.error('Error processing transcript:', error);
+          setLoading(false);
+          alert('Error processing transcript: ' + error.message);
+        });
+      };
+
+      // Simple map rendering
+      const renderMap = () => {
+        if (!results) return null;
+        
+        return (
+          <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+            <h3 className="text-lg font-bold mb-2">Incident Location</h3>
+            <div className="bg-gray-100 p-3 mb-3 rounded-md">
+              <p><strong>Location:</strong> {results.location.name}</p>
+              <p><strong>Coordinates:</strong> ({results.location.lat.toFixed(4)}, {results.location.lng.toFixed(4)})</p>
+              <p><strong>Extraction Source:</strong> {results.location.source}</p>
+              <p><strong>Confidence:</strong> {(results.location.confidence * 100).toFixed(1)}%</p>
+            </div>
+            <div className="h-64 bg-blue-50 flex items-center justify-center rounded-md border border-blue-200 relative">
+              {/* This would be a real map in a production implementation */}
+              <div className="text-center text-gray-600">
+                <p className="mb-2">Interactive Map</p>
+                <p className="text-sm">In a real implementation, this would show a map centered at:</p>
+                <p className="font-bold">{results.location.name}</p>
+                <p>({results.location.lat.toFixed(6)}, {results.location.lng.toFixed(6)})</p>
+              </div>
+              <div 
+                className="absolute h-4 w-4 bg-red-500 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                style="box-shadow:'0 0 0 8px rgba(239, 68, 68, 0.3)"></div>
+            </div>
+          </div>
+        );
+      };
+
+      return (
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-dark text-light p-6 rounded-t-lg shadow-md border-b border-secondary">
+            <h1 className="text-3xl font-bold">Safe Campus Agent Demo</h1>
+            <p className="mt-2">Test the emergency notification system with a 911 call transcript</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-b-lg shadow-md mb-8">
+            <div className="mb-4 flex justify-between items-center">
+              <div className="font-medium text-lg">
+                {viewMode === 'transcript' ? 'Transcript Mode' : 'Conversation Mode'}
+              </div>
+              <button
+                className="btn text-sm py-1 px-3"
+                onClick={toggleViewMode}
+              >
+                Switch to {viewMode === 'transcript' ? 'Conversation' : 'Transcript'} Mode
+              </button>
+            </div>
+            
+            {viewMode === 'transcript' ? (
+              <div className="mb-4">
+                <label htmlFor="transcript" className="block text-lg font-medium mb-2">
+                  911 Call Transcript
+                </label>
+                <textarea
+                  id="transcript"
+                  className="w-full h-64 p-3 border border-gray-300 rounded-md shadow-sm"
+                  placeholder="Enter the 911 call transcript here..."
+                  value={transcript}
+                  onChange={(e) => setTranscript(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="mb-4">
+                <label className="block text-lg font-medium mb-2">
+                  911 Call Conversation
+                </label>
+                <div className="border border-gray-300 rounded-md shadow-sm p-3 h-64 overflow-y-auto mb-3">
+                  {conversation.map((msg, index) => (
+                    <div key={index} className="mb-3 flex">
+                      <div className={`p-2 rounded-lg max-w-3/4 ${msg.speaker === "Dispatcher" ? "bg-blue-100 mr-auto" : "bg-green-100 ml-auto"}`}>
+                        <div className="font-bold text-sm text-gray-700">{msg.speaker}</div>
+                        <div>{msg.text}</div>
+                      </div>
+                      <button 
+                        onClick={() => deleteMessage(index)}
+                        className="ml-2 text-red-500 hover:text-red-700 self-center"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex">
+                  <select 
+                    className="p-2 border border-gray-300 rounded-l-md"
+                    value={newMessage.speaker}
+                    onChange={(e) => setNewMessage({ ...newMessage, speaker: e.target.value })}
+                  >
+                    <option value="Dispatcher">Dispatcher</option>
+                    <option value="Caller">Caller</option>
+                  </select>
+                  <input
+                    type="text"
+                    className="flex-grow p-2 border-t border-b border-gray-300"
+                    placeholder="Type a message..."
+                    value={newMessage.text}
+                    onChange={(e) => setNewMessage({ ...newMessage, text: e.target.value })}
+                    onKeyPress={handleKeyPress}
+                  />
+                  <button
+                    className="p-2 bg-blue-600 text-white rounded-r-md"
+                    onClick={addMessage}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            )}
+            
+            <div className="flex gap-4">
+              <button
+                className="btn btn-primary py-2 px-4"
+                onClick={processTranscript}
+                disabled={loading}
+              >
+                {loading ? 'Processing...' : 'Process Emergency Call'}
+              </button>
+              <button
+                className="btn py-2 px-4"
+                onClick={loadSample}
+                disabled={loading}
+              >
+                Load Sample
+              </button>
+            </div>
+          </div>
+          
+          {results && (
+            <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+              <div className="bg-secondary text-dark p-4">
+                <h2 className="text-xl font-bold">Results</h2>
+                <p className="text-sm">Processing time: {results.processing_time}s | Notification planning time: {results.notification_time}s</p>
+              </div>
+              
+              <div className="border-b border-gray-200">
+                <nav className="flex flex-wrap">
+                  <button
+                    className={`px-4 py-2 font-medium ${activeTab === 'summary' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                    onClick={() => setActiveTab('summary')}
+                  >
+                    Summary
+                  </button>
+                  <button
+                    className={`px-4 py-2 font-medium ${activeTab === 'classification' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                    onClick={() => setActiveTab('classification')}
+                  >
+                    LLM Classification
+                  </button>
+                  <button
+                    className={`px-4 py-2 font-medium ${activeTab === 'location' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                    onClick={() => setActiveTab('location')}
+                  >
+                    Location
+                  </button>
+                  <button
+                    className={`px-4 py-2 font-medium ${activeTab === 'eido' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                    onClick={() => setActiveTab('eido')}
+                  >
+                    EIDO Details
+                  </button>
+                  <button
+                    className={`px-4 py-2 font-medium ${activeTab === 'notifications' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                    onClick={() => setActiveTab('notifications')}
+                  >
+                    Notification Plan
+                  </button>
+                </nav>
+              </div>
+              
+              <div className="p-6">
+                {activeTab === 'summary' && (
+                  <div>
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold mb-2">Incident Summary</h3>
+                      <div className="bg-gray-50 p-4 rounded-md">
+                        <p className="mb-1"><strong>Type:</strong> {results.eido.eido.incident.incidentType.toUpperCase()}</p>
+                        {results.eido.eido.incident.incidentSubType && (
+                          <p className="mb-1"><strong>Subtype:</strong> {results.eido.eido.incident.incidentSubType.replace('_', ' ').toUpperCase()}</p>
+                        )}
+                        <p className="mb-1"><strong>Priority:</strong> {results.eido.eido.incident.priority}/5 ({['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'INFORMATION'][results.eido.eido.incident.priority-1]})</p>
+                        <p className="mb-1"><strong>Location:</strong> {results.eido.eido.incident.location.address.fullAddress}</p>
+                        <p className="mb-1"><strong>Status:</strong> {results.eido.eido.incident.status.toUpperCase()}</p>
+                        <p className="mt-3"><strong>Description:</strong> {results.eido.eido.incident.details.description}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold mb-2">Recommended Actions</h3>
+                      <ul className="bg-yellow-50 p-4 rounded-md">
+                        {results.eido.eido.notification.recommendedActions.map((action, i) => (
+                          <li key={i} className="mb-1">• {action}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold mb-2">Key Facts</h3>
+                      <ul className="bg-blue-50 p-4 rounded-md">
+                        {results.eido.eido.incident.details.keyFacts.map((fact, i) => (
+                          <li key={i} className="mb-1">• {fact}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-lg font-bold mb-2">Notification Overview</h3>
+                      <div className="bg-purple-50 p-4 rounded-md">
+                        <p className="mb-1"><strong>Notification Radius:</strong> {results.notification_results.notification_radius_meters} meters</p>
+                        <p className="mb-1"><strong>Target Groups:</strong> {results.notification_results.target_groups.join(', ')}</p>
+                        <p className="mb-1"><strong>Total Recipients:</strong> {results.notification_results.recipients_count}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {activeTab === 'classification' && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">LLM Classification Results</h3>
+                    
+                    <div className="bg-yellow-50 p-4 rounded-md mb-4">
+                      <p className="text-sm italic">{results.classification.analysis}</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div className="bg-gray-50 p-4 rounded-md">
+                        <h4 className="font-bold mb-2">Primary Classification</h4>
+                        <p className="mb-1"><strong>Incident Type:</strong> {results.classification.incidentType}</p>
+                        {results.classification.subtype && (
+                          <p className="mb-1"><strong>Subtype:</strong> {results.classification.subtype.replace('_', ' ')}</p>
+                        )}
+                        <p className="mb-1"><strong>Priority:</strong> {results.classification.priority}/5</p>
+                        <p className="mb-1"><strong>Confidence:</strong> {(results.classification.confidence * 100).toFixed(1)}%</p>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-md">
+                        <h4 className="font-bold mb-2">Extracted Details</h4>
+                        <p className="mb-1"><strong>Victims:</strong> {results.classification.victimCount > 0 ? `${results.classification.victimCount} reported` : 'None reported'}</p>
+                        <p className="mb-1"><strong>Weapons:</strong> {results.classification.weaponsInvolved ? 'Potentially involved' : 'None reported'}</p>
+                        {results.classification.suspectInfo && (
+                          <p className="mb-1"><strong>Suspect Info:</strong> {results.classification.suspectInfo}</p>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="bg-blue-50 p-4 rounded-md">
+                      <h4 className="font-bold mb-2">Key Details Extracted</h4>
+                      <ul>
+                        {results.classification.keyDetails.map((detail, i) => (
+                          <li key={i} className="mb-1">• {detail}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <h4 className="font-bold mb-2">Classification Explanation</h4>
+                      <p className="text-sm">
+                        The LLM analyzed the emergency call transcript and classified it based on keywords, 
+                        context, and patterns. It identified this as a <strong>{results.classification.incidentType}</strong> incident
+                        with {(results.classification.confidence * 100).toFixed(1)}% confidence. The severity was assessed as 
+                        priority <strong>{results.classification.priority}/5</strong> based on the nature of the incident and potential 
+                        impact.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+                {activeTab === 'location' && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">Location Extraction</h3>
+                    
+                    {renderMap()}
+                    
+                    <div className="bg-gray-50 p-4 rounded-md mb-4">
+                      <h4 className="font-bold mb-2">Location Details</h4>
+                      <p className="mb-1"><strong>Location Name:</strong> {results.location.name}</p>
+                      <p className="mb-1"><strong>Coordinates:</strong> ({results.location.lat.toFixed(6)}, {results.location.lng.toFixed(6)})</p>
+                      <p className="mb-1"><strong>Extraction Method:</strong> {results.location.source}</p>
+                      <p className="mb-1"><strong>Confidence:</strong> {(results.location.confidence * 100).toFixed(1)}%</p>
+                    </div>
+                    
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <h4 className="font-bold mb-2">Location Processing Explanation</h4>
+                      <p className="text-sm">
+                        The LLM extracted location information from the emergency call by identifying specific location
+                        references and keywords. It analyzed the context to determine the most likely location of the incident.
+                        The system then geocoded this location to obtain precise coordinates for emergency response and
+                        notification purposes.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+                {activeTab === 'eido' && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">EIDO Object (Emergency Incident Data Object)</h3>
+                    <p className="mb-4 text-sm">
+                      This is the standardized EIDO format following NENA (National Emergency Number Association) standards.
+                      This structured format enables interoperability between emergency systems.
+                    </p>
+                    <pre className="bg-gray-100 p-4 rounded-md overflow-auto h-96 text-sm">
+                      {JSON.stringify(results.eido, null, 2)}
+                    </pre>
+                  </div>
+                )}
+                
+                {activeTab === 'notifications' && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">Notification Plan</h3>
+                    
+                    <div className="mb-4 bg-blue-50 p-4 rounded-md">
+                      <p className="font-medium">Notification Content:</p>
+                      <p className="mb-1"><strong>Summary:</strong> {results.notification_results.content.summary}</p>
+                      <p className="mb-1"><strong>Action Required:</strong> {results.notification_results.content.action_required}</p>
+                      <p className="mb-1"><strong>Severity:</strong> {results.notification_results.content.severity}</p>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <h4 className="font-bold mb-2">Notification Scope</h4>
+                      <div className="bg-green-50 p-4 rounded-md">
+                        <p className="mb-1"><strong>Geographic Scope:</strong> {results.eido.eido.notification.recommendedNotificationScope.geographic.replace('_', ' ')}</p>
+                        <p className="mb-1"><strong>Radius:</strong> {results.notification_results.notification_radius_meters} meters</p>
+                        <p className="mb-1"><strong>Target Groups:</strong> {results.notification_results.target_groups.join(', ')}</p>
+                        <p className="mb-1"><strong>Notify Authorities:</strong> {results.eido.eido.notification.recommendedNotificationScope.notify_authorities ? 'Yes' : 'No'}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="overflow-auto">
+                      <h4 className="font-bold mb-2">Recipients by Channel</h4>
+                      <table className="min-w-full bg-white">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            <th className="py-2 px-4 text-left">Recipient</th>
+                            <th className="py-2 px-4 text-left">Channel</th>
+                            <th className="py-2 px-4 text-left">Message</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {results.notification_results.notification_plan.slice(0, 10).map((notification, i) => (
+                            <tr key={i} className={i % 2 === 0 ? "bg-gray-50" : ""}>
+                              <td className="py-2 px-4">{notification.recipient_name}</td>
+                              <td className="py-2 px-4">
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  notification.channel === 'sms' ? 'bg-blue-100 text-blue-800' :
+                                  notification.channel === 'email' ? 'bg-green-100 text-green-800' :
+                                  notification.channel === 'app_push' ? 'bg-purple-100 text-purple-800' :
+                                  notification.channel === 'phone' ? 'bg-red-100 text-red-800' :
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {notification.channel}
+                                </span>
+                              </td>
+                              <td className="py-2 px-4 truncate max-w-xs">{notification.message}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {results.notification_results.notification_plan.length > 10 && (
+                        <p className="text-center text-gray-500 text-sm mt-2">
+                          Showing 10 of {results.notification_results.notification_plan.length} notifications
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+    
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize the Safe Campus Demo
+      ReactDOM.render(<SafeCampusDemo />, document.getElementById('demo-container'));
+    });
+  </script>
+</body>
+</html>
