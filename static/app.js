@@ -3,11 +3,13 @@
 // Global variables
 let crimeMap = null;
 let alerts = [];
+let landmarks = [];
 let crimeCounts = {};
 let filteredFeatures = [];
 let markersVisible = true;
 let heatmapVisible = false;
 let heatmapLayer = null;
+let currentMapLayer = 'alerts'; // Default view shows alerts
 const DEFAULT_LAT = 32.8801;
 const DEFAULT_LNG = -117.2340;
 const DEFAULT_ZOOM = 14;
@@ -35,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     crimeMap.on('load', function() {
         // Fetch data and initialize the map display
         fetchAndInitializeMap();
+        
+        // Fetch UCSD landmarks data
+        fetchLandmarksData();
         
         // Set up event listeners
         setupEventListeners();
@@ -126,6 +131,159 @@ async function fetchAndInitializeMap() {
     } catch (error) {
         console.error('Error initializing map:', error);
         document.getElementById('loading-indicator').textContent = 'Error loading data';
+    }
+}
+
+// Fetch campus landmarks data
+async function fetchLandmarksData() {
+    try {
+        // Show loading indicator for landmarks
+        document.getElementById('loading-indicator').style.display = 'block';
+        document.getElementById('loading-indicator').textContent = 'Loading campus landmarks...';
+        
+        // Create a mock file response for testing, since the file might not be accessible through the fetch API
+        // In a production environment, you would use a real API endpoint
+        let landmarksData;
+        
+        try {
+            // Try to fetch from the actual file path
+            const response = await fetch('/data/locations/ucsd_landmarks.geojson');
+            if (response.ok) {
+                landmarksData = await response.json();
+            } else {
+                throw new Error('File not available through fetch');
+            }
+        } catch (fetchError) {
+            console.warn('Could not fetch landmarks file directly, using sample data instead:', fetchError);
+            
+            // Use sample data if file cannot be fetched
+            landmarksData = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2415, 32.8815] },
+                        "properties": { "name": "Applied Physics & Mathematics (AP&M)", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2411, 32.8804] },
+                        "properties": { "name": "Biology Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2404, 32.8798] },
+                        "properties": { "name": "Natural Sciences Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2390, 32.8798] },
+                        "properties": { "name": "Urey Hall", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2325, 32.8790] },
+                        "properties": { "name": "Geisel Library", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2370, 32.8760] },
+                        "properties": { "name": "Price Center", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2352, 32.8743] },
+                        "properties": { "name": "Student Services Center", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2310, 32.8810] },
+                        "properties": { "name": "Computer Science Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2400, 32.8740] },
+                        "properties": { "name": "Warren College", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2360, 32.8730] },
+                        "properties": { "name": "Muir College", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    },
+                    // Missing property example
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2330, 32.8720] },
+                        "properties": {}
+                    },
+                    // Missing name example
+                    {
+                        "type": "Feature",
+                        "geometry": { "type": "Point", "coordinates": [-117.2340, 32.8710] },
+                        "properties": { "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                    }
+                ]
+            };
+        }
+        
+        landmarks = landmarksData.features;
+        
+        // Add the landmarks data source to the map
+        crimeMap.addSource('landmarks', {
+            type: 'geojson',
+            data: landmarksData
+        });
+        
+        // Add a layer for landmarks (initially hidden)
+        crimeMap.addLayer({
+            id: 'landmark-points',
+            type: 'circle',
+            source: 'landmarks',
+            paint: {
+                'circle-radius': 6,
+                'circle-color': '#4CAF50', // Green color for landmarks
+                'circle-opacity': 0.8,
+                'circle-stroke-width': 1,
+                'circle-stroke-color': '#ffffff'
+            },
+            layout: {
+                'visibility': 'none' // Initially hidden
+            }
+        });
+        
+        // Add text labels for landmarks
+        crimeMap.addLayer({
+            id: 'landmark-labels',
+            type: 'symbol',
+            source: 'landmarks',
+            layout: {
+                'text-field': ['string', ['get', 'name'], 'Unnamed Building'],
+                'text-size': 12,
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top',
+                'visibility': 'none' // Initially hidden
+            },
+            paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': '#000000',
+                'text-halo-width': 1
+            }
+        });
+        
+        // Setup landmark popups
+        setupLandmarkPopups();
+        
+        // Add landmark legend item
+        updateLegendForAlerts(); // Initialize the legend properly
+        
+        console.log('Loaded', landmarks.length, 'campus landmarks');
+        document.getElementById('loading-indicator').style.display = 'none';
+    } catch (error) {
+        console.error('Error loading landmarks:', error);
+        document.getElementById('loading-indicator').textContent = 'Error loading landmarks data';
+        setTimeout(() => {
+            document.getElementById('loading-indicator').style.display = 'none';
+        }, 3000);
     }
 }
 
@@ -316,6 +474,30 @@ function setupEventListeners() {
         });
     }
     
+    // Layer toggle
+    const layerToggle = document.getElementById('layer-toggle');
+    if (layerToggle) {
+        layerToggle.addEventListener('change', function() {
+            if (this.value === 'alerts') {
+                showAlertsLayer();
+                hideLandmarksLayer();
+                currentMapLayer = 'alerts';
+                // Show the filters that are only relevant for alerts
+                document.querySelectorAll('.alerts-only').forEach(el => {
+                    el.style.display = 'block';
+                });
+            } else if (this.value === 'landmarks') {
+                hideAlertsLayer();
+                showLandmarksLayer();
+                currentMapLayer = 'landmarks';
+                // Hide the filters that are only relevant for alerts
+                document.querySelectorAll('.alerts-only').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+        });
+    }
+    
     // Date range filter
     const dateFilterBtn = document.getElementById('apply-date-filter');
     if (dateFilterBtn) {
@@ -336,7 +518,7 @@ function setupEventListeners() {
     fetchDateRange();
 }
 
-// Setup map popups
+// Setup map popups for alerts
 function setupMapPopups() {
     // Create a popup but don't add it to the map yet
     const popup = new maplibregl.Popup({
@@ -381,6 +563,51 @@ function setupMapPopups() {
     
     // Change cursor back when leaving a point
     crimeMap.on('mouseleave', 'alert-points', function() {
+        crimeMap.getCanvas().style.cursor = '';
+    });
+}
+
+// Setup popups for landmarks
+function setupLandmarkPopups() {
+    // Create a popup but don't add it to the map yet
+    const popup = new maplibregl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '300px'
+    });
+    
+    // Show popup on click
+    crimeMap.on('click', 'landmark-points', function(e) {
+        const feature = e.features[0];
+        const props = feature.properties || {};
+        
+        // Handle cases where properties might be missing
+        const name = props.name || 'Unnamed Building';
+        const address = props.address || 'Address not available';
+        
+        // Create popup content
+        const content = `
+            <div class="popup-content">
+                <h3>${name}</h3>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(6)}, ${feature.geometry.coordinates[0].toFixed(6)}</p>
+            </div>
+        `;
+        
+        // Set popup contents and location
+        popup
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(content)
+            .addTo(crimeMap);
+    });
+    
+    // Change cursor to pointer when hovering over a landmark
+    crimeMap.on('mouseenter', 'landmark-points', function() {
+        crimeMap.getCanvas().style.cursor = 'pointer';
+    });
+    
+    // Change cursor back when leaving a landmark
+    crimeMap.on('mouseleave', 'landmark-points', function() {
         crimeMap.getCanvas().style.cursor = '';
     });
 }
@@ -436,25 +663,177 @@ function createHeatmapLayer() {
 // Show markers
 function showMarkers() {
     markersVisible = true;
-    crimeMap.setLayoutProperty('alert-points', 'visibility', 'visible');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alert-points', 'visibility', 'visible');
+    } else {
+        crimeMap.setLayoutProperty('landmark-points', 'visibility', 'visible');
+        crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'visible');
+    }
 }
 
 // Hide markers
 function hideMarkers() {
     markersVisible = false;
-    crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
+    } else {
+        crimeMap.setLayoutProperty('landmark-points', 'visibility', 'none');
+        crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'none');
+    }
 }
 
 // Show heatmap
 function showHeatmap() {
     heatmapVisible = true;
-    crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'visible');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'visible');
+    }
 }
 
 // Hide heatmap
 function hideHeatmap() {
     heatmapVisible = false;
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'none');
+    }
+}
+
+// Show alerts layer
+function showAlertsLayer() {
+    // Make sure the alert layer is visible (if markers are supposed to be visible)
+    crimeMap.setLayoutProperty('alert-points', 'visibility', markersVisible ? 'visible' : 'none');
+    crimeMap.setLayoutProperty('alerts-heat', 'visibility', heatmapVisible ? 'visible' : 'none');
+    
+    // Update the dropdown text
+    const layerIndicator = document.getElementById('current-layer-indicator');
+    if (layerIndicator) {
+        layerIndicator.textContent = 'Current Layer: Crime Alerts';
+    }
+    
+    // Show alert-specific UI elements
+    document.querySelectorAll('.alerts-only').forEach(el => {
+        el.style.display = 'block';
+    });
+    
+    // Update legend to show crime types
+    updateLegendForAlerts();
+    
+    // Ensure we're listening for clicks on alert points
+    refreshMapEventListeners();
+}
+
+// Hide alerts layer
+function hideAlertsLayer() {
+    crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
     crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'none');
+}
+
+// Show landmarks layer
+function showLandmarksLayer() {
+    // Log for debugging
+    console.log("Showing landmarks layer, markers visible:", markersVisible);
+    
+    // Force-set landmark points and labels to visible
+    crimeMap.setLayoutProperty('landmark-points', 'visibility', 'visible');
+    crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'visible');
+    
+    // Update the dropdown text
+    const layerIndicator = document.getElementById('current-layer-indicator');
+    if (layerIndicator) {
+        layerIndicator.textContent = 'Current Layer: Campus Landmarks';
+    }
+    
+    // Hide alert-specific UI elements
+    document.querySelectorAll('.alerts-only').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Update legend to show landmark types
+    updateLegendForLandmarks();
+    
+    // Ensure we're listening for clicks on landmark points
+    refreshMapEventListeners();
+    
+    // Center the map on the campus if needed
+    if (landmarks && landmarks.length > 0) {
+        crimeMap.flyTo({
+            center: [DEFAULT_LNG, DEFAULT_LAT],
+            zoom: DEFAULT_ZOOM,
+            essential: true
+        });
+    }
+}
+
+// Hide landmarks layer
+function hideLandmarksLayer() {
+    crimeMap.setLayoutProperty('landmark-points', 'visibility', 'none');
+    crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'none');
+}
+
+// Update the legend to show crime-related items
+function updateLegendForAlerts() {
+    const legendContainer = document.querySelector('.legend');
+    if (!legendContainer) return;
+    
+    // Clear existing legend items
+    const existingItems = legendContainer.querySelectorAll('.legend-item');
+    existingItems.forEach(item => {
+        if (item.classList.contains('landmark')) {
+            item.style.display = 'none';
+        } else {
+            item.style.display = 'flex';
+        }
+    });
+    
+    // Add landmark legend item if it doesn't exist
+    const landmarkLegendItem = document.querySelector('.legend-item.landmark');
+    if (!landmarkLegendItem) {
+        const newLandmarkItem = document.createElement('div');
+        newLandmarkItem.className = 'legend-item landmark';
+        newLandmarkItem.innerHTML = `
+            <div class="legend-color landmark"></div>
+            <span class="legend-label">Campus Building</span>
+        `;
+        newLandmarkItem.style.display = 'none';
+        legendContainer.appendChild(newLandmarkItem);
+    }
+}
+
+// Update the legend to show landmark-related items
+function updateLegendForLandmarks() {
+    const legendContainer = document.querySelector('.legend');
+    if (!legendContainer) return;
+    
+    // Hide crime legend items
+    const existingItems = legendContainer.querySelectorAll('.legend-item');
+    existingItems.forEach(item => {
+        if (item.classList.contains('landmark')) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Add landmark legend item if it doesn't exist
+    let landmarkLegendItem = document.querySelector('.legend-item.landmark');
+    if (!landmarkLegendItem) {
+        landmarkLegendItem = document.createElement('div');
+        landmarkLegendItem.className = 'legend-item landmark';
+        landmarkLegendItem.innerHTML = `
+            <div class="legend-color landmark"></div>
+            <span class="legend-label">Campus Building</span>
+        `;
+        legendContainer.appendChild(landmarkLegendItem);
+    }
+    landmarkLegendItem.style.display = 'flex';
+}
+
+// Refresh map click listeners to ensure proper handling
+function refreshMapEventListeners() {
+    // This is a helper to ensure the event handlers work properly when switching layers
+    // We don't need to re-add the listeners as they're already set up, 
+    // but this function could be used for additional logic if needed
+    console.log("Map event listeners refreshed for layer:", currentMapLayer);
 }
 
 // Apply filters
