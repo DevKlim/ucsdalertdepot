@@ -1,0 +1,441 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2415, 32.8815] },
+        "properties": { "name": "Applied Physics & Mathematics (AP&M)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2411, 32.8804] },
+        "properties": { "name": "Biology Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2404, 32.8798] },
+        "properties": { "name": "Natural Sciences Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2390, 32.8798] },
+        "properties": { "name": "Urey Hall", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2396, 32.8805] },
+        "properties": { "name": "Mayer Hall", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2393, 32.8810] },
+        "properties": { "name": "Bonner Hall", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2400, 32.8815] },
+        "properties": { "name": "Humanities & Social Sciences (H&SS)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2405, 32.8810] },
+        "properties": { "name": "Galbraith Hall", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2386, 32.8816] },
+        "properties": { "name": "Pacific Hall", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2419, 32.8793] },
+        "properties": { "name": "Muir Residence Halls (Tenaya/Tioga)", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2426, 32.8798] },
+        "properties": { "name": "Muir Apartments", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2400, 32.8805] },
+          "properties": { "name": "Mandeville Auditorium/Center", "address": "Not available on map" }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2393, 32.8777] },
+        "properties": { "name": "Mandell Weiss Theatre", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2386, 32.8774] },
+        "properties": { "name": "Potiker Theatre / Weiss Forum", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2380, 32.8779] },
+          "properties": { "name": "Wagner Dance Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2399, 32.8784] },
+        "properties": { "name": "Visual Arts Facility (VAF)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2372, 32.8790] },
+        "properties": { "name": "Central Utilities Plant", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2331, 32.8794] },
+        "properties": { "name": "Leichtag Biomedical Research Building", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2340, 32.8795] },
+        "properties": { "name": "Biomedical Library Building", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2338, 32.8802] },
+        "properties": { "name": "Medical Teaching Facility", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2323, 32.8795] },
+        "properties": { "name": "Stein Clinical Research Building", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2318, 32.8804] },
+        "properties": { "name": "Center for Neural Circuits and Behavior", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2311, 32.8793] }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2321, 32.8780] },
+        "properties": { "name": "Pharmaceutical Sciences Building", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2332, 32.8782] },
+        "properties": { "name": "Clinical Research Facility", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2314, 32.8784] },
+        "properties": { "name": "Central Research Services Facility", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2337, 32.8775] },
+        "properties": { "name": "Telemedicine Education Building", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2344, 32.8769] },
+        "properties": { "name": "Cellular and Molecular Medicine West", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2328, 32.8767] },
+        "properties": { "name": "Cellular and Molecular Medicine East", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2297, 32.8780] },
+        "properties": { "name": "Skaggs School of Pharmacy", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2300, 32.8790] },
+          "properties": { "name": "Denny Sanford Education Center", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2338, 32.8760] },
+        "properties": { "name": "Rita Atkinson Residences", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2376, 32.8811] },
+        "properties": { "name": "Geisel Library", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2360, 32.8800] },
+        "properties": { "name": "Price Center East", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2368, 32.8801] },
+        "properties": { "name": "Price Center West", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2388, 32.8794] },
+        "properties": { "name": "Student Services Center", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2374, 32.8794] },
+        "properties": { "name": "Student Health and Wellness", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2347, 32.8821] },
+        "properties": { "name": "Jacobs Hall (EBU I)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2338, 32.8825] },
+        "properties": { "name": "Franklin Antonio Hall", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2342, 32.8833] },
+        "properties": { "name": "Atkinson Hall (Calit2)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2330, 32.8818] },
+        "properties": { "name": "Computer Science and Engineering Building (CSE)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2343, 32.8810] },
+        "properties": { "name": "Structural & Materials Engineering (SME)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2351, 32.8816] },
+        "properties": { "name": "Powell-Focht Bioengineering Hall", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2361, 32.8811] }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2351, 32.8838] },
+        "properties": { "name": "Warren Lecture Halls", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2364, 32.8835] },
+          "properties": { "name": "Warren Administrative Complex", "address": "Not available on map" }
+        },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2369, 32.8825] },
+        "properties": { "name": "Center for Magnetic Recording Research (CMRR)", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2354, 32.8804] },
+        "properties": { "name": "Pepper Canyon Hall", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2358, 32.8790] },
+          "properties": { "name": "Conrad Prebys Music Center", "address": "Not available on map" }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2364, 32.8785] }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2409, 32.8822] },
+        "properties": { "name": "Social Sciences Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2393, 32.8825] },
+        "properties": { "name": "Cognitive Science Building", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2384, 32.8831] },
+          "properties": { "name": "Solís Hall", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2389, 32.8837] },
+          "properties": { "name": "Sequoyah Hall", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2417, 32.8827] },
+          "properties": { "name": "Arts and Humanities Building", "address": "Not available on map" }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2407, 32.8833] },
+          "properties": { "name": "Public Engagement Building", "address": "Not available on map" }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2418, 32.8836] },
+          "properties": { "name": "Tapestry Building", "address": "Not available on map" }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2412, 32.8841] },
+        "properties": { "name": "Mosaic Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2425, 32.8788] },
+        "properties": { "name": "Main Gymnasium", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2418, 32.8783] },
+        "properties": { "name": "Natatorium", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2408, 32.8869] },
+        "properties": { "name": "Institute of the Americas", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2403, 32.8856] },
+        "properties": { "name": "School of Global Policy & Strategy (GPS)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2395, 32.8862] },
+        "properties": { "name": "Social Sciences Research Building", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2388, 32.8868] },
+        "properties": { "name": "Supercomputer Center (SDSC)", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2395, 32.8878] },
+        "properties": { "name": "RIMAC Annex", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2427, 32.8863] },
+        "properties": { "name": "Thurgood Marshall College Administration", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2424, 32.8855] }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2432, 32.8859] }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2434, 32.8851] },
+        "properties": { "name": "Ocean View Terrace", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2410, 32.8850] },
+        "properties": { "name": "Asante Halls (Marshall Apartments)", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2441, 32.8851] },
+          "properties": { "name": "Pangea Parking Structure", "address": "Not available on map" }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2421, 32.8885] },
+        "properties": { "name": "RIMAC Arena", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2430, 32.8877] },
+        "properties": { "name": "Spanos Athletic Performance Center", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2407, 32.8880] },
+        "properties": { "name": "Triton Track & Field Stadium", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2414, 32.8836] },
+        "properties": { "name": "Rady School of Management (Otterson Hall, Wells Fargo Hall)", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2423, 32.8844] },
+        "properties": { "name": "Great Hall (Eleanor Roosevelt College)", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2427, 32.8848] },
+          "properties": { "name": "Cafe Ventanas", "address": "Not available on map" }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2446, 32.8868] },
+        "properties": { "name": "Torrey Pines Center South", "address": "Not available on map" }
+      },
+       {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2449, 32.8877] },
+        "properties": { "name": "Torrey Pines Center North", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2460, 32.8868] },
+        "properties": { "name": "Sanford Consortium for Regenerative Medicine", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2420, 32.8905] }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2442, 32.8888] }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2324, 32.8838] }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2316, 32.8830] },
+          "properties": { "name": "Stewart Commons", "address": "Not available on map" }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2315, 32.8819] },
+          "properties": { "name": "Facilities Management", "address": "Not available on map" }
+        },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2302, 32.8820] }
+        },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2306, 32.8808] },
+        "properties": { "name": "Emergency Services / Police Dept.", "address": "Not available on map" }
+      },
+      {
+        "type": "Feature",
+        "geometry": { "type": "Point", "coordinates": [-117.2318, 32.8800] },
+        "properties": { "name": "Triton Ballpark / Clubhouse", "address": "Not available on map" }
+      },
+      {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-117.2333, 32.8809] },
+          "properties": { "name": "Canyonview Aquatic Center", "address": "Not available on map" }
+        }
+    ]
+  }

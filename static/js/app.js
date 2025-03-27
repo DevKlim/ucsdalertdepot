@@ -1,14 +1,15 @@
 // app.js - Main JavaScript file for the UCSD Crime Map application
 
 // Global variables
-
 let crimeMap = null;
 let alerts = [];
+let landmarks = [];
 let crimeCounts = {};
 let filteredFeatures = [];
 let markersVisible = true;
 let heatmapVisible = false;
 let heatmapLayer = null;
+let currentMapLayer = 'alerts'; // Default view shows alerts
 const DEFAULT_LAT = 32.8801;
 const DEFAULT_LNG = -117.2340;
 const DEFAULT_ZOOM = 14;
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load the map
     crimeMap = new maplibregl.Map({
         container: 'map',
-        style: 'https://demotiles.maplibre.org/style.json', // MapLibre demo style or your custom style
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', // Dark street-like style
         center: [DEFAULT_LNG, DEFAULT_LAT],
         zoom: DEFAULT_ZOOM
     });
@@ -37,9 +38,26 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fetch data and initialize the map display
         fetchAndInitializeMap();
         
+        // Fetch UCSD landmarks data
+        fetchLandmarksData();
+        
         // Set up event listeners
         setupEventListeners();
     });
+    const testAgentButton = document.getElementById('test-agent-button');
+    if (testAgentButton) {
+        testAgentButton.addEventListener('click', function() {
+            testSafeCampusAgent();
+        });
+    }
+    
+    // Add sample data button listener if it exists
+    const loadSampleButton = document.getElementById('load-sample-button');
+    if (loadSampleButton) {
+        loadSampleButton.addEventListener('click', function() {
+            loadSampleData();
+        });
+    }
 });
 
 // Fetch crime data and initialize the map
@@ -113,6 +131,70 @@ async function fetchAndInitializeMap() {
     } catch (error) {
         console.error('Error initializing map:', error);
         document.getElementById('loading-indicator').textContent = 'Error loading data';
+    }
+}
+
+// Fetch campus landmarks data
+async function fetchLandmarksData() {
+    try {
+        // Fetch the data
+        const response = await fetch('/data/locations/ucsd_landmarks.geojson');
+        if (!response.ok) {
+            throw new Error('Failed to fetch landmarks data');
+        }
+        
+        // Parse the response
+        const data = await response.json();
+        landmarks = data.features;
+        
+        // Add the landmarks data source to the map
+        crimeMap.addSource('landmarks', {
+            type: 'geojson',
+            data: data
+        });
+        
+        // Add a layer for landmarks (initially hidden)
+        crimeMap.addLayer({
+            id: 'landmark-points',
+            type: 'circle',
+            source: 'landmarks',
+            paint: {
+                'circle-radius': 5,
+                'circle-color': '#4CAF50', // Green color for landmarks
+                'circle-opacity': 0.8,
+                'circle-stroke-width': 1,
+                'circle-stroke-color': '#ffffff'
+            },
+            layout: {
+                'visibility': 'none' // Initially hidden
+            }
+        });
+        
+        // Add text labels for landmarks
+        crimeMap.addLayer({
+            id: 'landmark-labels',
+            type: 'symbol',
+            source: 'landmarks',
+            layout: {
+                'text-field': ['string', ['get', 'name'], 'Unnamed Building'],
+                'text-size': 12,
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top',
+                'visibility': 'none' // Initially hidden
+            },
+            paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': '#000000',
+                'text-halo-width': 1
+            }
+        });
+        
+        // Setup landmark popups
+        setupLandmarkPopups();
+        
+        console.log('Loaded', landmarks.length, 'campus landmarks');
+    } catch (error) {
+        console.error('Error loading landmarks:', error);
     }
 }
 
@@ -303,6 +385,30 @@ function setupEventListeners() {
         });
     }
     
+    // Layer toggle
+    const layerToggle = document.getElementById('layer-toggle');
+    if (layerToggle) {
+        layerToggle.addEventListener('change', function() {
+            if (this.value === 'alerts') {
+                showAlertsLayer();
+                hideLandmarksLayer();
+                currentMapLayer = 'alerts';
+                // Show the filters that are only relevant for alerts
+                document.querySelectorAll('.alerts-only').forEach(el => {
+                    el.style.display = 'block';
+                });
+            } else if (this.value === 'landmarks') {
+                hideAlertsLayer();
+                showLandmarksLayer();
+                currentMapLayer = 'landmarks';
+                // Hide the filters that are only relevant for alerts
+                document.querySelectorAll('.alerts-only').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+        });
+    }
+    
     // Date range filter
     const dateFilterBtn = document.getElementById('apply-date-filter');
     if (dateFilterBtn) {
@@ -323,10 +429,10 @@ function setupEventListeners() {
     fetchDateRange();
 }
 
-// Setup map popups
+// Setup map popups for alerts
 function setupMapPopups() {
     // Create a popup but don't add it to the map yet
-    const popup = new mapboxgl.Popup({
+    const popup = new maplibregl.Popup({
         closeButton: true,
         closeOnClick: true,
         maxWidth: '300px'
@@ -368,6 +474,51 @@ function setupMapPopups() {
     
     // Change cursor back when leaving a point
     crimeMap.on('mouseleave', 'alert-points', function() {
+        crimeMap.getCanvas().style.cursor = '';
+    });
+}
+
+// Setup popups for landmarks
+function setupLandmarkPopups() {
+    // Create a popup but don't add it to the map yet
+    const popup = new maplibregl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '300px'
+    });
+    
+    // Show popup on click
+    crimeMap.on('click', 'landmark-points', function(e) {
+        const feature = e.features[0];
+        const props = feature.properties || {};
+        
+        // Handle cases where properties might be missing
+        const name = props.name || 'Unnamed Building';
+        const address = props.address || 'Address not available';
+        
+        // Create popup content
+        const content = `
+            <div class="popup-content">
+                <h3>${name}</h3>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(6)}, ${feature.geometry.coordinates[0].toFixed(6)}</p>
+            </div>
+        `;
+        
+        // Set popup contents and location
+        popup
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(content)
+            .addTo(crimeMap);
+    });
+    
+    // Change cursor to pointer when hovering over a landmark
+    crimeMap.on('mouseenter', 'landmark-points', function() {
+        crimeMap.getCanvas().style.cursor = 'pointer';
+    });
+    
+    // Change cursor back when leaving a landmark
+    crimeMap.on('mouseleave', 'landmark-points', function() {
         crimeMap.getCanvas().style.cursor = '';
     });
 }
@@ -423,25 +574,85 @@ function createHeatmapLayer() {
 // Show markers
 function showMarkers() {
     markersVisible = true;
-    crimeMap.setLayoutProperty('alert-points', 'visibility', 'visible');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alert-points', 'visibility', 'visible');
+    } else {
+        crimeMap.setLayoutProperty('landmark-points', 'visibility', 'visible');
+        crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'visible');
+    }
 }
 
 // Hide markers
 function hideMarkers() {
     markersVisible = false;
-    crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
+    } else {
+        crimeMap.setLayoutProperty('landmark-points', 'visibility', 'none');
+        crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'none');
+    }
 }
 
 // Show heatmap
 function showHeatmap() {
     heatmapVisible = true;
-    crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'visible');
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'visible');
+    }
 }
 
 // Hide heatmap
 function hideHeatmap() {
     heatmapVisible = false;
+    if (currentMapLayer === 'alerts') {
+        crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'none');
+    }
+}
+
+// Show alerts layer
+function showAlertsLayer() {
+    crimeMap.setLayoutProperty('alert-points', 'visibility', markersVisible ? 'visible' : 'none');
+    crimeMap.setLayoutProperty('alerts-heat', 'visibility', heatmapVisible ? 'visible' : 'none');
+    
+    // Update the dropdown text
+    const layerIndicator = document.getElementById('current-layer-indicator');
+    if (layerIndicator) {
+        layerIndicator.textContent = 'Current Layer: Crime Alerts';
+    }
+    
+    // Show alert-specific UI elements
+    document.querySelectorAll('.alerts-only').forEach(el => {
+        el.style.display = 'block';
+    });
+}
+
+// Hide alerts layer
+function hideAlertsLayer() {
+    crimeMap.setLayoutProperty('alert-points', 'visibility', 'none');
     crimeMap.setLayoutProperty('alerts-heat', 'visibility', 'none');
+}
+
+// Show landmarks layer
+function showLandmarksLayer() {
+    crimeMap.setLayoutProperty('landmark-points', 'visibility', markersVisible ? 'visible' : 'none');
+    crimeMap.setLayoutProperty('landmark-labels', 'visibility', markersVisible ? 'visible' : 'none');
+    
+    // Update the dropdown text
+    const layerIndicator = document.getElementById('current-layer-indicator');
+    if (layerIndicator) {
+        layerIndicator.textContent = 'Current Layer: Campus Landmarks';
+    }
+    
+    // Hide alert-specific UI elements
+    document.querySelectorAll('.alerts-only').forEach(el => {
+        el.style.display = 'none';
+    });
+}
+
+// Hide landmarks layer
+function hideLandmarksLayer() {
+    crimeMap.setLayoutProperty('landmark-points', 'visibility', 'none');
+    crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'none');
 }
 
 // Apply filters
@@ -621,7 +832,7 @@ function updateRecentAlerts(features) {
                 });
                 
                 // Create a popup for this alert
-                new mapboxgl.Popup({
+                new maplibregl.Popup({
                     closeButton: true,
                     closeOnClick: true,
                     maxWidth: '300px'
@@ -669,4 +880,84 @@ function parseAlertDate(dateStr) {
 function setupGeocodingComparison() {
     // This function will be implemented in a separate file
     console.log('Geocoding comparison setup function called');
+}
+
+function testSafeCampusAgent() {
+    // Get the test transcript
+    const transcript = document.getElementById('test-transcript').value;
+    if (!transcript) {
+      alert('Please enter a test transcript');
+      return;
+    }
+  
+    // Show loading state
+    const resultArea = document.getElementById('agent-test-result');
+    resultArea.innerHTML = '<div class="loading">Processing transcript...</div>';
+    
+    // Call the API
+    fetch('/api/process_call', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ transcript: transcript })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Display a simplified result
+      resultArea.innerHTML = `
+        <div class="agent-result">
+          <h4>Processing Result:</h4>
+          <p><strong>Incident Type:</strong> ${data.classification.incidentType.toUpperCase()}</p>
+          <p><strong>Priority:</strong> ${data.classification.priority}/5</p>
+          <p><strong>Location:</strong> ${data.location.name}</p>
+          <p><strong>Notification Radius:</strong> ${data.notification_results.notification_radius_meters} meters</p>
+          <p><strong>Recipients to Notify:</strong> ${data.notification_results.recipients_count}</p>
+          <p><a href="/safe-campus-agent" class="btn btn-small">View Full Demo</a></p>
+        </div>
+      `;
+    })
+    .catch(error => {
+      resultArea.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+    });
+}
+  
+function loadSampleData() {
+    // Sample transcript for quick testing
+    const sampleTranscript = `Dispatcher: 911, what's your emergency?
+  
+  Caller: Hi, I'm at Geisel Library on campus, and there's someone acting very suspicious. They're walking around looking at people's belongings and trying doors to locked rooms.
+  
+  Dispatcher: Can you describe this person?
+  
+  Caller: Yes, it's a man wearing a black hoodie and jeans. He's about 6 feet tall with short dark hair. He keeps looking around nervously and checking if people are watching him.
+  
+  Dispatcher: Where exactly are you seeing this?
+  
+  Caller: I'm on the 2nd floor in the east wing. He's gone into the study rooms a few times, and I saw him try to open someone's backpack when they stepped away.
+  
+  Dispatcher: Is he there right now?
+  
+  Caller: Yes, he's still here walking around. He's now heading toward the elevator area.
+  
+  Dispatcher: OK, I'm sending campus security. Are you in a safe location?
+  
+  Caller: Yes, I'm sitting with a group of people. He's not paying attention to me.
+  
+  Dispatcher: Good. What's your name?
+  
+  Caller: Alex Chen. I'm a student here.
+  
+  Dispatcher: OK Alex, officers are on the way. Stay where you are and call back if anything changes.`;
+  
+    // Set the sample transcript in the textarea
+    const transcriptElement = document.getElementById('test-transcript');
+    if (transcriptElement) {
+      transcriptElement.value = sampleTranscript;
+    }
 }

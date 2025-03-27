@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- MapLibre GL JS CSS -->
   <script src="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.js"></script>
-<link href="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.css" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/static/style.css" />
   <!-- Favicon -->
@@ -78,7 +78,7 @@
     <div class="app-container">
       <div class="map-container">
         <div id="map"></div>
-        <div class="map-loading">Loading map data...</div>
+        <div id="loading-indicator" class="map-loading">Loading map data...</div>
         
         <!-- Sidebar for filters and legend -->
         <div id="sidebar" class="sidebar">
@@ -87,40 +87,36 @@
             <button id="closeSidebar">×</button>
           </h2>
           
-          <!-- Alert Type Filter -->
+          <!-- Layer Selector -->
           <div class="filter-group">
-            <h3>Alert Types</h3>
-            <div class="filter-options">
-              <div class="filter-checkbox">
-                <input type="checkbox" id="filter-timely-warning" checked>
-                <label for="filter-timely-warning">Timely Warning</label>
-              </div>
-              <div class="filter-checkbox">
-                <input type="checkbox" id="filter-triton-alert" checked>
-                <label for="filter-triton-alert">Triton Alert</label>
-              </div>
-              <div class="filter-checkbox">
-                <input type="checkbox" id="filter-community-alert" checked>
-                <label for="filter-community-alert">Community Alert</label>
-              </div>
-              <div class="filter-checkbox">
-                <input type="checkbox" id="filter-other-alert" checked>
-                <label for="filter-other-alert">Other</label>
-              </div>
+            <h3>Map Layer</h3>
+            <div class="layer-selector">
+              <select id="layer-toggle" class="layer-toggle">
+                <option value="alerts">Crime Alerts</option>
+                <option value="landmarks">Campus Landmarks</option>
+              </select>
+              <div id="current-layer-indicator" class="current-layer">Current Layer: Crime Alerts</div>
             </div>
           </div>
           
-          <!-- Crime Type Filter -->
-          <div class="filter-group">
+          <!-- Alert Type Filter (only visible when alerts layer is active) -->
+          <div class="filter-group alerts-only">
+            <h3>Alert Types</h3>
+            <div id="alert-type-filter" class="filter-options">
+              <div class="loading-placeholder">Loading alert types...</div>
+            </div>
+          </div>
+          
+          <!-- Crime Type Filter (only visible when alerts layer is active) -->
+          <div class="filter-group alerts-only">
             <h3>Crime Types</h3>
-            <div class="filter-options" id="crime-type-filters">
-              <!-- Will be populated dynamically -->
+            <div id="crime-type-filter" class="filter-options">
               <div class="loading-placeholder">Loading crime types...</div>
             </div>
           </div>
           
-          <!-- Date Range Filter -->
-          <div class="filter-group">
+          <!-- Date Range Filter (only visible when alerts layer is active) -->
+          <div class="filter-group alerts-only">
             <h3>Date Range</h3>
             <div class="date-filter">
               <label for="date-from">From:</label>
@@ -132,84 +128,55 @@
             </div>
           </div>
           
-          <!-- Reset Filters Button -->
-          <button id="reset-filters" class="btn btn-primary">Reset Filters</button>
-          
-          <!-- Geocoding Comparison Feature (new) -->
-          <div class="filter-group geocoding-comparison">
-            <h3>Geocoding Comparison</h3>
-            <p class="comparison-description">Compare how different geocoding services and LLMs interpret campus locations.</p>
-            <div class="loading-placeholder geocoding-comparison-loading">Loading comparison data...</div>
-            <div class="comparison-selector">
-              <label for="geocoding-comparison-selector">Select Service:</label>
-              <select id="geocoding-comparison-selector" style="display: none;">
-                <option value="current">Current (Custom Geocoding)</option>
-                <!-- Other options will be populated dynamically -->
+          <!-- View Type Selector -->
+          <div class="filter-group">
+            <h3>View Type</h3>
+            <div class="view-selector">
+              <select id="view-toggle" class="view-toggle">
+                <option value="markers">Markers Only</option>
+                <option value="heatmap">Heatmap Only</option>
+                <option value="both">Markers & Heatmap</option>
               </select>
             </div>
-            <div id="active-geocoding-service" class="active-service">
-              Active: Current (Custom Geocoding)
-            </div>
-            <div class="service-metrics" style="display: none;">
-              <div class="metrics-title">Geocoding Accuracy Metrics:</div>
-              <div class="metric-item">
-                <span class="metric-label">Locations Found</span>
-                <span class="metric-value" id="locations-found">0%</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-label">Avg. Distance Error</span>
-                <span class="metric-value" id="avg-distance">0 meters</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-label">Campus Location Accuracy</span>
-                <span class="metric-value" id="campus-accuracy">0%</span>
-              </div>
-            </div>
-            <div class="comparison-note">
-              Note: Campus-specific locations like "Warren Mall" are often mislocated by standard geocoding services.
-            </div>
-            <div class="comparison-info">
-              <button class="btn btn-small" id="toggle-info">About Geocoding Services ℹ️</button>
-              <div class="comparison-info-content" style="display: none;">
-                <div class="info-section">
-                  <h4>About the Geocoding Services</h4>
-                  <p>This comparison demonstrates how different geocoding approaches handle campus-specific locations:</p>
-                  <ul>
-                    <li><strong>Custom Geocoding:</strong> Our specialized database for UCSD campus</li>
-                    <li><strong>DeepSeek-R1:</strong> A large language model with general knowledge</li>
-                    <li><strong>Google Gemini Pro:</strong> Google's advanced language model</li>
-                    <li><strong>Mistral Large:</strong> An open-source language model</li>
-                    <li><strong>OpenStreetMaps:</strong> Traditional geocoding service</li>
-                  </ul>
-                  <p>The comparison highlights how specialized geocoding improves accuracy for campus locations that standard services struggle with.</p>
-                </div>
-              </div>
-            </div>
           </div>
+          
+          <!-- Filter Status -->
+          <div id="filter-status" class="filter-status"></div>
+          
+          <!-- Reset Filters Button -->
+          <button id="reset-filters" class="btn btn-primary">Reset Filters</button>
           
           <!-- Map Legend -->
           <div class="legend">
             <h3>Legend</h3>
             <div class="legend-item">
-              <div class="legend-color" style="background-color: #FF495C;"></div>
-              <span class="legend-label">Violent Crime</span>
+              <div class="legend-color" style="background-color: #FF5733;"></div>
+              <span class="legend-label">Burglary</span>
             </div>
             <div class="legend-item">
-              <div class="legend-color" style="background-color: #FFCD00;"></div>
-              <span class="legend-label">Property Crime</span>
+              <div class="legend-color" style="background-color: #C70039;"></div>
+              <span class="legend-label">Robbery/Weapons</span>
             </div>
             <div class="legend-item">
-              <div class="legend-color" style="background-color: #3DDC97;"></div>
-              <span class="legend-label">Other Incidents</span>
+              <div class="legend-color" style="background-color: #581845;"></div>
+              <span class="legend-label">Sexual Assault</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #FFC300;"></div>
+              <span class="legend-label">Other Crime</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #2874A6;"></div>
+              <span class="legend-label">Misc. Incidents</span>
             </div>
           </div>
           
           <!-- Recent Alerts -->
           <div class="filter-group">
             <h3>Recent Alerts</h3>
-            <div class="alerts-list" id="recent-alerts">
-              <div class="loading-placeholder">Loading recent alerts...</div>
-            </div>
+            <ul class="alerts-list" id="recent-alerts-list">
+              <li class="loading-placeholder">Loading recent alerts...</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -235,7 +202,7 @@
     </div>
 
   <!-- MapLibre GL JS -->
-  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.js"></script>
   <!-- Custom JS -->
   <script src="/static/app.js"></script>
   <script src="/static/geoswitcher.js"></script>

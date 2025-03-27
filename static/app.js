@@ -1,7 +1,6 @@
 // app.js - Main JavaScript file for the UCSD Crime Map application
 
 // Global variables
-
 let crimeMap = null;
 let alerts = [];
 let crimeCounts = {};
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load the map
     crimeMap = new maplibregl.Map({
         container: 'map',
-        style: 'https://demotiles.maplibre.org/style.json', // MapLibre demo style or your custom style
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', // Dark street-like style
         center: [DEFAULT_LNG, DEFAULT_LAT],
         zoom: DEFAULT_ZOOM
     });
@@ -41,19 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
         setupEventListeners();
     });
     const testAgentButton = document.getElementById('test-agent-button');
-  if (testAgentButton) {
-    testAgentButton.addEventListener('click', function() {
-      testSafeCampusAgent();
-    });
-  }
-  
-  // Add sample data button listener if it exists
-  const loadSampleButton = document.getElementById('load-sample-button');
-  if (loadSampleButton) {
-    loadSampleButton.addEventListener('click', function() {
-      loadSampleData();
-    });
-  }
+    if (testAgentButton) {
+        testAgentButton.addEventListener('click', function() {
+            testSafeCampusAgent();
+        });
+    }
+    
+    // Add sample data button listener if it exists
+    const loadSampleButton = document.getElementById('load-sample-button');
+    if (loadSampleButton) {
+        loadSampleButton.addEventListener('click', function() {
+            loadSampleData();
+        });
+    }
 });
 
 // Fetch crime data and initialize the map
@@ -340,7 +339,7 @@ function setupEventListeners() {
 // Setup map popups
 function setupMapPopups() {
     // Create a popup but don't add it to the map yet
-    const popup = new mapboxgl.Popup({
+    const popup = new maplibregl.Popup({
         closeButton: true,
         closeOnClick: true,
         maxWidth: '300px'
@@ -635,7 +634,7 @@ function updateRecentAlerts(features) {
                 });
                 
                 // Create a popup for this alert
-                new mapboxgl.Popup({
+                new maplibregl.Popup({
                     closeButton: true,
                     closeOnClick: true,
                     maxWidth: '300px'
@@ -728,9 +727,9 @@ function testSafeCampusAgent() {
     .catch(error => {
       resultArea.innerHTML = `<div class="error">Error: ${error.message}</div>`;
     });
-  }
+}
   
-  function loadSampleData() {
+function loadSampleData() {
     // Sample transcript for quick testing
     const sampleTranscript = `Dispatcher: 911, what's your emergency?
   
@@ -763,4 +762,4 @@ function testSafeCampusAgent() {
     if (transcriptElement) {
       transcriptElement.value = sampleTranscript;
     }
-  }
+}
