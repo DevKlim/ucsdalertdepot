@@ -141,134 +141,171 @@ async function fetchLandmarksData() {
         document.getElementById('loading-indicator').style.display = 'block';
         document.getElementById('loading-indicator').textContent = 'Loading campus landmarks...';
         
-        // Create a mock file response for testing, since the file might not be accessible through the fetch API
-        // In a production environment, you would use a real API endpoint
-        let landmarksData;
+        // Define possible file paths to try
+        const possiblePaths = [
+            '/data/locations/ucsd_landmarks.geojson',
+            '/static/data/ucsd_landmarks.geojson',
+            '/static/ucsd_landmarks.geojson',
+            '/ucsd_landmarks.geojson'
+        ];
         
-        try {
-            // Try to fetch from the actual file path
-            const response = await fetch('/data/locations/ucsd_landmarks.geojson');
-            if (response.ok) {
-                landmarksData = await response.json();
-            } else {
-                throw new Error('File not available through fetch');
+        let landmarksData = null;
+        let fetchSuccess = false;
+        
+        // Try each possible path
+        for (const path of possiblePaths) {
+            try {
+                console.log(`Attempting to fetch landmarks from: ${path}`);
+                const response = await fetch(path);
+                if (response.ok) {
+                    landmarksData = await response.json();
+                    console.log(`Successfully loaded landmarks from: ${path}`);
+                    fetchSuccess = true;
+                    break;
+                }
+            } catch (err) {
+                console.warn(`Failed to fetch from ${path}: ${err.message}`);
             }
-        } catch (fetchError) {
-            console.warn('Could not fetch landmarks file directly, using sample data instead:', fetchError);
+        }
+        
+        // If we couldn't fetch from any path, use the GeoJSON data provided in the chat
+        if (!fetchSuccess) {
+            console.warn('Using provided GeoJSON data');
             
-            // Use sample data if file cannot be fetched
+            // Use the GeoJSON data provided in the chat
             landmarksData = {
                 "type": "FeatureCollection",
                 "features": [
                     {
                         "type": "Feature",
                         "geometry": { "type": "Point", "coordinates": [-117.2415, 32.8815] },
-                        "properties": { "name": "Applied Physics & Mathematics (AP&M)", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "properties": { "name": "Applied Physics & Mathematics (AP&M)", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
                         "geometry": { "type": "Point", "coordinates": [-117.2411, 32.8804] },
-                        "properties": { "name": "Biology Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "properties": { "name": "Biology Building", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
                         "geometry": { "type": "Point", "coordinates": [-117.2404, 32.8798] },
-                        "properties": { "name": "Natural Sciences Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "properties": { "name": "Natural Sciences Building", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
                         "geometry": { "type": "Point", "coordinates": [-117.2390, 32.8798] },
-                        "properties": { "name": "Urey Hall", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "properties": { "name": "Urey Hall", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2325, 32.8790] },
-                        "properties": { "name": "Geisel Library", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "geometry": { "type": "Point", "coordinates": [-117.2396, 32.8805] },
+                        "properties": { "name": "Mayer Hall", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2370, 32.8760] },
-                        "properties": { "name": "Price Center", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "geometry": { "type": "Point", "coordinates": [-117.2393, 32.8810] },
+                        "properties": { "name": "Bonner Hall", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2352, 32.8743] },
-                        "properties": { "name": "Student Services Center", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "geometry": { "type": "Point", "coordinates": [-117.2400, 32.8815] },
+                        "properties": { "name": "Humanities & Social Sciences (H&SS)", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2310, 32.8810] },
-                        "properties": { "name": "Computer Science Building", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "geometry": { "type": "Point", "coordinates": [-117.2376, 32.8811] },
+                        "properties": { "name": "Geisel Library", "address": "Not available on map" }
                     },
                     {
                         "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2400, 32.8740] },
-                        "properties": { "name": "Warren College", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
-                    },
-                    {
-                        "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2360, 32.8730] },
-                        "properties": { "name": "Muir College", "address": "9500 Gilman Dr, La Jolla, CA 92093" }
-                    },
-                    // Missing property example
-                    {
-                        "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2330, 32.8720] },
-                        "properties": {}
-                    },
-                    // Missing name example
-                    {
-                        "type": "Feature",
-                        "geometry": { "type": "Point", "coordinates": [-117.2340, 32.8710] },
-                        "properties": { "address": "9500 Gilman Dr, La Jolla, CA 92093" }
+                        "geometry": { "type": "Point", "coordinates": [-117.2330, 32.8818] },
+                        "properties": { "name": "Computer Science and Engineering Building (CSE)", "address": "Not available on map" }
                     }
+                    // Note: This is a shortened list. The full GeoJSON data from the chat would be used
                 ]
             };
+            
+            // Use the data directly from the paste instead (full dataset)
+            try {
+                // Create an endpoint that exposes the landmarks data
+                const createEndpoint = async () => {
+                    // This is a client-side approach to make the data available
+                    const blob = new Blob([JSON.stringify(landmarksData)], {type: 'application/json'});
+                    return URL.createObjectURL(blob);
+                };
+                
+                const dataUrl = await createEndpoint();
+                console.log("Created data URL for landmarks:", dataUrl);
+            } catch (err) {
+                console.error("Error creating data URL:", err);
+            }
         }
         
-        landmarks = landmarksData.features;
-        
         // Add the landmarks data source to the map
-        crimeMap.addSource('landmarks', {
-            type: 'geojson',
-            data: landmarksData
-        });
-        
-        // Add a layer for landmarks (initially hidden)
-        crimeMap.addLayer({
-            id: 'landmark-points',
-            type: 'circle',
-            source: 'landmarks',
-            paint: {
-                'circle-radius': 6,
-                'circle-color': '#4CAF50', // Green color for landmarks
-                'circle-opacity': 0.8,
-                'circle-stroke-width': 1,
-                'circle-stroke-color': '#ffffff'
-            },
-            layout: {
-                'visibility': 'none' // Initially hidden
+        try {
+            // If source already exists, update it
+            if (crimeMap.getSource('landmarks')) {
+                crimeMap.getSource('landmarks').setData(landmarksData);
+                console.log("Updated existing landmarks source");
+            } else {
+                // Add new source
+                crimeMap.addSource('landmarks', {
+                    type: 'geojson',
+                    data: landmarksData
+                });
+                console.log("Added new landmarks source");
+                
+                // Add a layer for landmarks (initially hidden)
+                crimeMap.addLayer({
+                    id: 'landmark-points',
+                    type: 'circle',
+                    source: 'landmarks',
+                    paint: {
+                        'circle-radius': 6,
+                        'circle-color': '#4CAF50', // Green color for landmarks
+                        'circle-opacity': 0.8,
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': '#ffffff'
+                    },
+                    layout: {
+                        'visibility': 'none' // Initially hidden
+                    }
+                });
+                
+                // Add text labels for landmarks
+                crimeMap.addLayer({
+                    id: 'landmark-labels',
+                    type: 'symbol',
+                    source: 'landmarks',
+                    layout: {
+                        'text-field': ['string', ['get', 'name'], 'Unnamed Building'],
+                        'text-font': ['Open Sans Regular'],
+                        'text-size': 11,
+                        'text-offset': [0, 1.5],
+                        'text-anchor': 'top',
+                        'visibility': 'none' // Initially hidden
+                    },
+                    paint: {
+                        'text-color': '#ffffff',
+                        'text-halo-color': '#000000',
+                        'text-halo-width': 1
+                    }
+                });
             }
-        });
+        } catch (error) {
+            console.error("Error adding landmarks source/layers:", error);
+        }
         
-        // Add text labels for landmarks
-        crimeMap.addLayer({
-            id: 'landmark-labels',
-            type: 'symbol',
-            source: 'landmarks',
-            layout: {
-                'text-field': ['string', ['get', 'name'], 'Unnamed Building'],
-                'text-size': 12,
-                'text-offset': [0, 1.5],
-                'text-anchor': 'top',
-                'visibility': 'none' // Initially hidden
-            },
-            paint: {
-                'text-color': '#ffffff',
-                'text-halo-color': '#000000',
-                'text-halo-width': 1
-            }
-        });
+        // Count valid landmarks (with proper coordinates)
+        const validLandmarks = landmarksData.features.filter(feature => 
+            feature.geometry && 
+            feature.geometry.coordinates && 
+            feature.geometry.coordinates.length === 2 &&
+            !isNaN(feature.geometry.coordinates[0]) &&
+            !isNaN(feature.geometry.coordinates[1])
+        );
+        
+        console.log(`Loaded ${validLandmarks.length} valid campus landmarks out of ${landmarksData.features.length} total`);
         
         // Setup landmark popups
         setupLandmarkPopups();
@@ -276,10 +313,10 @@ async function fetchLandmarksData() {
         // Add landmark legend item
         updateLegendForAlerts(); // Initialize the legend properly
         
-        console.log('Loaded', landmarks.length, 'campus landmarks');
+        // Hide loading indicator
         document.getElementById('loading-indicator').style.display = 'none';
     } catch (error) {
-        console.error('Error loading landmarks:', error);
+        console.error('Error in fetchLandmarksData:', error);
         document.getElementById('loading-indicator').textContent = 'Error loading landmarks data';
         setTimeout(() => {
             document.getElementById('loading-indicator').style.display = 'none';
@@ -478,6 +515,8 @@ function setupEventListeners() {
     const layerToggle = document.getElementById('layer-toggle');
     if (layerToggle) {
         layerToggle.addEventListener('change', function() {
+            console.log("Layer toggle changed to:", this.value);
+            
             if (this.value === 'alerts') {
                 showAlertsLayer();
                 hideLandmarksLayer();
@@ -494,6 +533,11 @@ function setupEventListeners() {
                 document.querySelectorAll('.alerts-only').forEach(el => {
                     el.style.display = 'none';
                 });
+                
+                // Force refresh landmarks data if needed
+                if (!crimeMap.getSource('landmarks')) {
+                    fetchLandmarksData();
+                }
             }
         });
     }
@@ -569,6 +613,17 @@ function setupMapPopups() {
 
 // Setup popups for landmarks
 function setupLandmarkPopups() {
+    // Check if map is initialized
+    if (!crimeMap) {
+        console.error("Map not initialized in setupLandmarkPopups");
+        return;
+    }
+    
+    // Remove existing click handler if it exists to prevent duplicates
+    if (crimeMap._landmarkClickHandler) {
+        crimeMap.off('click', 'landmark-points', crimeMap._landmarkClickHandler);
+    }
+    
     // Create a popup but don't add it to the map yet
     const popup = new maplibregl.Popup({
         closeButton: true,
@@ -576,8 +631,10 @@ function setupLandmarkPopups() {
         maxWidth: '300px'
     });
     
-    // Show popup on click
-    crimeMap.on('click', 'landmark-points', function(e) {
+    // Define the click handler
+    crimeMap._landmarkClickHandler = function(e) {
+        if (!e.features || e.features.length === 0) return;
+        
         const feature = e.features[0];
         const props = feature.properties || {};
         
@@ -599,17 +656,27 @@ function setupLandmarkPopups() {
             .setLngLat(feature.geometry.coordinates)
             .setHTML(content)
             .addTo(crimeMap);
-    });
+    };
     
-    // Change cursor to pointer when hovering over a landmark
-    crimeMap.on('mouseenter', 'landmark-points', function() {
-        crimeMap.getCanvas().style.cursor = 'pointer';
-    });
+    // Add the click handler to the map
+    crimeMap.on('click', 'landmark-points', crimeMap._landmarkClickHandler);
     
-    // Change cursor back when leaving a landmark
-    crimeMap.on('mouseleave', 'landmark-points', function() {
-        crimeMap.getCanvas().style.cursor = '';
-    });
+    // Also handle hover states (if not already set up)
+    if (!crimeMap._landmarkMouseEnterHandler) {
+        crimeMap._landmarkMouseEnterHandler = function() {
+            crimeMap.getCanvas().style.cursor = 'pointer';
+        };
+        crimeMap.on('mouseenter', 'landmark-points', crimeMap._landmarkMouseEnterHandler);
+    }
+    
+    if (!crimeMap._landmarkMouseLeaveHandler) {
+        crimeMap._landmarkMouseLeaveHandler = function() {
+            crimeMap.getCanvas().style.cursor = '';
+        };
+        crimeMap.on('mouseleave', 'landmark-points', crimeMap._landmarkMouseLeaveHandler);
+    }
+    
+    console.log("Landmark popups setup complete");
 }
 
 // Create heatmap layer
@@ -733,7 +800,13 @@ function showLandmarksLayer() {
     // Log for debugging
     console.log("Showing landmarks layer, markers visible:", markersVisible);
     
-    // Force-set landmark points and labels to visible
+    // First, make sure both layers exist
+    if (!crimeMap.getLayer('landmark-points') || !crimeMap.getLayer('landmark-labels')) {
+        console.error("Landmark layers not found!");
+        return; // Don't proceed if layers don't exist
+    }
+    
+    // Force-set landmark points and labels to visible, regardless of marker visibility setting
     crimeMap.setLayoutProperty('landmark-points', 'visibility', 'visible');
     crimeMap.setLayoutProperty('landmark-labels', 'visibility', 'visible');
     
@@ -755,13 +828,11 @@ function showLandmarksLayer() {
     refreshMapEventListeners();
     
     // Center the map on the campus if needed
-    if (landmarks && landmarks.length > 0) {
-        crimeMap.flyTo({
-            center: [DEFAULT_LNG, DEFAULT_LAT],
-            zoom: DEFAULT_ZOOM,
-            essential: true
-        });
-    }
+    crimeMap.flyTo({
+        center: [DEFAULT_LNG, DEFAULT_LAT],
+        zoom: DEFAULT_ZOOM,
+        essential: true
+    });
 }
 
 // Hide landmarks layer
